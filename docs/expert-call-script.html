@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Квалификационный звонок — Академия Личности</title>
+<style>
+:root{--navy:#1e293b;--teal:#0d9488;--green:#10b981;--amber:#f59e0b;--red:#ef4444;--purple:#8b5cf6;--gray-50:#f8fafc;--gray-100:#f1f5f9;--gray-200:#e2e8f0;--gray-600:#475569;--text:#334155}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--gray-50);color:var(--text);font-size:15px;line-height:1.6}
+.top-nav{position:sticky;top:0;z-index:100;background:var(--navy);padding:10px 16px;display:flex;align-items:center;gap:6px;overflow-x:auto;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.nav-logo{color:white;font-weight:700;font-size:13px;white-space:nowrap;margin-right:8px}
+.nav-btn{background:rgba(255,255,255,.15);color:white;border:none;padding:5px 10px;border-radius:20px;cursor:pointer;font-size:12px;white-space:nowrap;transition:background .15s}
+.nav-btn:hover{background:rgba(255,255,255,.3)}
+.timer{margin-left:auto;display:flex;align-items:center;gap:8px;flex-shrink:0}
+.timer-display{font-family:monospace;font-size:17px;font-weight:700;color:#7dd3fc}
+.timer-display.warn{color:#fbbf24}.timer-display.over{color:#f87171}
+.tbtn{background:#059669;color:white;border:none;padding:4px 10px;border-radius:4px;cursor:pointer;font-size:12px}
+.container{max-width:900px;margin:0 auto;padding:16px}
+.expert-card{background:white;border-radius:12px;padding:18px;margin-bottom:14px;box-shadow:0 1px 3px rgba(0,0,0,.1);border-left:4px solid var(--navy)}
+.expert-card h2{color:var(--navy);margin-bottom:14px;font-size:15px}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fgi{display:flex;flex-direction:column;gap:3px}
+.fgi label{font-size:11px;color:var(--gray-600);font-weight:700;text-transform:uppercase}
+.fgi input,.fgi select{border:1px solid var(--gray-200);border-radius:6px;padding:7px 10px;font-size:13px;font-family:inherit;color:var(--text);background:var(--gray-50)}
+.fgi input:focus,.fgi select:focus{outline:none;border-color:var(--teal);background:white}
+.block{background:white;border-radius:12px;margin-bottom:12px;box-shadow:0 1px 3px rgba(0,0,0,.1);overflow:hidden}
+.bh{padding:12px 18px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none}
+.bh h3{color:white;font-size:14px;display:flex;align-items:center;gap:8px}
+.bnum{background:rgba(255,255,255,.3);width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+.btime{color:rgba(255,255,255,.75);font-size:12px;font-weight:400;margin-left:4px}
+.ci{color:rgba(255,255,255,.8);font-size:16px;transition:transform .2s}
+.block.collapsed .ci{transform:rotate(-90deg)}
+.block.collapsed .bc{display:none}
+.bc{padding:18px}
+.b0 .bh{background:#64748b}.b1 .bh{background:#3b82f6}.b2 .bh{background:#8b5cf6}
+.b3 .bh{background:#d97706}.b4 .bh{background:#0d9488}.b5 .bh{background:#16a34a}
+.b6 .bh{background:#6366f1}.b7 .bh{background:#1e293b}.bsc .bh{background:#dc2626}.baf .bh{background:#374151}
+.hint{color:var(--gray-600);font-size:12px;margin-bottom:12px}
+.ci-item{display:flex;align-items:flex-start;gap:10px;padding:7px 0;border-bottom:1px solid var(--gray-100)}
+.ci-item:last-child{border-bottom:none}
+.ci-item input[type=checkbox]{margin-top:3px;width:17px;height:17px;cursor:pointer;accent-color:var(--teal);flex-shrink:0}
+.ci-item label{cursor:pointer;font-size:14px;line-height:1.5}
+.ci-item input:checked+label{text-decoration:line-through;color:#94a3b8}
+.q{margin-bottom:12px}
+.ql{font-weight:600;color:var(--navy);margin-bottom:3px;font-size:14px}
+.qh{font-size:12px;color:var(--gray-600);margin-bottom:5px}
+textarea{width:100%;border:1px solid var(--gray-200);border-radius:6px;padding:8px 10px;font-size:13px;font-family:inherit;resize:vertical;min-height:48px;color:var(--text);background:var(--gray-50)}
+textarea:focus{outline:none;border-color:var(--teal);background:white}
+.na{margin-top:12px}
+.na label{font-size:11px;font-weight:700;color:var(--gray-600);text-transform:uppercase;display:block;margin-bottom:5px}
+.na textarea{min-height:60px}
+.sq{background:#f0f9ff;border-left:3px solid #38bdf8;padding:12px 14px;border-radius:0 8px 8px 0;font-style:italic;color:#0c4a6e;font-size:13px;margin:8px 0;line-height:1.6}
+.st{font-size:11px;font-weight:700;color:var(--gray-600);text-transform:uppercase;letter-spacing:.5px;margin:14px 0 8px}
+.divider{border:none;border-top:1px solid var(--gray-200);margin:14px 0}
+.flags{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.fb{border-radius:8px;padding:10px 12px}
+.fb.g{background:#f0fdf4;border:1px solid #bbf7d0}
+.fb.r{background:#fef2f2;border:1px solid #fecaca}
+.fb h4{font-size:12px;font-weight:700;margin-bottom:6px}
+.fb.g h4{color:#15803d}.fb.r h4{color:#dc2626}
+.fb ul{list-style:none;padding:0}
+.fb li{font-size:12px;padding:2px 0;line-height:1.4}
+.fb.g li::before{content:"✅ "}.fb.r li::before{content:"❌ "}
+.close-opts{display:grid;gap:10px;margin-top:10px}
+.co{border-radius:8px;padding:12px 14px;border:2px solid transparent}
+.co.y{background:#f0fdf4;border-color:#bbf7d0}
+.co.m{background:#fffbeb;border-color:#fde68a}
+.co.n{background:#fef2f2;border-color:#fecaca}
+.co h4{font-size:13px;font-weight:700;margin-bottom:6px}
+.co.y h4{color:#15803d}.co.m h4{color:#d97706}.co.n h4{color:#dc2626}
+.co .sc{font-style:italic;font-size:13px;color:var(--text)}
+.sg-grid{display:grid;gap:10px}
+.sg-row{display:flex;align-items:center;gap:10px;padding:9px 12px;background:var(--gray-50);border-radius:8px}
+.sg-label{flex:1;font-size:13px}
+.sbtns{display:flex;gap:5px}
+.sbtn{width:34px;height:34px;border-radius:6px;border:2px solid var(--gray-200);background:white;cursor:pointer;font-weight:700;font-size:14px;transition:all .15s}
+.sbtn:hover{border-color:var(--teal)}
+.sbtn.s0{background:#fee2e2;border-color:#ef4444;color:#dc2626}
+.sbtn.s1{background:#fef3c7;border-color:#f59e0b;color:#d97706}
+.sbtn.s2{background:#d1fae5;border-color:#10b981;color:#059669}
+.score-box{text-align:center;padding:22px;border-radius:12px;margin-top:18px;transition:all .3s}
+.score-box.sy{background:#d1fae5;border:2px solid #10b981}
+.score-box.sm{background:#fef3c7;border:2px solid #f59e0b}
+.score-box.sn{background:#fee2e2;border:2px solid #ef4444}
+.score-num{font-size:52px;font-weight:900;line-height:1}
+.score-max{font-size:18px;color:var(--gray-600)}
+.score-dec{font-size:22px;font-weight:700;margin-top:6px}
+.sy .score-dec{color:#059669}.sm .score-dec{color:#d97706}.sn .score-dec{color:#dc2626}
+.score-act{font-size:13px;color:var(--gray-600);margin-top:5px}
+.actions{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.btn{padding:9px 18px;border-radius:8px;border:none;cursor:pointer;font-size:13px;font-weight:600;transition:all .2s}
+.btn-p{background:var(--teal);color:white}.btn-p:hover{background:#0f766e}
+.btn-s{background:var(--gray-100);color:var(--text)}.btn-s:hover{background:var(--gray-200)}
+.btn-d{background:#fee2e2;color:#dc2626}.btn-d:hover{background:#fecaca}
+#loadFile{display:none}
+.sig-chk{margin-top:12px}
+@media print{.top-nav,.actions{display:none}.block.collapsed .bc{display:block}}
+</style>
+</head>
+<body>
+
+<div class="top-nav">
+  <span class="nav-logo">🎓 АЛ — Звонок</span>
+  <button class="nav-btn" onclick="go('prep')">0 Подготовка</button>
+  <button class="nav-btn" onclick="go('open')">1 Открытие</button>
+  <button class="nav-btn" onclick="go('hist')">2 История</button>
+  <button class="nav-btn" onclick="go('pain')">3 Боли</button>
+  <button class="nav-btn" onclick="go('mind')">4 Взгляд</button>
+  <button class="nav-btn" onclick="go('pitc')">5 Питч</button>
+  <button class="nav-btn" onclick="go('reac')">6 Реакция</button>
+  <button class="nav-btn" onclick="go('clos')">7 Закрытие</button>
+  <button class="nav-btn" onclick="go('scor')">⭐ Скоринг</button>
+  <div class="timer">
+    <span class="timer-display" id="td">00:00</span>
+    <button class="tbtn" id="tbtn" onclick="toggleTimer()">▶ Старт</button>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- Expert info -->
+  <div class="expert-card">
+    <h2>📋 Информация об эксперте</h2>
+    <div class="fg">
+      <div class="fgi"><label>Имя / ФИО</label><input id="eName" placeholder="Имя эксперта"></div>
+      <div class="fgi"><label>Домен</label>
+        <select id="eDomain">
+          <option value="">— выбрать —</option>
+          <option>Нейрофизиология</option>
+          <option>Соматология / Телесные практики</option>
+          <option>Нутрициология</option>
+          <option>Психология / Травматерапия</option>
+          <option>Коучинг</option>
+          <option>Йога / Дыхание / Медитация</option>
+          <option>Семейная психология / Расстановки</option>
+          <option>Арт-терапия / МАК</option>
+          <option>Другое</option>
+        </select>
+      </div>
+      <div class="fgi"><label>Дата</label><input type="date" id="eDate"></div>
+      <div class="fgi"><label>Тип звонка</label>
+        <select id="ePhase">
+          <option value="1">Фаза 1 — Мы ищем (исходящий)</option>
+          <option value="2">Фаза 2 — К нам пришли (входящий)</option>
+        </select>
+      </div>
+      <div class="fgi" style="grid-column:span 2"><label>Контакт / Откуда</label>
+        <input id="eContact" placeholder="Telegram, LinkedIn, мероприятие, ассоциация...">
+      </div>
+    </div>
+  </div>
+
+  <!-- Block 0 -->
+  <div class="block b0" id="prep">
+    <div class="bh" onclick="tog(this)">
+      <h3><span class="bnum">0</span>ПЕРЕД ЗВОНКОМ<span class="btime">5 мин</span></h3>
+      <span class="ci">▼</span>
+    </div>
+    <div class="bc">
+      <div class="ci-item"><input type="checkbox" id="c01"><label for="c01">Посмотрел(а) соцсети / сайт / TG-канал эксперта</label></div>
+      <div class="ci-item"><input type="checkbox" id="c02"><label for="c02">Определил(а) домен (тело / психика / питание / коучинг / другое)</label></div>
+      <div class="ci-item"><input type="checkbox" id="c03"><label for="c03">Примерно оценил(а) аудиторию (есть / нет / неясно)</label></div>
+      <div class="ci-item"><input type="checkbox" id="c04"><label for="c04">Проверил(а): есть ли ИП или самозанятость?</label></div>
+      <div class="ci-item"><input type="checkbox" id="c05"><label for="c05">Записал(а) 1–2 наблюдения — использовать в открытии</label></div>
+      <div class="na"><label>Наблюдения (для персонализации открытия)</label>
+        <textarea id="n0" placeholder="Тема канала, стиль, посты, аудитория..."></textarea></div>
+    </div>
+  </div>
+
+  <!-- Block 1 -->
+  <div class="block b1" id="open">
+    <div class="bh" onclick="tog(this)">
+      <h3><span class="bnum">1</span>ОТКРЫТИЕ<span class="btime">2–3 мин</span></h3>
+      <span class="ci">▼</span>
+    </div>
+    <div class="bc">
+      <p class="hint">Цель: человек понял зачем звонок, расслабился, говорит свободно</p>
+      <div class="st">Фаза 1 — Мы ищем</div>
+      <div class="sq">"Мы сейчас формируем экспертный костяк нового формата сообщества — не просто школы, а пространства, где человек с любым жизненным запросом получает маршрут через нескольких специалистов. Я посмотрел(а) твою работу и подумал(а), что ты можешь быть органичной частью этого. Хочу 30 минут поговорить — понять, резонирует ли концепция, и подходим ли мы друг другу."</div>
+      <div class="st">Фаза 2 — К нам пришли</div>
+      <div class="sq">"Рад(а), что ты написал(а). Прежде чем расскажу подробности — хочу сначала понять тебя и твою практику. Это важнее, чем сразу показывать презентацию. Договорились?"</div>
+      <div class="na"><label>Первая реакция / настрой</label>
+        <textarea id="n1" placeholder="Как человек отреагировал на открытие..."></textarea></div>
+    </div>
+  </div>
+
+  <!-- Block 2 -->
+  <div class="block b2" id="hist">
+    <div class="bh" onclick="tog(this)">
+      <h3><span class="bnum">2</span>ИХ ИСТОРИЯ<span class="btime">7–10 мин</span></h3>
+      <span class="ci">▼</span>
+    </div>
+    <div class="bc">
+      <p class="hint">Цель: понять, где человек сейчас и откуда пришёл</p>
+      <div class="q"><div class="ql">Сколько лет в практике? Что было до этого?</div>
+        <textarea id="q21" placeholder="Ответ..."></textarea></div>
+      <div class="q"><div class="ql">Как сейчас выглядит работа?</div>
+        <div class="qh">→ индивидуально / группы / курсы? онлайн / офлайн?</div>
+        <textarea id="q22" placeholder="Ответ..."></textarea></div>
+      <div class="q"><div class="ql">Есть ли своя аудитория?</div>
+        <div class="qh">→ подписчики, база клиентов? примерный размер?</div>
+        <textarea id="q23" placeholder="Ответ..."></textarea></div>
+      <div class="q"><div class="ql">Как оформлена деятельность?</div>
+        <div class="qh">→ ИП / самозанятый / юрлицо / никак?</div>
+        <textarea id="q24" placeholder="Ответ..."></textarea></div>
+      <div class="q"><div class="ql">Выдаёт ли что-то клиентам/студентам документально?</div>
+        <div class="qh">→ сертификат, диплом, справку? Запрашивают ли?</div>
+        <textarea id="q25" placeholder="Ответ..."></textarea></div>
+      <div class="na"><label>Заметки блока</label>
+        <textarea id="n2" placeholder="Ключевые наблюдения..."></textarea></div>
+    </div>
+  </div>
+
+  <!-- Block 3 -->
+  <div class="block b3" id="pain">
+    <div class="bh" onclick="tog(this)">
+      <h3><span class="bnum">3</span>ИХ БОЛИ КАК ПРАКТИКА<span class="btime">7–10 мин</span></h3>
+      <span class="ci">▼</span>
+    </div>
+    <div class="bc">
+      <p class="hint">Цель: найти точки, где Академия решает их реальную проблему. <strong>Слушаем — не говорим.</strong></p>
+      <div class="q"><div class="ql">Что сейчас самое тяжёлое в работе?</div>
+        <div class="qh">⬅ Главный вопрос блока</div>
+        <textarea id="q31" placeholder="Ответ..."></textarea></div>
+      <div class="q"><div class="ql">Бывает, что клиент приходит с запросом не по вашей теме?</div>
+        <div class="qh">→ Куда направляете? Есть ли проверенные коллеги?</div>
+        <textarea id="q32" placeholder="Ответ..."></textarea></div>
+      <div class="q"><div class="ql">Как решаете юридику и бухгалтерию?</div>
+        <div class="qh">→ договоры, оплата, налоги — в радость или в тягость?</div>
+        <textarea id="q33" placeholder="Ответ..."></textarea></div>
+      <div class="q"><div class="ql">Если ведёте обучение — что с документами студентов?</div>
+        <div class="qh">→ выдаёте что-то официальное? Запрашивают ли?</div>
+        <textarea id="q34" placeholder="Ответ..."></textarea></div>
+      <div class="q"><div class="ql">Есть ли ощущение профессионального одиночества?</div>
+        <textarea id="q35" placeholder="Ответ..."></textarea></div>
+      <hr class="divider">
+      <div class="st">Сигналы — отметить что услышали</div>
+      <div class="sig-chk">
+        <div class="ci-item"><input type="checkbox" id="s31"><label for="s31">💼 "Устал от бумаг и договоров" → боль с операционкой</label></div>
+        <div class="ci-item"><input type="checkbox" id="s32"><label for="s32">🗺 "Не знаю куда отправить клиента" → готов к маршруту</label></div>
+        <div class="ci-item"><input type="checkbox" id="s33"><label for="s33">📜 "Хочу чтобы студенты получали диплом" → нужна лицензия ДПО</label></div>
+        <div class="ci-item"><input type="checkbox" id="s34"><label for="s34">👥 "Нет коллег рядом, варюсь в себе" → ценит сообщество</label></div>
+        <div class="ci-item"><input type="checkbox" id="s35"><label for="s35">📊 "Аудитория есть, но не знаю что с ней делать" → готов к структуре</label></div>
+      </div>
+      <div class="na"><label>Заметки блока</label>
+        <textarea id="n3" placeholder="Что ещё важного прозвучало..."></textarea></div>
+    </div>
+  </div>
+
+  <!-- Block 4 -->
+  <div class="block b4" id="mind">
+    <div class="bh" onclick="tog(this)">
+      <h3><span class="bnum">4</span>ИХ ВЗГЛЯД НА РАБОТУ<span class="btime">5–7 мин</span></h3>
+      <span class="ci">▼</span>
+    </div>
+    <div class="bc">
+      <p class="hint">Цель: проверить холистическое мышление — <strong>ключевой критерий отбора</strong></p>
+      <div class="q"><div class="ql">Когда клиент приходит — с чем чаще всего? Что за этим стоит на самом деле?</div>
+        <textarea id="q41" placeholder="Ответ..."></textarea></div>
+      <div class="q"><div class="ql">Бывает, что видите: человеку нужна работа в другом направлении параллельно?</div>
+        <div class="qh">→ что делаете в такой момент?</div>
+        <textarea id="q42" placeholder="Ответ..."></textarea></div>
+      <div class="q"><div class="ql">Как смотрите на смежных специалистов?</div>
+        <div class="qh">→ психолог + нутрициолог + телесник — конкуренты или партнёры?</div>
+        <textarea id="q43" placeholder="Ответ..."></textarea></div>
+      <div class="q"><div class="ql">Верите, что у одного клиента несколько точек роста одновременно?</div>
+        <textarea id="q44" placeholder="Ответ..."></textarea></div>
+      <hr class="divider">
+      <div class="flags">
+        <div class="fb g"><h4>✅ Зелёные флаги</h4><ul>
+          <li>"Вижу, что нужен ещё [смежный]"</li>
+          <li>"Сам(а) прохожу несколько практик"</li>
+          <li>"Лучший результат — когда командой"</li>
+          <li>"Мой метод не решает всё"</li>
+        </ul></div>
+        <div class="fb r"><h4>❌ Красные флаги — СТОП</h4><ul>
+          <li>"Моя система закрывает всё"</li>
+          <li>"Зачем делиться клиентами?"</li>
+          <li>"Психология не связана с телом"</li>
+          <li>"Клиент — только с одним спец-м"</li>
+        </ul></div>
+      </div>
+      <div class="st">Отметить флаги</div>
+      <div class="ci-item"><input type="checkbox" id="fg1"><label for="fg1">✅ Направляет клиентов к коллегам самостоятельно</label></div>
+      <div class="ci-item"><input type="checkbox" id="fg2"><label for="fg2">✅ Сам(а) проходит несколько практик параллельно</label></div>
+      <div class="ci-item"><input type="checkbox" id="fg3"><label for="fg3">✅ Видит смежных специалистов как партнёров</label></div>
+      <div class="ci-item"><input type="checkbox" id="fr1"><label for="fr1">❌ СТОП: "Моя система комплексная, мне другие не нужны"</label></div>
+      <div class="ci-item"><input type="checkbox" id="fr2"><label for="fr2">❌ СТОП: Не готов делиться клиентами / передавать коллегам</label></div>
+      <div class="na"><label>Заметки блока</label>
+        <textarea id="n4" placeholder="Общее ощущение от взглядов человека..."></textarea></div>
+    </div>
+  </div>
+
+  <!-- Block 5 -->
+  <div class="block b5" id="pitc">
+    <div class="bh" onclick="tog(this)">
+      <h3><span class="bnum">5</span>ПРЕЗЕНТАЦИЯ КОНЦЕПЦИИ<span class="btime">5–7 мин</span></h3>
+      <span class="ci">▼</span>
+    </div>
+    <div class="bc">
+      <p class="hint">Цель: показать идею портала и оффер — <strong>только после того, как выслушали</strong></p>
+      <div class="st">Концепция портала</div>
+      <div class="sq">"Теперь хочу поделиться тем, что мы строим — и посмотреть, откликается ли. Мы не строим просто школу с дипломами. Мы строим портал: человек входит с любым жизненным запросом — усталость, потеря смысла, проблемы в теле или в отношениях — и мы проводим диагностику, а потом ведём его по маршруту через нескольких специалистов. Питание, психика, тело, коучинг, йога — каждый делает своё, и вместе это даёт человеку осознанность и реальный сдвиг. Часть клиентов потом хочет сами стать специалистами — и тогда они проходят обучение и получают диплом ДПО государственного образца. Это наша лицензия — бессрочная, всё официально."</div>
+      <p style="font-weight:600;color:#059669;margin:10px 0;font-size:13px;">⏸ Пауза — дать отреагировать</p>
+      <div class="st">Оффер</div>
+      <div class="sq">"Мы сейчас формируем костяк — 8 специалистов по разным доменам. Три человека уже внутри. Что мы берём на себя: юридику, договоры, документооборот, дипломы, регистрацию в государственном реестре. Ты занимаешься только своей практикой — мы маршрутизируем к тебе клиентов и даём статус 'эксперт Академии Личности'. Для тех, кто входит сейчас — первые 3 месяца без комиссии."</div>
+      <div class="ci-item" style="margin-top:12px"><input type="checkbox" id="c51"><label for="c51">Концепция портала презентована</label></div>
+      <div class="ci-item"><input type="checkbox" id="c52"><label for="c52">Оффер (3 мес. без комиссии) озвучен</label></div>
+      <div class="ci-item"><input type="checkbox" id="c53"><label for="c53">Сделана пауза после презентации</label></div>
+      <div class="na"><label>Первая реакция на презентацию</label>
+        <textarea id="n5" placeholder="Что сказал(а) сразу после..."></textarea></div>
+    </div>
+  </div>
+
+  <!-- Block 6 -->
+  <div class="block b6" id="reac">
+    <div class="bh" onclick="tog(this)">
+      <h3><span class="bnum">6</span>РЕАКЦИЯ И УТОЧНЕНИЯ<span class="btime">5 мин</span></h3>
+      <span class="ci">▼</span>
+    </div>
+    <div class="bc">
+      <div class="q"><div class="ql">Что из этого откликается больше всего?</div>
+        <textarea id="q61" placeholder="Ответ..."></textarea></div>
+      <div class="q"><div class="ql">Что вызывает вопросы или сомнения?</div>
+        <textarea id="q62" placeholder="Ответ..."></textarea></div>
+      <div class="q"><div class="ql">Есть ли опыт работы в партнёрстве или команде специалистов?</div>
+        <textarea id="q63" placeholder="Ответ..."></textarea></div>
+      <hr class="divider">
+      <div class="ci-item"><input type="checkbox" id="c6l"><label for="c6l">Упомянул(а) закон 01.09.2026 (если актуально)</label></div>
+      <div class="sq" style="margin-top:8px;font-size:13px;">"С 1 сентября 2026 работа без ДПО становится вне закона для ряда практик. Наша лицензия — один из немногих способов это решить быстро и официально."</div>
+      <div class="na"><label>Заметки блока</label>
+        <textarea id="n6" placeholder="Возражения, вопросы, общая реакция..."></textarea></div>
+    </div>
+  </div>
+
+  <!-- Block 7 -->
+  <div class="block b7" id="clos">
+    <div class="bh" onclick="tog(this)">
+      <h3><span class="bnum">7</span>СЛЕДУЮЩИЙ ШАГ<span class="btime">3–5 мин</span></h3>
+      <span class="ci">▼</span>
+    </div>
+    <div class="bc">
+      <div class="close-opts">
+        <div class="co y"><h4>✅ ДА — вижу зелёные флаги</h4>
+          <div class="sc">"По ощущениям — вижу, что концепция резонирует. Предлагаю следующий шаг: я пришлю тебе описание формата участия, посмотри спокойно. Через 3–4 дня созвонимся ещё раз — уже предметно, с конкретными условиями. Как тебе?"</div></div>
+        <div class="co m"><h4>🔶 ПОКА НЕТ — есть сомнения</h4>
+          <div class="sc">"Понял(а). Давай я пришлю материалы — там всё подробно. Посмотри, и если откликнется — напиши. Мы не торопим."</div></div>
+        <div class="co n"><h4>❌ НЕТ — красные флаги</h4>
+          <div class="sc">"Спасибо за открытый разговор. Думаю, сейчас наши форматы немного в разных плоскостях. Буду рад(а) вернуться к теме, если что-то изменится — или просто остаться в профессиональном контакте."</div></div>
+      </div>
+      <div class="na" style="margin-top:14px"><label>Договорились на</label>
+        <textarea id="n7" placeholder="Что конкретно: прислать материалы, дата следующего звонка..."></textarea></div>
+    </div>
+  </div>
+
+  <!-- Scoring -->
+  <div class="block bsc" id="scor">
+    <div class="bh" onclick="tog(this)">
+      <h3><span class="bnum">⭐</span>СКОРИНГ — заполнить сразу после звонка</h3>
+      <span class="ci">▼</span>
+    </div>
+    <div class="bc">
+      <div class="sg-grid" id="sgGrid"></div>
+      <div class="score-box sm" id="sbox">
+        <div class="score-num" id="stotal">0</div>
+        <div class="score-max">/ 16 баллов</div>
+        <div class="score-dec" id="sdec">— заполните скоринг —</div>
+        <div class="score-act" id="sact"></div>
+      </div>
+      <div class="na"><label>Ключевые боли и зацепки для следующего контакта</label>
+        <textarea id="ngen" placeholder="Что важно помнить при следующем контакте..."></textarea></div>
+    </div>
+  </div>
+
+  <!-- After call -->
+  <div class="block baf" id="afte">
+    <div class="bh" onclick="tog(this)">
+      <h3><span class="bnum">✓</span>ПОСЛЕ ЗВОНКА — 5 минут</h3>
+      <span class="ci">▼</span>
+    </div>
+    <div class="bc">
+      <div class="ci-item"><input type="checkbox" id="ca1"><label for="ca1">Скоринг заполнен</label></div>
+      <div class="ci-item"><input type="checkbox" id="ca2"><label for="ca2">Статус зафиксирован: ДА / ПОКА НЕТ / НЕТ</label></div>
+      <div class="ci-item"><input type="checkbox" id="ca3"><label for="ca3">Ключевые боли и зацепки записаны</label></div>
+      <div class="ci-item"><input type="checkbox" id="ca4"><label for="ca4">Добавлен в таблицу контактов</label></div>
+      <div class="ci-item"><input type="checkbox" id="ca5"><label for="ca5">Если ДА → отправлены материалы в течение 24 часов</label></div>
+      <div class="ci-item"><input type="checkbox" id="ca6"><label for="ca6">Если ПОКА НЕТ → поставлено напоминание через 2 месяца</label></div>
+      <div class="ci-item"><input type="checkbox" id="ca7"><label for="ca7">JSON сохранён</label></div>
+      <div class="actions">
+        <button class="btn btn-p" onclick="saveJSON()">💾 Сохранить в JSON</button>
+        <button class="btn btn-s" onclick="document.getElementById('loadFile').click()">📂 Загрузить JSON</button>
+        <button class="btn btn-s" onclick="window.print()">🖨 Печать</button>
+        <button class="btn btn-d" onclick="clearAll()">🗑 Очистить всё</button>
+        <input type="file" id="loadFile" accept=".json" onchange="loadJSON(event)">
+      </div>
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<script>
+// ── Scoring criteria ──────────────────────────────────────────────────────
+const CRITERIA = [
+  {id:'rightDomain',    label:'Домен нужный (закрывает незаполненную нишу)'},
+  {id:'activePractice', label:'Активная практика (не только теория)'},
+  {id:'holistic',       label:'Холистическое мышление (готов передавать клиентов)'},
+  {id:'opPain',         label:'Боль с операционкой (юридика, документы)'},
+  {id:'community',      label:'Ценит сообщество коллег'},
+  {id:'dpoNeeded',      label:'ДПО-статус нужен или приветствуется'},
+  {id:'explains',       label:'Умеет объяснять просто (по разговору)'},
+  {id:'reaction',       label:'Реакция на концепцию (загорелся / равнодушен)'},
+];
+
+const scores = {};
+CRITERIA.forEach(c => scores[c.id] = null);
+
+function buildScoring(){
+  document.getElementById('sgGrid').innerHTML = CRITERIA.map(c=>`
+    <div class="sg-row">
+      <div class="sg-label">${c.label}</div>
+      <div class="sbtns">
+        ${[0,1,2].map(v=>`<button class="sbtn" id="sb_${c.id}_${v}" onclick="setScore('${c.id}',${v})">${v}</button>`).join('')}
+      </div>
+    </div>`).join('');
+}
+
+function setScore(id, val){
+  scores[id] = val;
+  [0,1,2].forEach(v=>{
+    const b = document.getElementById(`sb_${id}_${v}`);
+    b.className = 'sbtn' + (v===val ? ` s${v}` : '');
+  });
+  updateResult();
+}
+
+function updateResult(){
+  const vals = Object.values(scores).filter(v=>v!==null);
+  const total = vals.reduce((a,b)=>a+b,0);
+  document.getElementById('stotal').textContent = total;
+  const box=document.getElementById('sbox'), dec=document.getElementById('sdec'), act=document.getElementById('sact');
+  if(vals.length < 8){
+    box.className='score-box sm'; dec.textContent=`Заполнено ${vals.length} из 8`; act.textContent=''; return;
+  }
+  if(total>=12){
+    box.className='score-box sy'; dec.textContent='✅ ДА';
+    act.textContent='Присылаем условия → предметный звонок через 3–4 дня';
+  } else if(total>=8){
+    box.className='score-box sm'; dec.textContent='🔶 ПОКА НЕТ';
+    act.textContent='Присылаем материалы → возвращаемся через 2–3 месяца';
+  } else {
+    box.className='score-box sn'; dec.textContent='❌ НЕТ';
+    act.textContent='Вежливо закрываем → остаёмся в профессиональном контакте';
+  }
+}
+
+// ── Timer ─────────────────────────────────────────────────────────────────
+let timerSec=0, timerRun=false, timerInt=null;
+function toggleTimer(){
+  if(timerRun){
+    clearInterval(timerInt); timerRun=false;
+    document.getElementById('tbtn').textContent='▶ Продолжить';
+  } else {
+    timerInt=setInterval(()=>{
+      timerSec++;
+      const m=String(Math.floor(timerSec/60)).padStart(2,'0');
+      const s=String(timerSec%60).padStart(2,'0');
+      const el=document.getElementById('td');
+      el.textContent=`${m}:${s}`;
+      el.className='timer-display'+(timerSec>2400?' over':timerSec>1800?' warn':'');
+    },1000);
+    timerRun=true;
+    document.getElementById('tbtn').textContent='⏸ Пауза';
+  }
+}
+
+// ── Collapse ──────────────────────────────────────────────────────────────
+function tog(hdr){ hdr.parentElement.classList.toggle('collapsed'); }
+
+// ── Scroll ────────────────────────────────────────────────────────────────
+function go(id){ document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'}); }
+
+// ── Collect data ──────────────────────────────────────────────────────────
+const v = id => (document.getElementById(id)||{}).value||'';
+const c = id => !!(document.getElementById(id)||{}).checked;
+
+function collectData(){
+  const vals=Object.values(scores).filter(x=>x!==null);
+  const total=vals.reduce((a,b)=>a+b,0);
+  let decision='—';
+  if(vals.length===8) decision = total>=12?'ДА':total>=8?'ПОКА НЕТ':'НЕТ';
+  return {
+    meta:{expertName:v('eName'),domain:v('eDomain'),date:v('eDate'),phase:v('ePhase'),
+          contact:v('eContact'),savedAt:new Date().toISOString(),timerSec},
+    preCall:{c01:c('c01'),c02:c('c02'),c03:c('c03'),c04:c('c04'),c05:c('c05'),obs:v('n0')},
+    block1:{notes:v('n1')},
+    block2:{q1:v('q21'),q2:v('q22'),q3:v('q23'),q4:v('q24'),q5:v('q25'),notes:v('n2')},
+    block3:{q1:v('q31'),q2:v('q32'),q3:v('q33'),q4:v('q34'),q5:v('q35'),
+            signals:{s1:c('s31'),s2:c('s32'),s3:c('s33'),s4:c('s34'),s5:c('s35')},notes:v('n3')},
+    block4:{q1:v('q41'),q2:v('q42'),q3:v('q43'),q4:v('q44'),
+            greenFlags:{g1:c('fg1'),g2:c('fg2'),g3:c('fg3')},
+            redFlags:{r1:c('fr1'),r2:c('fr2')},notes:v('n4')},
+    block5:{c1:c('c51'),c2:c('c52'),c3:c('c53'),notes:v('n5')},
+    block6:{q1:v('q61'),q2:v('q62'),q3:v('q63'),lawMentioned:c('c6l'),notes:v('n6')},
+    block7:{notes:v('n7')},
+    scoring:{...scores,total,filled:vals.length},
+    decision,
+    afterCall:{ca1:c('ca1'),ca2:c('ca2'),ca3:c('ca3'),ca4:c('ca4'),
+               ca5:c('ca5'),ca6:c('ca6'),ca7:c('ca7')},
+    generalNotes:v('ngen')
+  };
+}
+
+// ── Save JSON ─────────────────────────────────────────────────────────────
+function saveJSON(){
+  const data=collectData();
+  const name=(data.meta.expertName||'expert').replace(/\s+/g,'_');
+  const date=data.meta.date||new Date().toISOString().slice(0,10);
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob); a.download=`call_${name}_${date}.json`; a.click();
+  document.getElementById('ca7').checked=true;
+}
+
+// ── Load JSON ─────────────────────────────────────────────────────────────
+function loadJSON(e){
+  const file=e.target.files[0]; if(!file) return;
+  const r=new FileReader();
+  r.onload=ev=>{ try{ fillForm(JSON.parse(ev.target.result)); } catch(err){ alert('Ошибка: '+err.message); } };
+  r.readAsText(file);
+}
+
+const sv=(id,val)=>{ const el=document.getElementById(id); if(el) el.value=val||''; };
+const sc=(id,val)=>{ const el=document.getElementById(id); if(el) el.checked=!!val; };
+
+function fillForm(d){
+  const m=d.meta||{};
+  sv('eName',m.expertName); sv('eDomain',m.domain); sv('eDate',m.date);
+  sv('ePhase',m.phase); sv('eContact',m.contact);
+  const p=d.preCall||{};
+  sc('c01',p.c01); sc('c02',p.c02); sc('c03',p.c03); sc('c04',p.c04); sc('c05',p.c05); sv('n0',p.obs);
+  sv('n1',(d.block1||{}).notes);
+  const b2=d.block2||{};
+  sv('q21',b2.q1); sv('q22',b2.q2); sv('q23',b2.q3); sv('q24',b2.q4); sv('q25',b2.q5); sv('n2',b2.notes);
+  const b3=d.block3||{};
+  sv('q31',b3.q1); sv('q32',b3.q2); sv('q33',b3.q3); sv('q34',b3.q4); sv('q35',b3.q5); sv('n3',b3.notes);
+  const sg=b3.signals||{};
+  sc('s31',sg.s1); sc('s32',sg.s2); sc('s33',sg.s3); sc('s34',sg.s4); sc('s35',sg.s5);
+  const b4=d.block4||{};
+  sv('q41',b4.q1); sv('q42',b4.q2); sv('q43',b4.q3); sv('q44',b4.q4); sv('n4',b4.notes);
+  const gf=b4.greenFlags||{}; sc('fg1',gf.g1); sc('fg2',gf.g2); sc('fg3',gf.g3);
+  const rf=b4.redFlags||{}; sc('fr1',rf.r1); sc('fr2',rf.r2);
+  const b5=d.block5||{};
+  sc('c51',b5.c1); sc('c52',b5.c2); sc('c53',b5.c3); sv('n5',b5.notes);
+  const b6=d.block6||{};
+  sv('q61',b6.q1); sv('q62',b6.q2); sv('q63',b6.q3); sc('c6l',b6.lawMentioned); sv('n6',b6.notes);
+  sv('n7',(d.block7||{}).notes);
+  const sc2=d.scoring||{};
+  CRITERIA.forEach(cr=>{ if(sc2[cr.id]!=null) setScore(cr.id,sc2[cr.id]); });
+  sv('ngen',d.generalNotes);
+  const ac=d.afterCall||{};
+  sc('ca1',ac.ca1); sc('ca2',ac.ca2); sc('ca3',ac.ca3); sc('ca4',ac.ca4);
+  sc('ca5',ac.ca5); sc('ca6',ac.ca6); sc('ca7',ac.ca7);
+  if(m.timerSec) timerSec=m.timerSec;
+}
+
+// ── Clear all ─────────────────────────────────────────────────────────────
+function clearAll(){
+  if(!confirm('Очистить все данные звонка?')) return;
+  document.querySelectorAll('input[type=text],input[type=date],textarea').forEach(el=>el.value='');
+  document.querySelectorAll('input[type=checkbox]').forEach(el=>el.checked=false);
+  document.querySelectorAll('select').forEach(el=>el.selectedIndex=0);
+  CRITERIA.forEach(cr=>{ scores[cr.id]=null; [0,1,2].forEach(v=>{ const b=document.getElementById(`sb_${cr.id}_${v}`); if(b) b.className='sbtn'; }); });
+  timerSec=0; timerRun=false; clearInterval(timerInt);
+  document.getElementById('td').textContent='00:00';
+  document.getElementById('td').className='timer-display';
+  document.getElementById('tbtn').textContent='▶ Старт';
+  updateResult();
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────
+document.getElementById('eDate').value=new Date().toISOString().slice(0,10);
+buildScoring();
+</script>
+</body>
+</html>

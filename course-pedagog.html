@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Педагог ДПО — Академия Развития Личности</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Inter:wght@300;400;500;600&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --dark-bg:    #090f1e;
+  --dark-panel: #0d1830;
+  --dark-ink:   #ddeafc;
+  --dark-mid:   #7898c8;
+  --bg:         #f8f6f2;
+  --panel:      #ffffff;
+  --ink:        #1a1e2e;
+  --mid:        #485070;
+  --muted:      #8890a8;
+  --navy:       #1a3a6e;
+  --crystal:    #38c8f0;
+  --gold:       #d4860a;
+  --serif:      'Cormorant Garamond', Georgia, serif;
+  --sans:       'Inter', sans-serif;
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:var(--sans); background:var(--bg); color:var(--ink); line-height:1.6; }
+a { color:inherit; text-decoration:none; }
+img { display:block; max-width:100%; }
+
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:190;
+  height:68px; display:flex; align-items:center; justify-content:space-between;
+  padding:0 48px;
+  background:rgba(9,15,30,.92); backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(56,200,240,.1);
+}
+.logo-wrap { display:flex; align-items:center; gap:10px; }
+.logo-fallback { font-family:var(--serif); font-size:13px; font-weight:600; color:var(--crystal); line-height:1.25; }
+.nav-back { font-size:13px; color:var(--dark-mid); display:flex; align-items:center; gap:6px; transition:color .2s; }
+.nav-back:hover { color:var(--crystal); }
+.nav-cta {
+  background:linear-gradient(135deg,var(--navy),var(--crystal));
+  color:#fff; padding:9px 22px; border-radius:4px;
+  font-size:13px; font-weight:600; letter-spacing:.03em;
+  box-shadow:0 4px 16px rgba(56,200,240,.2); transition:all .2s;
+}
+.nav-cta:hover { transform:translateY(-1px); }
+
+.hero {
+  min-height:100vh; background:var(--dark-bg);
+  display:flex; flex-direction:column; justify-content:center;
+  padding:120px 48px 80px; position:relative; overflow:hidden;
+}
+.hero::before {
+  content:''; position:absolute; inset:0; pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg width='60' height='52' viewBox='0 0 60 52' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 2L58 18v16L30 50 2 34V18z' fill='none' stroke='rgba(56%2C200%2C240%2C0.04)' stroke-width='1'/%3E%3C/svg%3E");
+  background-size:60px 52px;
+}
+.hero-inner { max-width:960px; position:relative; z-index:2; }
+.hero-tags { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:28px; }
+.htag { font-size:12px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; padding:5px 14px; border-radius:20px; border:1px solid; }
+.htag-gold { color:var(--gold); border-color:rgba(212,134,10,.35); background:rgba(212,134,10,.08); }
+.htag-crystal { color:var(--crystal); border-color:rgba(56,200,240,.3); background:rgba(56,200,240,.06); }
+.htag-mid { color:var(--dark-mid); border-color:rgba(120,152,200,.25); background:rgba(120,152,200,.06); }
+.hero h1 { font-family:var(--serif); font-size:clamp(32px,4.5vw,56px); font-weight:600; color:#fff; line-height:1.2; margin-bottom:20px; }
+.hero h1 em { color:var(--crystal); font-style:normal; }
+.hero-sub { font-size:17px; color:rgba(221,234,252,.7); line-height:1.6; max-width:600px; margin-bottom:14px; }
+.hero-law { font-size:13px; color:rgba(221,234,252,.4); line-height:1.5; margin-bottom:36px; }
+.hero-btns { display:flex; gap:16px; flex-wrap:wrap; }
+.btn-primary {
+  background:linear-gradient(135deg,var(--navy),#2060b8);
+  color:#fff; padding:16px 36px; border-radius:4px;
+  font-size:15px; font-weight:600; letter-spacing:.02em;
+  box-shadow:0 8px 32px rgba(26,58,110,.4); transition:all .25s;
+  border:1px solid rgba(56,200,240,.2);
+}
+.btn-primary:hover { transform:translateY(-2px); box-shadow:0 12px 40px rgba(56,200,240,.25); }
+.btn-outline {
+  color:var(--crystal); border:1px solid rgba(56,200,240,.35);
+  padding:16px 32px; border-radius:4px;
+  font-size:15px; font-weight:500; transition:all .25s;
+  background:rgba(56,200,240,.04);
+}
+.btn-outline:hover { background:rgba(56,200,240,.08); }
+
+.section { padding:88px 48px; }
+.container { max-width:1000px; margin:0 auto; }
+.sec-eyebrow { font-size:11px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--crystal); margin-bottom:12px; }
+.sec-title { font-family:var(--serif); font-size:clamp(28px,3.5vw,44px); font-weight:600; color:var(--ink); line-height:1.2; margin-bottom:16px; }
+.sec-title em { color:var(--navy); font-style:normal; }
+.sec-lead { font-size:17px; color:var(--mid); line-height:1.65; max-width:640px; margin-bottom:40px; }
+
+/* COMPLIANCE WARNING */
+.compliance { background:var(--dark-bg); }
+.compliance .sec-title { color:#fff; }
+.compliance .sec-lead { color:rgba(221,234,252,.65); }
+.comp-year {
+  display:inline-block; margin-bottom:32px;
+  background:rgba(212,134,10,.1); border:1px solid rgba(212,134,10,.3);
+  color:var(--gold); font-size:15px; padding:12px 20px; border-radius:6px; line-height:1.5;
+}
+.comp-if-label { font-size:12px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--gold); margin-bottom:16px; }
+.comp-list { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px; margin-bottom:32px; }
+.comp-item {
+  display:flex; gap:12px; align-items:flex-start;
+  background:rgba(255,255,255,.04); border:1px solid rgba(56,200,240,.1);
+  border-radius:6px; padding:14px 16px;
+}
+.comp-dot { width:6px; height:6px; border-radius:50%; background:var(--crystal); flex-shrink:0; margin-top:5px; }
+.comp-text { font-size:14px; color:rgba(221,234,252,.75); }
+.comp-result {
+  background:rgba(212,134,10,.08); border:1px solid rgba(212,134,10,.2);
+  border-radius:8px; padding:24px; margin-bottom:16px;
+}
+.comp-result-title { font-size:15px; font-weight:600; color:#fff; margin-bottom:10px; }
+.comp-result ol { padding-left:20px; }
+.comp-result li { font-size:14px; color:rgba(221,234,252,.75); margin-bottom:6px; line-height:1.5; }
+.comp-warning {
+  background:rgba(220,50,50,.08); border:1px solid rgba(220,50,50,.2);
+  border-radius:8px; padding:20px; font-size:14px; color:rgba(221,234,252,.75); line-height:1.6;
+}
+.comp-warning strong { color:#ff7070; }
+.comp-callouts { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:16px; }
+.callout {
+  background:rgba(255,255,255,.04); border-left:3px solid var(--crystal);
+  border-radius:0 6px 6px 0; padding:14px 18px;
+  font-size:14px; color:rgba(221,234,252,.7); font-weight:500;
+}
+
+/* HERO PROGRAM CHOICE */
+.hero-law-badge {
+  display:inline-flex; align-items:center; gap:8px;
+  font-size:12px; color:rgba(221,234,252,.5);
+  border:1px solid rgba(221,234,252,.12);
+  background:rgba(221,234,252,.04);
+  padding:7px 14px; border-radius:4px; margin-bottom:28px; line-height:1.5;
+}
+.hero-law-badge strong { color:var(--crystal); font-weight:700; }
+.hero-programs {
+  display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:28px;
+}
+.prog-card {
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(56,200,240,.2);
+  border-radius:8px; padding:24px; transition:all .25s;
+  position:relative; overflow:hidden;
+}
+.prog-card::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:3px;
+  background:linear-gradient(90deg,var(--crystal),var(--navy));
+}
+.prog-card:hover {
+  background:rgba(56,200,240,.07);
+  border-color:rgba(56,200,240,.45);
+  transform:translateY(-2px);
+}
+.pc-num {
+  font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--crystal); margin-bottom:10px;
+}
+.pc-name {
+  font-family:var(--serif); font-size:22px; font-weight:600; color:#fff;
+  line-height:1.25; margin-bottom:6px;
+}
+.pc-full {
+  font-size:12px; color:rgba(221,234,252,.45); line-height:1.45; margin-bottom:14px;
+  font-style:italic;
+}
+.pc-audience {
+  font-size:13px; color:rgba(221,234,252,.75); line-height:1.55; margin-bottom:18px;
+  padding-bottom:18px; border-bottom:1px solid rgba(56,200,240,.1);
+}
+.pc-meta {
+  display:flex; gap:16px; align-items:baseline; margin-bottom:18px;
+}
+.pc-price {
+  font-family:var(--serif); font-size:28px; font-weight:700; color:#fff;
+}
+.pc-hours { font-size:12px; color:var(--dark-mid); }
+.pc-cta {
+  display:block; text-align:center;
+  background:linear-gradient(135deg,var(--navy),#2060b8);
+  color:#fff; padding:11px 20px; border-radius:4px;
+  font-size:13px; font-weight:600; letter-spacing:.03em;
+  transition:all .2s; border:1px solid rgba(56,200,240,.25);
+}
+.pc-cta:hover { background:linear-gradient(135deg,#2060b8,var(--crystal)); }
+
+/* PROGRAM COMPARE */
+.prog-compare { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+.pcomp-card {
+  border:1px solid rgba(26,58,110,.12); border-radius:12px;
+  background:var(--panel); overflow:hidden;
+}
+.pcomp-head {
+  background:var(--navy); padding:24px 28px;
+  display:flex; align-items:center; gap:16px;
+}
+.pcomp-owl { width:80px; height:80px; object-fit:contain; border-radius:10px; flex-shrink:0; }
+.pcomp-htitle { font-family:var(--serif); font-size:20px; font-weight:600; color:#fff; line-height:1.25; }
+.pcomp-hnum { font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--crystal); margin-bottom:6px; }
+.pcomp-body { padding:24px 28px; display:flex; flex-direction:column; gap:14px; }
+.pcomp-row { display:flex; flex-direction:column; gap:4px; }
+.pcomp-label { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); }
+.pcomp-val { font-size:14px; color:var(--ink); line-height:1.5; }
+.pcomp-footer {
+  padding:0 28px 24px;
+}
+.pcomp-cta {
+  display:block; text-align:center;
+  background:linear-gradient(135deg,var(--navy),#2060b8);
+  color:#fff; padding:13px 20px; border-radius:4px;
+  font-size:14px; font-weight:600; letter-spacing:.02em;
+  transition:all .2s;
+}
+.pcomp-cta:hover { transform:translateY(-1px); box-shadow:0 6px 20px rgba(26,58,110,.25); }
+
+/* FOR WHOM */
+.for-whom { background:var(--panel); }
+.whom-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:14px; }
+.whom-item {
+  display:flex; gap:12px; align-items:flex-start;
+  background:var(--bg); border:1px solid rgba(26,58,110,.08);
+  border-radius:8px; padding:18px;
+}
+.whom-dot { width:8px; height:8px; border-radius:50%; background:var(--navy); flex-shrink:0; margin-top:5px; }
+.whom-text { font-size:15px; color:var(--ink); line-height:1.5; }
+
+/* PROGRAM */
+.program-section { background:var(--bg); }
+.prog-pillars { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+.pillar {
+  border:1px solid rgba(26,58,110,.1); border-radius:8px;
+  padding:24px; background:var(--panel); text-align:center;
+}
+.pillar-icon { margin-bottom:18px; display:flex; align-items:center; justify-content:center; }
+.pillar-icon img { height:140px; width:140px; object-fit:contain; border-radius:16px; }
+.pillar-title { font-size:14px; font-weight:600; color:var(--navy); margin-bottom:6px; }
+.pillar-text { font-size:13px; color:var(--mid); line-height:1.6; }
+
+/* PRICE */
+.price-section { background:var(--dark-bg); }
+.price-card {
+  max-width:600px; margin:0 auto;
+  background:rgba(255,255,255,.04); border:1px solid rgba(56,200,240,.15);
+  border-radius:12px; padding:48px; text-align:center;
+}
+.price-val { font-family:var(--serif); font-size:52px; font-weight:700; color:#fff; }
+.price-note { font-size:14px; color:var(--dark-mid); margin-top:6px; margin-bottom:32px; }
+.price-includes { text-align:left; margin:24px 0; display:flex; flex-direction:column; gap:10px; }
+.pi-item { display:flex; gap:10px; align-items:flex-start; }
+.pi-check { color:var(--crystal); flex-shrink:0; }
+.pi-text { font-size:14px; color:rgba(221,234,252,.75); line-height:1.5; }
+.pi-plus {
+  margin-top:16px; padding-top:16px; border-top:1px solid rgba(56,200,240,.1);
+  font-size:13px; color:rgba(221,234,252,.5); line-height:1.6;
+}
+
+/* CTA */
+.cta-section { background:linear-gradient(135deg,var(--navy) 0%,#0d1830 100%); padding:88px 48px; text-align:center; }
+.cta-title { font-family:var(--serif); font-size:40px; color:#fff; margin-bottom:14px; }
+.cta-sub { font-size:16px; color:rgba(221,234,252,.65); margin-bottom:36px; }
+.cta-form { display:flex; gap:12px; max-width:480px; margin:0 auto; flex-wrap:wrap; justify-content:center; }
+.cta-input {
+  flex:1; min-width:220px; padding:14px 18px; border-radius:4px;
+  border:1px solid rgba(56,200,240,.25); background:rgba(255,255,255,.06);
+  color:#fff; font-size:15px; font-family:var(--sans); outline:none; transition:border-color .2s;
+}
+.cta-input::placeholder { color:rgba(221,234,252,.35); }
+.cta-input:focus { border-color:var(--crystal); }
+.cta-submit {
+  padding:14px 32px; background:linear-gradient(135deg,var(--crystal),#2080c8);
+  color:#fff; border:none; border-radius:4px; font-size:15px; font-weight:600;
+  cursor:pointer; font-family:var(--sans); transition:all .2s;
+}
+.cta-submit:hover { transform:translateY(-1px); box-shadow:0 8px 24px rgba(56,200,240,.3); }
+.cta-note { font-size:12px; color:rgba(221,234,252,.4); margin-top:14px; }
+
+footer { background:var(--dark-bg); padding:32px 48px; border-top:1px solid rgba(56,200,240,.08); }
+.footer-inner { max-width:1000px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; }
+.footer-logo { font-family:var(--serif); font-size:12px; color:var(--crystal); }
+.footer-back { font-size:13px; color:var(--dark-mid); transition:color .2s; }
+.footer-back:hover { color:var(--crystal); }
+
+@media (max-width: 768px) {
+  nav { padding:0 20px; }
+  .hero, .section, .price-section, .cta-section { padding-left:20px; padding-right:20px; }
+  .hero-programs { grid-template-columns:1fr; }
+  .prog-compare { grid-template-columns:1fr; }
+  .prog-pillars { grid-template-columns:1fr; }
+  .comp-callouts { grid-template-columns:1fr; }
+  footer { padding:24px 20px; }
+}
+#glazd-wrap{position:fixed;top:80px;right:32px;z-index:9999;}
+#glazd{display:block;width:44px;height:44px;background:#fff;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,.18);padding:6px;cursor:pointer;border:1px solid #ddd;transition:box-shadow .2s;}
+#glazd:hover{box-shadow:0 4px 20px rgba(0,0,0,.25);}
+@media(max-width:980px){#glazd-wrap{top:auto;bottom:80px;right:16px;}#glazd{width:40px;height:40px;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo-wrap">
+    <img src="assets/logo.png" alt="" style="height:36px;" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none'">
+    <div class="logo-fallback">Академия<br>Развития Личности</div>
+  </div>
+  <a href="site-concept-v6.html#programs" class="nav-back">← Все программы</a>
+  <a href="#cta" class="nav-cta">Получить диплом →</a>
+</nav>
+<div id="glazd-wrap"><a id="specialButton" href="https://lidrekon.ru/slep/" target="_blank" title="Версия для слабовидящих"><img src="https://lidrekon.ru/images/special.png" id="glazd" alt="Версия для слабовидящих"></a></div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-tags">
+      <span class="htag htag-gold">🎓 Диплом ДПО</span>
+      <span class="htag htag-crystal">🔔 Идёт набор</span>
+      <span class="htag htag-mid">💻 250 часов · 100% онлайн</span>
+    </div>
+    <h1>Ведёшь курсы или тренинги?<br>Без диплома педагога —<br>ты <em>вне закона</em></h1>
+    <div class="hero-law-badge">⚖️ <strong>№ 273-ФЗ</strong> «Об образовании в РФ» — программа полностью соответствует требованиям закона</div>
+    <div class="hero-programs">
+      <div class="prog-card">
+        <div class="pc-num">Программа 1</div>
+        <div class="pc-name">Педагог ДПО</div>
+        <div class="pc-full">«Педагог дополнительного профессионального образования»</div>
+        <div class="pc-audience">Для тех, кто обучает взрослых специалистов — коучи, тренеры, эксперты онлайн-школ</div>
+        <div class="pc-meta">
+          <div class="pc-price">14 700 ₽</div>
+          <div class="pc-hours">250 ч · 100% онлайн</div>
+        </div>
+        <a href="#cta" class="pc-cta">Записаться на программу →</a>
+      </div>
+      <div class="prog-card">
+        <div class="pc-num">Программа 2</div>
+        <div class="pc-name">Педагог ДО детей и взрослых</div>
+        <div class="pc-full">«Педагог дополнительного образования детей и взрослых»</div>
+        <div class="pc-audience">Для тех, кто работает с широкой аудиторией — от детей 5 лет до взрослых</div>
+        <div class="pc-meta">
+          <div class="pc-price">14 700 ₽</div>
+          <div class="pc-hours">250 ч · 100% онлайн</div>
+        </div>
+        <a href="#cta" class="pc-cta">Записаться на программу →</a>
+      </div>
+    </div>
+    <div class="hero-btns">
+      <a href="#compliance" class="btn-outline">Почему это важно →</a>
+    </div>
+  </div>
+</section>
+
+<!-- COMPLIANCE -->
+<section class="section compliance" id="compliance">
+  <div class="container">
+    <div class="sec-eyebrow">Юридический контекст</div>
+    <h2 class="sec-title" style="color:#fff;">Почему важно<br>пройти обучение?</h2>
+    <div class="comp-year">С 2024 года усилился контроль над образовательной деятельностью инфобизнеса.</div>
+
+    <div class="comp-if-label">Если ты:</div>
+    <div class="comp-list">
+      <div class="comp-item"><div class="comp-dot"></div><div class="comp-text">Обучаешь группами</div></div>
+      <div class="comp-item"><div class="comp-dot"></div><div class="comp-text">Даёшь расписание занятий, модулей</div></div>
+      <div class="comp-item"><div class="comp-dot"></div><div class="comp-text">Используешь термин «обучение»</div></div>
+      <div class="comp-item"><div class="comp-dot"></div><div class="comp-text">Выдаёшь сертификаты</div></div>
+      <div class="comp-item"><div class="comp-dot"></div><div class="comp-text">Публикуешь модули и программы</div></div>
+    </div>
+
+    <div class="comp-result">
+      <div class="comp-result-title">— ты уже осуществляешь образовательную деятельность и обязан иметь:</div>
+      <ol>
+        <li>Лицензию на образовательную деятельность</li>
+        <li>Педагогов в штате онлайн-школы</li>
+      </ol>
+    </div>
+    <div class="comp-warning">
+      <strong>В противном случае — штраф от 40 000 рублей,</strong> а в ряде случаев — уголовная ответственность (ст. 171 УК РФ).
+    </div>
+    <div class="comp-callouts">
+      <div class="callout">Суды не принимают «незнание» за оправдание.</div>
+      <div class="callout">Штрафы назначаются в полном объёме.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOR WHOM -->
+<section class="section for-whom">
+  <div class="container">
+    <div class="sec-eyebrow">Для кого</div>
+    <h2 class="sec-title">Для тех, кто уже обучает<br>или <em>готовит запуск</em></h2>
+    <p class="sec-lead">Программа подходит всем, кто ведёт или планирует образовательную деятельность онлайн.</p>
+    <div class="whom-grid">
+      <div class="whom-item"><div class="whom-dot"></div><div class="whom-text">Эксперты, ведущие марафоны, тренинги, программы и интенсивы</div></div>
+      <div class="whom-item"><div class="whom-dot"></div><div class="whom-text">Будущие преподаватели онлайн-школ и их руководители</div></div>
+      <div class="whom-item"><div class="whom-dot"></div><div class="whom-text">Школы, находящиеся в процессе получения образовательной лицензии</div></div>
+      <div class="whom-item"><div class="whom-dot"></div><div class="whom-text">Специалисты, чья деятельность выходит за рамки консультаций</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAM -->
+<section class="section program-section">
+  <div class="container">
+    <div class="sec-eyebrow">Сравнение программ</div>
+    <h2 class="sec-title">Выберите своё<br><em>направление</em></h2>
+    <p class="sec-lead">Обе программы дают диплом установленного образца. Разница — в охвате целевой аудитории.</p>
+    <div class="prog-compare">
+
+      <!-- Программа 1 -->
+      <div class="pcomp-card">
+        <div class="pcomp-head">
+          <img class="pcomp-owl" src="assets/Сова-педагог (course-pedagog, кит 1).png" alt="Педагог ДПО">
+          <div>
+            <div class="pcomp-hnum">Программа 1</div>
+            <div class="pcomp-htitle">Педагог ДПО</div>
+          </div>
+        </div>
+        <div class="pcomp-body">
+          <div class="pcomp-row">
+            <div class="pcomp-label">Полное название</div>
+            <div class="pcomp-val">«Педагог дополнительного профессионального образования»</div>
+          </div>
+          <div class="pcomp-row">
+            <div class="pcomp-label">Для кого</div>
+            <div class="pcomp-val">Коучи, тренеры, эксперты — те, кто обучает взрослых специалистов и профессионалов</div>
+          </div>
+          <div class="pcomp-row">
+            <div class="pcomp-label">Диплом</div>
+            <div class="pcomp-val">Диплом установленного образца о профессиональной переподготовке</div>
+          </div>
+          <div class="pcomp-row">
+            <div class="pcomp-label">Объём · формат</div>
+            <div class="pcomp-val">250 академических часов · 100% онлайн · итоговая аттестация</div>
+          </div>
+        </div>
+        <div class="pcomp-footer">
+          <a href="#cta" class="pcomp-cta">Записаться на Программу 1</a>
+        </div>
+      </div>
+
+      <!-- Программа 2 -->
+      <div class="pcomp-card">
+        <div class="pcomp-head">
+          <img class="pcomp-owl" src="assets/Сова с учениками (course-pedagog, кит 2).png" alt="Педагог ДО">
+          <div>
+            <div class="pcomp-hnum">Программа 2</div>
+            <div class="pcomp-htitle">Педагог ДО детей и взрослых</div>
+          </div>
+        </div>
+        <div class="pcomp-body">
+          <div class="pcomp-row">
+            <div class="pcomp-label">Полное название</div>
+            <div class="pcomp-val">«Педагог дополнительного образования детей и взрослых»</div>
+          </div>
+          <div class="pcomp-row">
+            <div class="pcomp-label">Для кого</div>
+            <div class="pcomp-val">Педагоги, репетиторы — те, кто работает с широкой аудиторией от детей 5 лет до взрослых</div>
+          </div>
+          <div class="pcomp-row">
+            <div class="pcomp-label">Диплом</div>
+            <div class="pcomp-val">Диплом установленного образца о профессиональной переподготовке</div>
+          </div>
+          <div class="pcomp-row">
+            <div class="pcomp-label">Объём · формат</div>
+            <div class="pcomp-val">250 академических часов · 100% онлайн · итоговая аттестация</div>
+          </div>
+        </div>
+        <div class="pcomp-footer">
+          <a href="#cta" class="pcomp-cta">Записаться на Программу 2</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PRICE -->
+<section class="section price-section">
+  <div class="container">
+    <div class="sec-eyebrow" style="color:var(--crystal);text-align:center;margin-bottom:32px;">Стоимость</div>
+    <div class="price-card">
+      <div class="price-val">14 700 ₽</div>
+      <div class="price-note">полный доступ к программе</div>
+      <div class="price-includes">
+        <div class="pi-item"><div class="pi-check">✓</div><div class="pi-text">250 академических часов — 100% онлайн</div></div>
+        <div class="pi-item"><div class="pi-check">✓</div><div class="pi-text">Доступ к материалам в любое время</div></div>
+        <div class="pi-item"><div class="pi-check">✓</div><div class="pi-text">Итоговая аттестация и разбор работы</div></div>
+        <div class="pi-item"><div class="pi-check">✓</div><div class="pi-text">Диплом установленного образца о профессиональной переподготовке</div></div>
+      </div>
+      <div class="pi-plus">
+        ➕ Бонус: возможность запустить авторский курс под лицензией Академии — индивидуальные условия партнёрства, подробности при встрече.
+      </div>
+      <br>
+      <a href="#cta" class="btn-primary" style="display:inline-block;text-align:center;width:100%;">Начать обучение</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="cta">
+  <div class="container">
+    <div class="cta-title">Оформите диплом педагога сегодня</div>
+    <p class="cta-sub">Оставьте контакт — расскажем о старте и ответим на вопросы</p>
+    <form class="cta-form" onsubmit="return false;">
+      <input class="cta-input" type="text" placeholder="Ваше имя">
+      <input class="cta-input" type="tel" placeholder="Телефон / Telegram">
+      <button class="cta-submit" type="submit">Получить диплом</button>
+    </form>
+    <div class="cta-note">Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности</div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Академия Развития Личности · АНО ДПО «АРЛ»</div>
+    <a href="site-concept-v6.html" class="footer-back">← Вернуться на главную</a>
+  </div>
+</footer>
+
+</body>
+</html>
