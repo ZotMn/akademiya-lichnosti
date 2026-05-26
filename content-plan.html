@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Контент-план · Академия Личности · Юлия Цезарь</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:      #090f1e;
+  --panel:   #0d1830;
+  --panel2:  #111e38;
+  --ink:     #ddeafc;
+  --mid:     #7898c8;
+  --muted:   #3d5278;
+  --crystal: #38c8f0;
+  --navy:    #1a3a6e;
+  --gold:    #d4860a;
+  --green:   #2ec97e;
+  --red:     #e05555;
+  --purple:  #9b6bcc;
+  --serif:   'Cormorant Garamond', Georgia, serif;
+  --sans:    'Inter', sans-serif;
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:var(--sans); background:var(--bg); color:var(--ink); line-height:1.5; min-height:100vh; }
+
+/* ── HEADER ── */
+header {
+  background:linear-gradient(135deg, #0d1830 0%, #091428 100%);
+  border-bottom:1px solid rgba(56,200,240,.12);
+  padding:28px 40px 24px;
+}
+.header-top { display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:16px; }
+.header-title { font-family:var(--serif); font-size:28px; font-weight:300; color:#fff; }
+.header-title span { color:var(--crystal); }
+.header-sub { font-size:13px; color:var(--mid); margin-top:4px; }
+.header-meta { display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+.meta-badge {
+  font-size:11px; font-weight:600; letter-spacing:.07em; text-transform:uppercase;
+  padding:4px 12px; border-radius:20px; border:1px solid;
+}
+.badge-crystal { color:var(--crystal); border-color:rgba(56,200,240,.3); background:rgba(56,200,240,.07); }
+.badge-gold    { color:var(--gold);    border-color:rgba(212,134,10,.3);  background:rgba(212,134,10,.07); }
+.badge-green   { color:var(--green);   border-color:rgba(46,201,126,.3);  background:rgba(46,201,126,.07); }
+
+/* ── PROGRESS DASHBOARD ── */
+.dashboard {
+  display:grid; grid-template-columns:repeat(auto-fit, minmax(160px,1fr));
+  gap:12px; padding:20px 40px; background:rgba(13,24,48,.6);
+  border-bottom:1px solid rgba(56,200,240,.08);
+}
+.stat-card {
+  background:var(--panel); border:1px solid rgba(56,200,240,.1);
+  border-radius:10px; padding:14px 16px; text-align:center;
+}
+.stat-val { font-family:var(--serif); font-size:30px; font-weight:600; color:var(--crystal); line-height:1; }
+.stat-val.green { color:var(--green); }
+.stat-val.gold  { color:var(--gold); }
+.stat-lab { font-size:11px; color:var(--mid); margin-top:4px; letter-spacing:.04em; }
+
+/* Прогресс-бар */
+.progress-wrap { padding:16px 40px 0; background:rgba(13,24,48,.6); }
+.progress-label { display:flex; justify-content:space-between; font-size:12px; color:var(--mid); margin-bottom:6px; }
+.progress-track { height:6px; background:rgba(56,200,240,.1); border-radius:3px; overflow:hidden; }
+.progress-fill  { height:100%; background:linear-gradient(90deg, var(--navy), var(--crystal)); border-radius:3px; transition:width .4s ease; }
+.progress-pad   { padding-bottom:16px; background:rgba(13,24,48,.6); border-bottom:1px solid rgba(56,200,240,.08); }
+
+/* ── FILTERS ── */
+.filters {
+  display:flex; gap:8px; flex-wrap:wrap; align-items:center;
+  padding:16px 40px; background:var(--bg); border-bottom:1px solid rgba(56,200,240,.07);
+}
+.filter-label { font-size:12px; color:var(--muted); font-weight:600; letter-spacing:.06em; text-transform:uppercase; margin-right:4px; }
+.filter-btn {
+  font-size:12px; font-weight:500; padding:5px 14px; border-radius:20px;
+  border:1px solid rgba(56,200,240,.18); background:transparent; color:var(--mid);
+  cursor:pointer; transition:all .18s; font-family:var(--sans);
+}
+.filter-btn:hover, .filter-btn.active {
+  background:rgba(56,200,240,.1); color:var(--crystal); border-color:rgba(56,200,240,.4);
+}
+.filter-sep { width:1px; height:20px; background:rgba(56,200,240,.1); margin:0 4px; }
+
+/* ── WEEK BLOCK ── */
+.week-block { padding:24px 40px 8px; }
+.week-header {
+  display:flex; align-items:center; gap:14px; margin-bottom:16px;
+  padding:14px 20px; background:var(--panel);
+  border:1px solid rgba(56,200,240,.12); border-radius:10px;
+  cursor:pointer; user-select:none;
+}
+.week-num { font-family:var(--serif); font-size:22px; font-weight:600; color:var(--crystal); min-width:32px; }
+.week-theme { font-size:15px; font-weight:600; color:#fff; flex:1; }
+.week-goal  { font-size:12px; color:var(--mid); }
+.week-progress { font-size:12px; color:var(--green); font-weight:600; margin-left:auto; }
+.week-toggle { font-size:16px; color:var(--muted); transition:transform .2s; }
+.week-toggle.open { transform:rotate(180deg); }
+
+/* ── TABLE ── */
+.plan-table { width:100%; border-collapse:collapse; margin-bottom:20px; }
+.plan-table thead th {
+  font-size:10px; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--muted); padding:8px 12px; text-align:left;
+  border-bottom:1px solid rgba(56,200,240,.1);
+}
+.plan-table tbody tr {
+  border-bottom:1px solid rgba(56,200,240,.05);
+  transition:background .15s;
+}
+.plan-table tbody tr:hover { background:rgba(56,200,240,.03); }
+.plan-table tbody tr.done { opacity:.55; }
+.plan-table tbody td { padding:10px 12px; vertical-align:top; }
+
+/* Checkbox */
+.cb-wrap { display:flex; align-items:center; justify-content:center; }
+.cb {
+  width:20px; height:20px; border-radius:5px; border:1.5px solid rgba(56,200,240,.3);
+  background:transparent; cursor:pointer; appearance:none; flex-shrink:0;
+  position:relative; transition:all .18s;
+}
+.cb:checked {
+  background:var(--green); border-color:var(--green);
+}
+.cb:checked::after {
+  content:'✓'; position:absolute; top:50%; left:50%;
+  transform:translate(-50%,-50%); color:#fff; font-size:12px; font-weight:700;
+}
+.cb:hover { border-color:var(--crystal); }
+
+/* Platform pill */
+.platform {
+  display:inline-block; font-size:10px; font-weight:700; letter-spacing:.06em;
+  text-transform:uppercase; padding:3px 9px; border-radius:12px; white-space:nowrap;
+}
+.pl-channel  { background:rgba(56,200,240,.12); color:var(--crystal); border:1px solid rgba(56,200,240,.25); }
+.pl-comm     { background:rgba(155,107,204,.12); color:var(--purple); border:1px solid rgba(155,107,204,.25); }
+
+/* Type pill */
+.type-pill {
+  display:inline-block; font-size:10px; font-weight:600; padding:2px 8px;
+  border-radius:10px; white-space:nowrap;
+}
+.tp-personal { background:rgba(212,134,10,.12); color:var(--gold); }
+.tp-expert   { background:rgba(56,200,240,.1);  color:var(--crystal); }
+.tp-promo    { background:rgba(46,201,126,.1);   color:var(--green); }
+.tp-engage   { background:rgba(155,107,204,.1);  color:var(--purple); }
+.tp-result   { background:rgba(56,200,240,.08); color:#80c8f0; }
+
+/* Day cell */
+.day-cell { font-size:12px; font-weight:700; color:var(--mid); white-space:nowrap; }
+.day-name { color:var(--crystal); }
+
+/* Post title */
+.post-title { font-size:13.5px; font-weight:600; color:var(--ink); margin-bottom:3px; }
+.post-title .emoji { margin-right:4px; }
+.post-desc  { font-size:12px; color:rgba(221,234,252,.55); line-height:1.5; }
+
+/* CTA cell */
+.cta-cell { font-size:11.5px; color:var(--mid); line-height:1.5; }
+.cta-arrow { color:var(--crystal); font-weight:700; }
+
+/* Priority star */
+.star { color:var(--gold); font-size:14px; margin-left:4px; }
+
+/* Notes cell */
+.notes-input {
+  width:100%; background:rgba(56,200,240,.04); border:1px solid rgba(56,200,240,.1);
+  border-radius:6px; padding:6px 8px; font-size:11px; color:var(--ink);
+  font-family:var(--sans); resize:none; height:42px; transition:border-color .18s;
+  outline:none;
+}
+.notes-input:focus { border-color:rgba(56,200,240,.3); background:rgba(56,200,240,.07); }
+.notes-input::placeholder { color:var(--muted); }
+
+/* Legend */
+.legend {
+  display:flex; gap:12px; flex-wrap:wrap; align-items:center;
+  padding:12px 40px; background:rgba(13,24,48,.4);
+  border-top:1px solid rgba(56,200,240,.07);
+  font-size:11px; color:var(--muted);
+}
+.legend-item { display:flex; align-items:center; gap:5px; }
+
+/* Responsive */
+@media(max-width:900px) {
+  header, .dashboard, .progress-wrap, .progress-pad, .filters, .week-block { padding-left:16px; padding-right:16px; }
+  .plan-table thead th:nth-child(6),
+  .plan-table tbody td:nth-child(6) { display:none; }
+}
+@media(max-width:650px) {
+  .plan-table thead th:nth-child(5),
+  .plan-table tbody td:nth-child(5) { display:none; }
+  .post-desc { display:none; }
+}
+
+/* Print */
+@media print {
+  body { background:#fff; color:#000; }
+  .filters, .notes-input, .cb { display:none; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-top">
+    <div>
+      <div class="header-title">Контент-план · <span>Юлия Цезарь</span></div>
+      <div class="header-sub">Академия развития личности · Telegram-канал + Бесплатное сообщество</div>
+    </div>
+    <div class="header-meta">
+      <span class="meta-badge badge-crystal">📅 4 недели</span>
+      <span class="meta-badge badge-gold">🎯 Марафон → Курс</span>
+      <span class="meta-badge badge-green" id="completedBadge">✓ 0 выполнено</span>
+    </div>
+  </div>
+</header>
+
+<!-- DASHBOARD -->
+<div class="dashboard">
+  <div class="stat-card">
+    <div class="stat-val" id="statTotal">56</div>
+    <div class="stat-lab">Всего задач</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-val green" id="statDone">0</div>
+    <div class="stat-lab">Выполнено</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-val" id="statLeft">56</div>
+    <div class="stat-lab">Осталось</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-val gold" id="statChannel">0</div>
+    <div class="stat-lab">Постов в канал</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-val" style="color:var(--purple);" id="statComm">0</div>
+    <div class="stat-lab">Активностей в сообщество</div>
+  </div>
+</div>
+
+<!-- PROGRESS BAR -->
+<div class="progress-wrap">
+  <div class="progress-label">
+    <span>Прогресс месяца</span>
+    <span id="progressPct">0%</span>
+  </div>
+  <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+</div>
+<div class="progress-pad"></div>
+
+<!-- FILTERS -->
+<div class="filters">
+  <span class="filter-label">Неделя:</span>
+  <button class="filter-btn active" onclick="filterWeek('all')">Все</button>
+  <button class="filter-btn" onclick="filterWeek('w1')">Неделя 1</button>
+  <button class="filter-btn" onclick="filterWeek('w2')">Неделя 2</button>
+  <button class="filter-btn" onclick="filterWeek('w3')">Неделя 3</button>
+  <button class="filter-btn" onclick="filterWeek('w4')">Неделя 4</button>
+  <div class="filter-sep"></div>
+  <span class="filter-label">Площадка:</span>
+  <button class="filter-btn active" onclick="filterPlatform('all')">Все</button>
+  <button class="filter-btn" onclick="filterPlatform('channel')">📢 Канал</button>
+  <button class="filter-btn" onclick="filterPlatform('comm')">💬 Сообщество</button>
+  <div class="filter-sep"></div>
+  <button class="filter-btn" onclick="filterStatus('pending')">🔲 Только невыполненные</button>
+  <button class="filter-btn" onclick="filterStatus('all')">Сбросить фильтры</button>
+</div>
+
+<!-- ══════════════════════════════════════
+     НЕДЕЛЯ 1
+══════════════════════════════════════ -->
+<div class="week-block" id="week-w1">
+  <div class="week-header" onclick="toggleWeek('w1')">
+    <div class="week-num">01</div>
+    <div>
+      <div class="week-theme">Я и мой мир</div>
+      <div class="week-goal">Задача: показать Юлю как живого человека + заинтриговать темой рун</div>
+    </div>
+    <div class="week-progress" id="prog-w1">0 / 10</div>
+    <div class="week-toggle open" id="toggle-w1">▾</div>
+  </div>
+
+  <table class="plan-table" id="table-w1">
+    <thead>
+      <tr>
+        <th style="width:36px;">✓</th>
+        <th style="width:72px;">День</th>
+        <th style="width:90px;">Площадка</th>
+        <th style="width:90px;">Тип</th>
+        <th>Пост / Активность</th>
+        <th style="width:180px;">CTA / Действие</th>
+        <th style="width:160px;">Заметки</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Канал -->
+      <tr data-week="w1" data-platform="channel">
+        <td class="cb-wrap"><input type="checkbox" class="cb" id="t1" onchange="updateStats()"></td>
+        <td class="day-cell"><span class="day-name">ПН</span></td>
+        <td><span class="platform pl-channel">📢 Канал</span></td>
+        <td><span class="type-pill tp-personal">Личное</span></td>
+        <td>
+          <div class="post-title"><span class="emoji">💬</span>«Я пришла к рунам не через эзотерику. Я пришла через боль»<span class="star">★</span></div>
+          <div class="post-desc">История Юли: откуда взялась система рун как психологический инструмент. Живо, честно, без пафоса.</div>
+        </td>
+        <td class="cta-cell"><span class="cta-arrow">→</span> «Напишите в комментарии — как вы узнали обо мне?»</td>
+        <td><textarea class="notes-input" placeholder="Заметки..."></textarea></td>
+      </tr>
+      <tr data-week="w1" data-platform="channel">
+        <td class="cb-wrap"><input type="checkbox" class="cb" id="t2" onchange="updateStats()"></td>
+        <td class="day-cell"><span class="day-name">СР</span></td>
+        <td><span class="platform pl-channel">📢 Канал</span></td>
+        <td><span class="type-pill tp-expert">Экспертное</span></td>
+        <td>
+          <div class="post-title"><span class="emoji">🪨</span>«Руна — это не гадание. Это зеркало»</div>
+          <div class="post-desc">Как руны работают в паре с психологией. Снимаем возражение «это же магия».</div>
+        </td>
+        <td class="cta-cell"><span class="cta-arrow">→</span> «Сохраните пост — вернётесь к нему после марафона»</td>
+        <td><textarea class="notes-input" placeholder="Заметки..."></textarea></td>
+      </tr>
+      <tr data-week="w1" data-platform="channel">
+        <td class="cb-wrap"><input type="checkbox" class="cb" id="t3" onchange="updateStats()"></td>
+        <td class="day-cell"><span class="day-name">ПТ</span></td>
+        <td><span class="platform pl-channel">📢 Канал</span></td>
+        <td><span class="type-pill tp-result">Результат</span></td>
+        <td>
+          <div class="post-title"><span class="emoji">🌟</span>История ученицы: конкретное изменение в жизни</div>
+          <div class="post-desc">Короткий отзыв + фото/видео. Акцент — было/стало.</div>
+        </td>
+        <td class="cta-cell"><span class="cta-arrow">→</span> «Хотите так же? Ссылка в описании канала»</td>
+        <td><textarea class="notes-input" placeholder="Заметки..."></textarea></td>
+      </tr>
+      <tr data-week="w1" data-platform="channel">
+        <td class="cb-wrap"><input type="checkbox" class="cb" id="t4" onchange="updateStats()"></td>
+        <td class="day-cell"><span class="day-name">ВС</span></td>
+        <td><span class="platform pl-channel">📢 Канал</span></td>
+        <td><span class="type-pill tp-engage">Вовлечение</span></td>
+        <td>
+          <div class="post-title"><span class="emoji">🔮</span>«Какая руна ваша по дате рождения?» — мини-гайд + таблица</div>
+          <div class="post-desc">Просто, интересно, вирусно. Люди пересылают.</div>
+        </td>
+        <td class="cta-cell"><span class="cta-arrow">→</span> «Напишите вашу руну в комментарии 👇»</td>
+        <td><textarea class="notes-input" placeholder="Заметки..."></textarea></td>
+      </tr>
+      <!-- Сообщество -->
+      <tr data-week="w1" data-platform="comm">
+        <td class="cb-wrap"><input type="checkbox" class="cb" id="t5" onchange="updateStats()"></td>
+        <td class="day-cell"><span class="day-name">ПН</span></td>
+        <td><span class="platform pl-comm">💬 Сообщество</span></td>
+        <td><span class="type-pill tp-engage">Вовлечение</span></td>
+        <td>
+          <div class="post-title"><span class="emoji">👋</span>Знакомство участников</div>
+          <div class="post-desc">«Напишите своё имя + одно слово о себе»</div>
+        </td>
+        <td class="cta-cell">Создаём тёплую атмосферу, Юля отвечает каждому</td>
+        <td><textarea class="notes-input" placeholder="Заметки..."></textarea></td>
+      </tr>
+      <tr data-week="w1" data-platform="comm">
+        <td class="cb-wrap"><input type="checkbox" class="cb" id="t6" onchange="updateStats()"></td>
+        <td class="day-cell"><span class="day-name">ВТ</span></td>
+        <td><span class="platform pl-comm">💬 Сообщество</span></td>
+        <td><span class="type-pill tp-engage">Вовлечение</span></td>
+        <td>
+          <div class="post-title"><span class="emoji">📊</span>Голосование: «Что вас привело сюда?»</div>
+          <div class="post-desc">Варианты: Саморазвитие / Профессия / Любопытство / Кризис</div>
+        </td>
+        <td class="cta-cell">Сбор данных об аудитории</td>
+        <td><textarea class="notes-input" placeholder="Заметки..."></textarea></td>
+      </tr>
+      <tr data-week="w1" data-platform="comm">
+        <td class="cb-wrap"><input type="checkbox" class="cb" id="t7" onchange="updateStats()"></td>
+        <td class="day-cell"><span class="day-name">СР</span></td>
+        <td><span class="platform pl-comm">💬 Сообщество</span></td>
+        <td><span class="type-pill tp-expert">Экспертное</span></td>
+        <td>
+          <div class="post-title"><span class="emoji">🎙</span>Войс от Юли: мини-практика на осознанность (3 мин)</div>
+          <div class="post-desc">Эксклюзив для сообщества, нет в канале</div>
+        </td>
+        <td class="cta-cell">Повышение ценности сообщества</td>
+        <td><textarea class="notes-input" placeholder="Заметки..."></textarea></td>
+      </tr>
+      <tr data-week="w1" data-platform="comm">
+        <td class="cb-wrap"><input type="checkbox" class="cb" id="t8" onchange="updateStats()"></td>
+        <td class="day-cell"><span class="day-name">ЧТ</span></td>
+        <td><span class="platform pl-comm">💬 Сообщество</span></td>
+        <td><span class="type-pill tp-engage">Вовлечение</span></td>
+        <td>
+          <div class="post-title"><span class="emoji">❓</span>Вопрос дня: «Что в вашей жизни сейчас требует изменений?»</div>
+          <div class="post-desc">Обсуждение в чате, Юля комментирует</div>
+        </td>
+        <td class="cta-cell">Прогрев к теме трансформации</td>
+        <td><textarea class="notes-input" placeholder="Заметки..."></textarea></td>
+      </tr>
+      <tr data-week="w1" data-platform="comm">
+        <td class="cb-wrap"><input type="checkbox" class="cb" id="t9" onchange="updateStats()"></td>
+        <td class="day-cell"><span class="day-name">ПТ</span></td>
+        <td><span class="platform pl-comm">💬 Сообщество</span></td>
+        <td><span class="type-pill tp-engage">Вовлечение</span></td>
+        <td>
+          <div class="post-title"><span class="emoji">🔁</span>Репост поста канала + обсуждение в чате</div>
+          <div class="post-desc">Поднимаем активность, задаём вопрос к отзыву</div>
+        </td>
+        <td class="cta-cell">Связь канала и сообщества</td>
+        <td><textarea class="notes-input" placeholder="Заметки..."></textarea></td>
+      </tr>
+      <tr data-week="w1" data-platform="comm">
+        <td class="cb-wrap"><input type="checkbox" class="cb" id="t10" onchange="updateStats()"></td>
+        <td class="day-cell"><span class="day-name">СБ</span></td>
+        <td><span class="platform pl-comm">💬 Сообщество</span></td>
+        <td><span class="type-pill tp-engage">Вовлечение</span></td>
+        <td>
+          <div class="post-title"><span class="emoji">📚</span>Подборка от Юли: 3 книги/фильма/подкаста о трансформации</div>
+          <div class="post-desc">Полезный контент, сохраняемый</div>
+        </td>
+        <td class="cta-cell">Экспертный авторитет + удержание в сообществе</td>
+        <td><textarea class="notes-input" placeholder="Заметки..."></textarea></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ══════════════════════════════════════
+     НЕДЕЛЯ 2
+══════════════════════════════════════ -->
+<div class="week-block" id="week-w2">
+  <div class="week-header" onclick="toggleWeek('w2')">
+    <div class="week-num">02</div>
+    <div>
+      <div class="week-theme">Твоя боль — это твой ресурс</div>
+      <div class="week-goal">Задача: попасть в боли аудитории, объявить марафон, открыть регистрацию</div>
+    </div>
+    <div class="week-progress" id="prog-w2">0 / 10</div>
+    <div class="week-toggle open" id="toggle-w2">▾</div>
+  </div>
+
+  <table class="plan-table" id="table-w2">
+    <thead>
+      <tr>
+        <th style="width:36px;">✓</th>
+        <th style="width:72px;">День</th>
+        <th style="width:90px;">Площадка</th>
+        <th style="width:90px;">Тип</th>
+        <th>Пост / Активность</th>
+        <th style="width:180px;">CTA / Действие</th>
+        <th style="width:160px;">Заметки</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr data-week="w2" data-platform="channel">
+        <td class="cb-wrap"><input type="checkbox" class="cb" id="t11" onchange="updateStats()"></td>
+        <td class="day-cell"><span class="day-name">ПН</span></td>
+        <td><span class="platform pl-channel">📢 Канал</span></td>
+        <td><span class="type-pill tp-expert">Экспертное</span></td>
+        <td>
+          <div class="post-title"><span class="emoji">🧠</span>«Почему умные, чувствующие женщины годами живут не своей жизнью»</div>
+          <div class="post-desc">Разбор психологического паттерна. Читательницы узнают себя.</div>
+        </td>
+        <td class="cta-cell"><span class="cta-arrow">→</span> «Если это про вас — у меня есть кое-что важное»</td>
+        <td><textarea class="notes-input" placeholder="Заметки..."></textarea></td>
+      </tr>
+      <tr data-week="w2" data-platform="channel">
+        <td class="cb-wrap"><input type="checkbox" class="cb" id="t12" onchange="updateStats()"></td>
+        <td class="day-cell"><span class="day-name">СР</span></td>
+        <td><span class="platform pl-channel">📢 Канал</span></td>
+        <td><span class="type-pill tp-promo">Продажа</span></td>
+        <td>
+          <div class="post-title"><span class="emoji">🔥</span>АНОНС: Марафон «Тайны Мантики»<span class="star">★★</span></div>
+          <div class="post-desc">Что будет: 5 дней, выбор, активация, 3 расклада, гайд. Цена 2 990 ₽. Даты. Ссылка.</div>
+        </td>
+        <td class="cta-cell"><span class="cta-arrow">→</span> Прямая ссылка на регистрацию</td>
+        <td><textarea class="notes-input" placeholder="Заметки..."></textarea></td>
+      </tr>
+      <tr data-week="w2" data-platform="channel">
+        <td class="cb-wrap"><input type="checkbox" class="cb" id="t13" onchange="updateStats()"></td>
+        <td class="day-cell"><span class="day-name">ПТ</span></td>
+        <td><span class="platform pl-channel">📢 Канал</span></td>
+        <td><span class="type-pill tp-promo">Продажа</span></td>
+        <td>
+          <div class="post-title"><span class="emoji">🎯</span>«3 признака, что вам точно нужен марафон»</div>
+          <div class="post-desc">Конкретные ситуации — работает как самодиагностика «о, это же я!»</div>
+        </td>
+        <td class="cta-cell"><span class="cta-arrow">→</span> Ссылка + напоминание о цене</td>
+        <td><textarea class="notes-input" placeholder="Заметки..."></textarea></td>
+      </tr>
+      <tr data-week="w2" data-platform="channel">
+        <td class="cb-wrap"><input type="checkbox" class="cb" id="t14" onchange="updateStats()"></td>
+        <td class="day-cell"><span class="day-name">ВС</span></td>
+        <td><span class="platform pl-channel">📢 Канал</span></td>
+        <td><span class="type-pill tp-personal">Личное</span></td>
+        <td>
+          <div class="post-title"><span class="emoji">💛</span>Юля от себя: как готовится к марафону, что чувствует</div>
+          <div class="post-desc">Войс или текст. Живо, по-человечески. Создаём ощущение причастности.</div>
+        </td>
+        <td class="cta-cell"><span class="cta-arrow">→</span> «Жду вас на марафоне. Ссылка ↑»</td>
+        <td><textarea class="notes-input" placeholder="Заметки..."></textarea></td>
+      </tr>
+      <!-- Сообщество -->
+      <tr data-week="w2" data-platform="comm">
+        <td class="cb-wrap"><input type="checkbox" class="cb" id="t15" onchange="updateStats()"></td>
+        <td class="day-cell"><span class="day-name">ПН</span></td>
+        <td><span class="platform pl-comm">💬 Сообщество</span></td>
+        <td><span class="type-pill tp-engage">Вовлечение</span></td>
+        <td>
+          <div class="post-title"><span class="emoji">📊</span>Опрос: «Что мешает вам двигаться вперёд?»</div>
+          <div class="post-desc">Варианты: Страх / Деньги / Не знаю с чего начать / Нет времени</div>
+        </td>
+        <td class="cta-cell">Сбор возражений для дожимающих постов</td>
+        <td><textarea class="notes-input" placeholder="Заметки..."></textarea></td>
+      </tr>
+      <tr data-week="w2" data-platform="comm">
+        <td class="cb-wrap"><input type="checkbox" class="cb" id="t16" onchange="updateStats()"></td>
+        <td class="day-cell"><span class="day-name">ВТ</span></td>
+        <td><span class="platform pl-comm">💬 Сообщество</span></td>
+        <td><span class="type-pill tp-expert">Экспертное</span></td>
+        <td>
+          <div class="post-title"><span class="emoji">🤫</span>Эксклюзив: факт о рунах, которого нет в канале</div>
+          <div class="post-desc">Создаём ощущение «здесь особенное»</div>
+        </td>
+        <td class="cta-cell">Удержание + повышение ценности сообщества</td>
+        <td><textarea class="notes-input" placeholder="Заметки..."></textarea></td>
+      </tr>
+      <tr data-week="w2" data-platform="comm">
+        <td class="cb-wrap"><input type="checkbox" class="cb" id="t17" onchange="updateStats()"></td>
+        <td class="day-cell"><span class="day-name">СР</span></td>
+        <td><span class="platform pl-comm">💬 Сообщество</span></td>
+        <td><span class="type-pill tp-promo">Продажа</span></td>
+        <td>
+          <div class="post-title"><span class="emoji">🚀</span>Репост анонса марафона + личное сообщение Юли в чат</div>
+          <div class="post-desc">«Дорогие мои, открыла регистрацию — специально иду сюда первой»</div>
+        </td>
+        <td class="cta-cell"><span class="cta-arrow">→</span> Ссылка на регистрацию</td>
+        <td><textarea class="notes-input" placeholder="Заметки..."></textarea></td>
+      </tr>
+      <tr data-week="w2" data-platform="comm">
+        <td class="cb-wrap"><input type="checkbox" class="cb" id="t18" onchange="updateStats()"></td>
+        <td class="day-cell"><span class="day-name">ЧТ</span></td>
+        <td><span class="platform pl-comm">💬 Сообщество</span></td>
+        <td><span class="type-pill tp-engage">Вовлечение</span></td>
+        <td>
+          <div class="post-title"><span class="emoji">🔥</span>«Кто уже зарегистрировался? Напишите 🔥» — социальное доказательство</div>
+          <div class="post-desc">Создаём эффект «все идут», дожимаем сомневающихся</div>
+        </td>
+        <td class="cta-cell">Дожим через социальное доказательство</td>
+        <td><textarea class="notes-input" placeholder="Заметки..."></textarea></td>
+      </tr>
+      <tr data-week="w2" data-platform="comm">
+        <td class="cb-wrap"><input type="checkbox" class="cb" id="t19" onchange="updateStats()"></td>
+        <td class="day-cell"><span class="day-name">ПТ</span></td>
+        <td><span class="platform pl-comm">💬 Сообщество</span></td>
+        <td><span class="type-pill tp-expert">Экспертное</span></td>
+        <td>
+          <div class="post-title"><span class="emoji">🪨</span>Руна дня — Юля бросает руну и даёт краткую трактовку</div>
+          <div class="post-desc">Интерактив, вовлечение, демонстрация экспертизы</div>
+        </td>
+        <td class="cta-cell">«Как ваша руна откликается сегодня?»</td>
+        <td><textarea class="notes-input" placeholder="Заметки..."></textarea></td>
+      </tr>
+      <tr data-week="w2" data-platform="comm">
+        <td class="cb-wrap"><input type="checkbox" class="cb" id="t20" onchange="updateStats()"></td>
+        <td class="day-cell"><span class="day-name">ВС</span></td>
+        <td><span class="platform pl-comm">💬 Сообщество</span></td>
+        <td><span class="type-pill tp-promo">Продажа</span></td>
+        <td>
+          <div class="post-title"><span class="emoji">⏰</span>Напоминание о марафоне + «задайте мне любой вопрос про руны»</div>
+          <div class="post-desc">Юля отвечает лично — создаёт близость и дожимает</div>
+        </td>
+        <td class="cta-cell"><span class="cta-arrow">→</span> Последний шанс зарегистрироваться</td>
+        <td><textarea class="notes-input" placeholder="Заметки..."></textarea></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ══════════════════════════════════════
+     НЕДЕЛЯ 3
+══════════════════════════════════════ -->
+<div class="week-block" id="week-w3">
+  <div class="week-header" onclick="toggleWeek('w3')">
+    <div class="week-num">03</div>
+    <div>
+      <div class="week-theme">Марафон идёт 🔥</div>
+      <div class="week-goal">Задача: марафон в активной фазе, параллельно греем к продаже курса</div>
+    </div>
+    <div class="week-progress" id="prog-w3">0 / 11</div>
+    <div class="week-toggle open" id="toggle-w3">▾</div>
+  </div>
+
+  <table class="plan-table" id="table-w3">
+    <thead>
+      <tr>
+        <th style="width:36px;">✓</th>
+        <th style="width:72px;">День</th>
+        <th style="width:90px;">Площадка</th>
+        <th style="width:90px;">Тип</th>
+        <th>Пост / Активность</th>
+        <th style="width:180px;">CTA / Действие</th>
+        <th style="width:160px;">Заметки</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr data-week="w3" data-platform="channel">
+        <td class="cb-wrap"><input type="checkbox" class="cb" id="t21" onchange="updateStats()"></td>
+        <td class="day-cell"><span class="day-name">ПН</span></td>
+        <td><span class="platform pl-channel">📢 Канал</span></td>
+        <td><span class="type-pill tp-promo">Продажа</span></td>
+        <td>
+          <div class="post-title"><span class="emoji">🚀</span>«Мы начали!» — пост-запуск марафона</div>
+          <div class="post-desc">Эмоции, первые реакции, атмосфера. Для тех, кто не попал — «следующий вход через курс»</div>
+        </td>
+        <td class="cta-cell"><span class="cta-arrow">→</span> Ссылка на запись на курс для тех, кто не в марафоне</td>
+        <td><textarea class="notes-input" placeholder="Заметки..."></textarea></td>
+      </tr>
+      <tr data-week="w3" data-platform="channel">
+        <td class="cb-wrap"><input type="checkbox" class="cb" id="t22" onchange="updateStats()"></td>
+        <td class="day-cell"><span class="day-name">СР</span></td>
+        <td><span class="platform pl-channel">📢 Канал</span></td>
+        <td><span class="type-pill tp-result">Результат</span></td>
+        <td>
+          <div class="post-title"><span class="emoji">✨</span>Инсайт изнутри марафона (анонимно)</div>
+          <div class="post-desc">Яркий момент, реакция участницы. Показываем ценность без спойлеров.</div>
+        </td>
+        <td class="cta-cell"><span class="cta-arrow">→</span> «Хотите так же — запишитесь на курс»</td>
+        <td><textarea class="notes-input" placeholder="Заметки..."></textarea></td>
+      </tr>
+      <tr data-week="w3" data-platform="channel">
+        <td class="cb-wrap"><input type="checkbox" class="cb" id="t23" onchange="updateStats()"></td>
+        <td class="day-cell"><span class="day-name">ПТ</span></td>
+        <td><span class="platform pl-channel">📢 Канал</span></td>
+        <td><span class="type-pill tp-promo">Продажа</span></td>
+        <td>
+          <div class="post-title"><span class="emoji">🗺</span>«После марафона — что дальше?» Три формата курса<span class="star">★</span></div>
+          <div class="post-desc">30k без терапии / 60k с терапией / 150k ДПО — описание без давления</div>
+        </td>
+        <td class="cta-cell"><span class="cta-arrow">→</span> «Напишите мне в личку — подберём формат»</td>
+        <td><textarea class="notes-input" placeholder="Заметки..."></textarea></td>
+      </tr>
+      <!-- Сообщество -->
+      <tr data-week="w3" data-platform="comm">
+        <td class="cb-wrap"><input type="checkbox" class="cb" id="t24" onchange="updateStats()"></td>
+        <td class="day-cell"><span class="day-name">ПН</span></td>
+        <td><span class="platform pl-comm">💬 Сообщество</span></td>
+        <td><span class="type-pill tp-personal">Личное</span></td>
+        <td>
+          <div class="post-title"><span class="emoji">🌅</span>Реакция Юли: что произошло на 1-м дне марафона</div>
+          <div class="post-desc">Короткий войс или текст — ощущение живого дневника</div>
+        </td>
+        <td class="cta-cell">Держим вовлечённость тех, кто не в марафоне</td>
+        <td><textarea class="notes-input" placeholder="Заметки..."></textarea></td>
+      </tr>
+      <tr data-week="w3" data-platform="comm">
+        <td class="cb-wrap"><input type="checkbox" class="cb" id="t25" onchange="updateStats()"></td>
+        <td class="day-cell"><span class="day-name">ВТ</span></td>
+        <td><span class="platform pl-comm">💬 Сообщество</span></td>
+        <td><span class="type-pill tp-personal">Личное</span></td>
+        <td>
+          <div class="post-title"><span class="emoji">📔</span>День 2 марафона: инсайт от Юли</div>
+          <div class="post-desc">Что удивило? Что открылось? Эмоции ведущей</div>
+        </td>
+        <td class="cta-cell">Атмосфера близости</td>
+        <td><textarea class="notes-input" placeholder="Заметки..."></textarea></td>
+      </tr>
+      <tr data-week="w3" data-platform="comm">
+        <td class="cb-wrap"><input type="checkbox" class="cb" id="t26" onchange="updateStats()"></td>
+        <td class="day-cell"><span class="day-name">СР</span></td>
+        <td><span class="platform pl-comm">💬 Сообщество</span></td>
+        <td><span class="type-pill tp-engage">Вовлечение</span></td>
+        <td>
+          <div class="post-title"><span class="emoji">📊</span>Голосование: «Какой следующий курс вас интересует?»</div>
+          <div class="post-desc">Тест гипотез для линейки продуктов, сбор спроса</div>
+        </td>
+        <td class="cta-cell">Данные для следующего запуска</td>
+        <td><textarea class="notes-input" placeholder="Заметки..."></textarea></td>
+      </tr>
+      <tr data-week="w3" data-platform="comm">
+        <td class="cb-wrap"><input type="checkbox" class="cb" id="t27" onchange="updateStats()"></td>
+        <td class="day-cell"><span class="day-name">ЧТ</span></td>
+        <td><span class="platform pl-comm">💬 Сообщество</span></td>
+        <td><span class="type-pill tp-personal">Личное</span></td>
+        <td>
+          <div class="post-title"><span class="emoji">💫</span>День 4: самый сильный момент марафона</div>
+          <div class="post-desc">Анонимная цитата участницы + реакция Юли</div>
+        </td>
+        <td class="cta-cell">Социальное доказательство</td>
+        <td><textarea class="notes-input" placeholder="Заметки..."></textarea></td>
+      </tr>
+      <tr data-week="w3" data-platform="comm">
+        <td class="cb-wrap"><input type="checkbox" class="cb" id="t28" onchange="updateStats()"></td>
+        <td class="day-cell"><span class="day-name">ПТ</span></td>
+        <td><span class="platform pl-comm">💬 Сообщество</span></td>
+        <td><span class="type-pill tp-personal">Личное</span></td>
+        <td>
+          <div class="post-title"><span class="emoji">🎉</span>Финал марафона: эмоции, реакции, благодарности</div>
+          <div class="post-desc">Собираем скрины/цитаты участниц (с разрешения)</div>
+        </td>
+        <td class="cta-cell">Мощное социальное доказательство</td>
+        <td><textarea class="notes-input" placeholder="Заметки..."></textarea></td>
+      </tr>
+      <tr data-week="w3" data-platform="comm">
+        <td class="cb-wrap"><input type="checkbox" class="cb" id="t29" onchange="updateStats()"></td>
+        <td class="day-cell"><span class="day-name">СБ</span></td>
+        <td><span class="platform pl-comm">💬 Сообщество</span></td>
+        <td><span class="type-pill tp-result">Результат</span></td>
+        <td>
+          <div class="post-title"><span class="emoji">💬</span>Итоговые отзывы участниц марафона</div>
+          <div class="post-desc">3–5 цитат с конкретными изменениями или ощущениями</div>
+        </td>
+        <td class="cta-cell">Прогрев к покупке курса</td>
+        <td><textarea class="notes-input" placeholder="Заметки..."></textarea></td>
+      </tr>
+      <tr data-week="w3" data-platform="comm">
+        <td class="cb-wrap"><input type="checkbox" class="cb" id="t30" onchange="updateStats()"></td>
+        <td class="day-cell"><span class="day-name">ВС</span></td>
+        <td><span class="platform pl-comm">💬 Сообщество</span></td>
+        <td><span class="type-pill tp-expert">Экспертное</span></td>
+        <td>
+          <div class="post-title"><span class="emoji">🎙</span>Юля отвечает на вопросы в чате голосом (20–30 мин)</div>
+          <div class="post-desc">«Окно ответов» — живое общение, эксклюзив сообщества</div>
+        </td>
+        <td class="cta-cell">Высший уровень доверия и близости</td>
+        <td><textarea class="notes-input" placeholder="Заметки..."></textarea></td>
+      </tr>
+      <tr data-week="w3" data-platform="comm">
+        <td class="cb-wrap"><input type="checkbox" class="cb" id="t31" onchange="updateStats()"></td>
+        <td class="day-cell"><span class="day-name">ВС</span></td>
+        <td><span class="platform pl-comm">💬 Сообщество</span></td>
+        <td><span class="type-pill tp-promo">Продажа</span></td>
+        <td>
+          <div class="post-title"><span class="emoji">🗺</span>Объяснение трёх форматов курса простыми словами</div>
+          <div class="post-desc">Без давления, как «дальнейший путь». Ответы на вопросы.</div>
+        </td>
+        <td class="cta-cell"><span class="cta-arrow">→</span> «Напишите мне, подберём вместе»</td>
+        <td><textarea class="notes-input" placeholder="Заметки..."></textarea></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ══════════════════════════════════════
+     НЕДЕЛЯ 4
+══════════════════════════════════════ -->
+<div class="week-block" id="week-w4">
+  <div class="week-header" onclick="toggleWeek('w4')">
+    <div class="week-num">04</div>
+    <div>
+      <div class="week-theme">Итоги и следующий шаг</div>
+      <div class="week-goal">Задача: продать курс через результаты марафона и живые истории</div>
+    </div>
+    <div class="week-progress" id="prog-w4">0 / 9</div>
+    <div class="week-toggle open" id="toggle-w4">▾</div>
+  </div>
+
+  <table class="plan-table" id="table-w4">
+    <thead>
+      <tr>
+        <th style="width:36px;">✓</th>
+        <th style="width:72px;">День</th>
+        <th style="width:90px;">Площадка</th>
+        <th style="width:90px;">Тип</th>
+        <th>Пост / Активность</th>
+        <th style="width:180px;">CTA / Действие</th>
+        <th style="width:160px;">Заметки</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr data-week="w4" data-platform="channel">
+        <td class="cb-wrap"><input type="checkbox" class="cb" id="t32" onchange="updateStats()"></td>
+        <td class="day-cell"><span class="day-name">ПН</span></td>
+        <td><span class="platform pl-channel">📢 Канал</span></td>
+        <td><span class="type-pill tp-result">Результат</span></td>
+        <td>
+          <div class="post-title"><span class="emoji">📊</span>«5 дней. Вот что произошло» — итоги марафона<span class="star">★</span></div>
+          <div class="post-desc">Цифры, реакции, скрины (с разрешения). Эмоциональный, живой.</div>
+        </td>
+        <td class="cta-cell"><span class="cta-arrow">→</span> «Хотите такую же трансформацию — но глубже?»</td>
+        <td><textarea class="notes-input" placeholder="Заметки..."></textarea></td>
+      </tr>
+      <tr data-week="w4" data-platform="channel">
+        <td class="cb-wrap"><input type="checkbox" class="cb" id="t33" onchange="updateStats()"></td>
+        <td class="day-cell"><span class="day-name">СР</span></td>
+        <td><span class="platform pl-channel">📢 Канал</span></td>
+        <td><span class="type-pill tp-promo">Продажа</span></td>
+        <td>
+          <div class="post-title"><span class="emoji">💎</span>ГЛАВНЫЙ ПРОДАЮЩИЙ ПОСТ: три формата курса<span class="star">★★</span></div>
+          <div class="post-desc">Развёрнутое описание. Истории реальных учениц как anchor. Цены, что входит.</div>
+        </td>
+        <td class="cta-cell"><span class="cta-arrow">→</span> Страница курса + «напишите мне»</td>
+        <td><textarea class="notes-input" placeholder="Заметки..."></textarea></td>
+      </tr>
+      <tr data-week="w4" data-platform="channel">
+        <td class="cb-wrap"><input type="checkbox" class="cb" id="t34" onchange="updateStats()"></td>
+        <td class="day-cell"><span class="day-name">ЧТ</span></td>
+        <td><span class="platform pl-channel">📢 Канал</span></td>
+        <td><span class="type-pill tp-expert">Экспертное</span></td>
+        <td>
+          <div class="post-title"><span class="emoji">🤔</span>«Почему я ещё не готова / дорого / нет времени»</div>
+          <div class="post-desc">Честно разбираем 3 главных возражения. Юля отвечает как подруга.</div>
+        </td>
+        <td class="cta-cell"><span class="cta-arrow">→</span> «Если осталось возражение — напишите, разберём»</td>
+        <td><textarea class="notes-input" placeholder="Заметки..."></textarea></td>
+      </tr>
+      <tr data-week="w4" data-platform="channel">
+        <td class="cb-wrap"><input type="checkbox" class="cb" id="t35" onchange="updateStats()"></td>
+        <td class="day-cell"><span class="day-name">ВС</span></td>
+        <td><span class="platform pl-channel">📢 Канал</span></td>
+        <td><span class="type-pill tp-personal">Личное</span></td>
+        <td>
+          <div class="post-title"><span class="emoji">🌙</span>Финальный личный пост месяца от Юли</div>
+          <div class="post-desc">Подводит итог. Благодарит. Говорит о ценностях. Живой и тёплый без продажи.</div>
+        </td>
+        <td class="cta-cell">Ссылка на запись — ненавязчиво, в конце</td>
+        <td><textarea class="notes-input" placeholder="Заметки..."></textarea></td>
+      </tr>
+      <!-- Сообщество -->
+      <tr data-week="w4" data-platform="comm">
+        <td class="cb-wrap"><input type="checkbox" class="cb" id="t36" onchange="updateStats()"></td>
+        <td class="day-cell"><span class="day-name">ПН</span></td>
+        <td><span class="platform pl-comm">💬 Сообщество</span></td>
+        <td><span class="type-pill tp-result">Результат</span></td>
+        <td>
+          <div class="post-title"><span class="emoji">🎊</span>Поздравляем выпускников марафона — аплодисменты в чате</div>
+          <div class="post-desc">Юля пишет каждой участнице имя + комплимент</div>
+        </td>
+        <td class="cta-cell">Создаём эффект принадлежности к сообществу</td>
+        <td><textarea class="notes-input" placeholder="Заметки..."></textarea></td>
+      </tr>
+      <tr data-week="w4" data-platform="comm">
+        <td class="cb-wrap"><input type="checkbox" class="cb" id="t37" onchange="updateStats()"></td>
+        <td class="day-cell"><span class="day-name">ВТ</span></td>
+        <td><span class="platform pl-comm">💬 Сообщество</span></td>
+        <td><span class="type-pill tp-personal">Личное</span></td>
+        <td>
+          <div class="post-title"><span class="emoji">💬</span>«Что дальше для каждой из вас?» — Юля отвечает персонально</div>
+          <div class="post-desc">Или в эфире, или в чате — индивидуальный подход</div>
+        </td>
+        <td class="cta-cell">Персональные рекомендации → конверсия в курс</td>
+        <td><textarea class="notes-input" placeholder="Заметки..."></textarea></td>
+      </tr>
+      <tr data-week="w4" data-platform="comm">
+        <td class="cb-wrap"><input type="checkbox" class="cb" id="t38" onchange="updateStats()"></td>
+        <td class="day-cell"><span class="day-name">СР</span></td>
+        <td><span class="platform pl-comm">💬 Сообщество</span></td>
+        <td><span class="type-pill tp-promo">Продажа</span></td>
+        <td>
+          <div class="post-title"><span class="emoji">🎁</span>Спецпредложение только для сообщества: бонус при записи до пятницы</div>
+          <div class="post-desc">Создаём срочность и эксклюзивность для участников</div>
+        </td>
+        <td class="cta-cell"><span class="cta-arrow">→</span> «Только здесь и только до ПТ»</td>
+        <td><textarea class="notes-input" placeholder="Заметки..."></textarea></td>
+      </tr>
+      <tr data-week="w4" data-platform="comm">
+        <td class="cb-wrap"><input type="checkbox" class="cb" id="t39" onchange="updateStats()"></td>
+        <td class="day-cell"><span class="day-name">ЧТ</span></td>
+        <td><span class="platform pl-comm">💬 Сообщество</span></td>
+        <td><span class="type-pill tp-engage">Вовлечение</span></td>
+        <td>
+          <div class="post-title"><span class="emoji">❓</span>Опрос: «Что вас останавливает?» — Юля отвечает на каждый ответ</div>
+          <div class="post-desc">Последний дожим через снятие возражений в живом диалоге</div>
+        </td>
+        <td class="cta-cell">Живая работа с возражениями</td>
+        <td><textarea class="notes-input" placeholder="Заметки..."></textarea></td>
+      </tr>
+      <tr data-week="w4" data-platform="comm">
+        <td class="cb-wrap"><input type="checkbox" class="cb" id="t40" onchange="updateStats()"></td>
+        <td class="day-cell"><span class="day-name">СБ</span></td>
+        <td><span class="platform pl-comm">💬 Сообщество</span></td>
+        <td><span class="type-pill tp-personal">Личное</span></td>
+        <td>
+          <div class="post-title"><span class="emoji">🌟</span>Закрытие месяца: тёплый пост от Юли + анонс следующего месяца</div>
+          <div class="post-desc">Создаём ожидание и удержание</div>
+        </td>
+        <td class="cta-cell">Интрига следующего месяца</td>
+        <td><textarea class="notes-input" placeholder="Заметки..."></textarea></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ДОПОЛНИТЕЛЬНО: Постоянные рубрики -->
+<div class="week-block" id="week-rubrics">
+  <div class="week-header" onclick="toggleWeek('rubrics')" style="border-color:rgba(212,134,10,.2);">
+    <div class="week-num" style="color:var(--gold);">+</div>
+    <div>
+      <div class="week-theme">Постоянные рубрики (раскидать по неделям)</div>
+      <div class="week-goal">16 единиц доп. контента на весь месяц</div>
+    </div>
+    <div class="week-progress" id="prog-rubrics">0 / 16</div>
+    <div class="week-toggle open" id="toggle-rubrics">▾</div>
+  </div>
+  <table class="plan-table" id="table-rubrics">
+    <thead>
+      <tr>
+        <th style="width:36px;">✓</th>
+        <th style="width:72px;">Когда</th>
+        <th style="width:90px;">Площадка</th>
+        <th style="width:90px;">Рубрика</th>
+        <th>Контент</th>
+        <th style="width:180px;">CTA / Действие</th>
+        <th style="width:160px;">Заметки</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr data-week="rubrics" data-platform="channel">
+        <td class="cb-wrap"><input type="checkbox" class="cb" id="r1" onchange="updateStats()"></td>
+        <td class="day-cell">Нед. 1</td>
+        <td><span class="platform pl-channel">📢 Канал</span></td>
+        <td><span class="type-pill tp-expert">Руна недели</span></td>
+        <td><div class="post-title">🪨 Руна Феху (ᚠ) — карточка + трактовка + как применить сегодня</div></td>
+        <td class="cta-cell">«Какой смысл отзывается у вас?»</td>
+        <td><textarea class="notes-input" placeholder="Заметки..."></textarea></td>
+      </tr>
+      <tr data-week="rubrics" data-platform="channel">
+        <td class="cb-wrap"><input type="checkbox" class="cb" id="r2" onchange="updateStats()"></td>
+        <td class="day-cell">Нед. 2</td>
+        <td><span class="platform pl-channel">📢 Канал</span></td>
+        <td><span class="type-pill tp-expert">Руна недели</span></td>
+        <td><div class="post-title">🪨 Руна Уруз (ᚢ) — сила, преобразование, воля</div></td>
+        <td class="cta-cell">«Где в жизни вам нужна эта сила?»</td>
+        <td><textarea class="notes-input" placeholder="Заметки..."></textarea></td>
+      </tr>
+      <tr data-week="rubrics" data-platform="channel">
+        <td class="cb-wrap"><input type="checkbox" class="cb" id="r3" onchange="updateStats()"></td>
+        <td class="day-cell">Нед. 3</td>
+        <td><span class="platform pl-channel">📢 Канал</span></td>
+        <td><span class="type-pill tp-expert">Руна недели</span></td>
+        <td><div class="post-title">🪨 Руна Ансуз (ᚨ) — коммуникация, слово, истина</div></td>
+        <td class="cta-cell">«Что хотите сказать, но молчите?»</td>
+        <td><textarea class="notes-input" placeholder="Заметки..."></textarea></td>
+      </tr>
+      <tr data-week="rubrics" data-platform="channel">
+        <td class="cb-wrap"><input type="checkbox" class="cb" id="r4" onchange="updateStats()"></td>
+        <td class="day-cell">Нед. 4</td>
+        <td><span class="platform pl-channel">📢 Канал</span></td>
+        <td><span class="type-pill tp-expert">Руна недели</span></td>
+        <td><div class="post-title">🪨 Руна Соулу (ᛊ) — солнце, успех, жизненная сила</div></td>
+        <td class="cta-cell">«Что даёт вам энергию прямо сейчас?»</td>
+        <td><textarea class="notes-input" placeholder="Заметки..."></textarea></td>
+      </tr>
+      <tr data-week="rubrics" data-platform="channel">
+        <td class="cb-wrap"><input type="checkbox" class="cb" id="r5" onchange="updateStats()"></td>
+        <td class="day-cell">Нед. 1–2</td>
+        <td><span class="platform pl-channel">📢 Канал</span></td>
+        <td><span class="type-pill tp-result">История ученицы</span></td>
+        <td><div class="post-title">💬 Текст-интервью: ученица рунического круга — вопрос-ответ</div></td>
+        <td class="cta-cell">«Хотите так же — марафон»</td>
+        <td><textarea class="notes-input" placeholder="Заметки..."></textarea></td>
+      </tr>
+      <tr data-week="rubrics" data-platform="channel">
+        <td class="cb-wrap"><input type="checkbox" class="cb" id="r6" onchange="updateStats()"></td>
+        <td class="day-cell">Нед. 3–4</td>
+        <td><span class="platform pl-channel">📢 Канал</span></td>
+        <td><span class="type-pill tp-result">История ученицы</span></td>
+        <td><div class="post-title">💬 Ученица ДПО: до/после + итоги обучения</div></td>
+        <td class="cta-cell">«Записаться на собеседование»</td>
+        <td><textarea class="notes-input" placeholder="Заметки..."></textarea></td>
+      </tr>
+      <tr data-week="rubrics" data-platform="channel">
+        <td class="cb-wrap"><input type="checkbox" class="cb" id="r7" onchange="updateStats()"></td>
+        <td class="day-cell">Нед. 1</td>
+        <td><span class="platform pl-channel">📢 Канал</span></td>
+        <td><span class="type-pill tp-expert">Мифы о рунах</span></td>
+        <td><div class="post-title">🔮 «Руны — это опасно» — разбираем миф №1</div></td>
+        <td class="cta-cell">«Какой ещё миф слышали?»</td>
+        <td><textarea class="notes-input" placeholder="Заметки..."></textarea></td>
+      </tr>
+      <tr data-week="rubrics" data-platform="channel">
+        <td class="cb-wrap"><input type="checkbox" class="cb" id="r8" onchange="updateStats()"></td>
+        <td class="day-cell">Нед. 3</td>
+        <td><span class="platform pl-channel">📢 Канал</span></td>
+        <td><span class="type-pill tp-expert">Мифы о рунах</span></td>
+        <td><div class="post-title">🔮 «Нужен дар, чтобы работать с рунами» — разбираем миф №2</div></td>
+        <td class="cta-cell">«Дара не нужно — нужна система»</td>
+        <td><textarea class="notes-input" placeholder="Заметки..."></textarea></td>
+      </tr>
+      <!-- Сообщество рубрики -->
+      <tr data-week="rubrics" data-platform="comm">
+        <td class="cb-wrap"><input type="checkbox" class="cb" id="r9" onchange="updateStats()"></td>
+        <td class="day-cell">Нед. 1</td>
+        <td><span class="platform pl-comm">💬 Сообщество</span></td>
+        <td><span class="type-pill tp-expert">Войс от Юли</span></td>
+        <td><div class="post-title">🎙 Войс: «Почему я выбрала именно руны, а не другие инструменты»</div></td>
+        <td class="cta-cell">Эксклюзив — нет в канале</td>
+        <td><textarea class="notes-input" placeholder="Заметки..."></textarea></td>
+      </tr>
+      <tr data-week="rubrics" data-platform="comm">
+        <td class="cb-wrap"><input type="checkbox" class="cb" id="r10" onchange="updateStats()"></td>
+        <td class="day-cell">Нед. 2</td>
+        <td><span class="platform pl-comm">💬 Сообщество</span></td>
+        <td><span class="type-pill tp-expert">Войс от Юли</span></td>
+        <td><div class="post-title">🎙 Войс: Разбор одного архетипа и его влияние на деньги</div></td>
+        <td class="cta-cell">«Ваш архетип — в курсе разберём подробно»</td>
+        <td><textarea class="notes-input" placeholder="Заметки..."></textarea></td>
+      </tr>
+      <tr data-week="rubrics" data-platform="comm">
+        <td class="cb-wrap"><input type="checkbox" class="cb" id="r11" onchange="updateStats()"></td>
+        <td class="day-cell">Нед. 1</td>
+        <td><span class="platform pl-comm">💬 Сообщество</span></td>
+        <td><span class="type-pill tp-engage">Q&A</span></td>
+        <td><div class="post-title">❓ Вопрос-ответ #1: собираем вопросы → Юля отвечает постом</div></td>
+        <td class="cta-cell">Вовлечение + экспертность</td>
+        <td><textarea class="notes-input" placeholder="Заметки..."></textarea></td>
+      </tr>
+      <tr data-week="rubrics" data-platform="comm">
+        <td class="cb-wrap"><input type="checkbox" class="cb" id="r12" onchange="updateStats()"></td>
+        <td class="day-cell">Нед. 3</td>
+        <td><span class="platform pl-comm">💬 Сообщество</span></td>
+        <td><span class="type-pill tp-engage">Q&A</span></td>
+        <td><div class="post-title">❓ Вопрос-ответ #2: «Спросите всё, что хотите знать о курсе»</div></td>
+        <td class="cta-cell">Снятие возражений через диалог</td>
+        <td><textarea class="notes-input" placeholder="Заметки..."></textarea></td>
+      </tr>
+      <tr data-week="rubrics" data-platform="comm">
+        <td class="cb-wrap"><input type="checkbox" class="cb" id="r13" onchange="updateStats()"></td>
+        <td class="day-cell">Нед. 2</td>
+        <td><span class="platform pl-comm">💬 Сообщество</span></td>
+        <td><span class="type-pill tp-expert">Практика</span></td>
+        <td><div class="post-title">🧘 Мини-медитация с руной: аудио 5 мин</div></td>
+        <td class="cta-cell">«Поделитесь ощущениями»</td>
+        <td><textarea class="notes-input" placeholder="Заметки..."></textarea></td>
+      </tr>
+      <tr data-week="rubrics" data-platform="comm">
+        <td class="cb-wrap"><input type="checkbox" class="cb" id="r14" onchange="updateStats()"></td>
+        <td class="day-cell">Нед. 4</td>
+        <td><span class="platform pl-comm">💬 Сообщество</span></td>
+        <td><span class="type-pill tp-expert">Практика</span></td>
+        <td><div class="post-title">🧘 Практика: «Расклад на следующий месяц» — пошаговая инструкция</div></td>
+        <td class="cta-cell">«В курсе таких раскладов — 24+»</td>
+        <td><textarea class="notes-input" placeholder="Заметки..."></textarea></td>
+      </tr>
+      <tr data-week="rubrics" data-platform="comm">
+        <td class="cb-wrap"><input type="checkbox" class="cb" id="r15" onchange="updateStats()"></td>
+        <td class="day-cell">Нед. 1</td>
+        <td><span class="platform pl-comm">💬 Сообщество</span></td>
+        <td><span class="type-pill tp-engage">Рубрика</span></td>
+        <td><div class="post-title">⭐ Ваш успех недели: «Поделитесь одной победой — большой или маленькой»</div></td>
+        <td class="cta-cell">Создаём культуру поддержки</td>
+        <td><textarea class="notes-input" placeholder="Заметки..."></textarea></td>
+      </tr>
+      <tr data-week="rubrics" data-platform="comm">
+        <td class="cb-wrap"><input type="checkbox" class="cb" id="r16" onchange="updateStats()"></td>
+        <td class="day-cell">Нед. 3</td>
+        <td><span class="platform pl-comm">💬 Сообщество</span></td>
+        <td><span class="type-pill tp-engage">Рубрика</span></td>
+        <td><div class="post-title">⭐ Ваш успех недели: что изменилось благодаря марафону?</div></td>
+        <td class="cta-cell">Социальное доказательство</td>
+        <td><textarea class="notes-input" placeholder="Заметки..."></textarea></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- LEGEND -->
+<div class="legend">
+  <strong style="color:var(--mid);">Типы контента:</strong>
+  <div class="legend-item"><span class="type-pill tp-personal">Личное</span> — истории Юли, эмоции, жизнь</div>
+  <div class="legend-item"><span class="type-pill tp-expert">Экспертное</span> — руны, психология, польза</div>
+  <div class="legend-item"><span class="type-pill tp-promo">Продажа</span> — анонсы, оферы, CTA</div>
+  <div class="legend-item"><span class="type-pill tp-engage">Вовлечение</span> — опросы, вопросы, активности</div>
+  <div class="legend-item"><span class="type-pill tp-result">Результат</span> — отзывы, истории учениц</div>
+  <div class="legend-item" style="margin-left:auto;"><span class="star">★</span> = ключевой пост, готовить тщательно</div>
+</div>
+
+<script>
+// ── STATS ──────────────────────────────────────────────────────────
+const STORAGE_KEY = 'yal_content_plan_v1';
+
+function saveState() {
+  const state = {};
+  document.querySelectorAll('.cb').forEach(cb => {
+    state[cb.id] = cb.checked;
+  });
+  document.querySelectorAll('.notes-input').forEach((n, i) => {
+    state['note_' + i] = n.value;
+  });
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch(e) {}
+}
+
+function loadState() {
+  try {
+    const state = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+    document.querySelectorAll('.cb').forEach(cb => {
+      if (state[cb.id]) { cb.checked = true; cb.closest('tr').classList.add('done'); }
+    });
+    document.querySelectorAll('.notes-input').forEach((n, i) => {
+      if (state['note_' + i]) n.value = state['note_' + i];
+    });
+  } catch(e) {}
+}
+
+function updateStats() {
+  const all  = document.querySelectorAll('.cb');
+  const done = document.querySelectorAll('.cb:checked');
+  const channelDone = [...document.querySelectorAll('.cb:checked')].filter(cb =>
+    cb.closest('tr').dataset.platform === 'channel').length;
+  const commDone = [...document.querySelectorAll('.cb:checked')].filter(cb =>
+    cb.closest('tr').dataset.platform === 'comm').length;
+
+  const total = all.length;
+  const doneN = done.length;
+  const pct   = total ? Math.round(doneN / total * 100) : 0;
+
+  document.getElementById('statTotal').textContent   = total;
+  document.getElementById('statDone').textContent    = doneN;
+  document.getElementById('statLeft').textContent    = total - doneN;
+  document.getElementById('statChannel').textContent = channelDone;
+  document.getElementById('statComm').textContent    = commDone;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressPct').textContent  = pct + '%';
+  document.getElementById('completedBadge').textContent = '✓ ' + doneN + ' выполнено';
+
+  // Per-week progress
+  ['w1','w2','w3','w4','rubrics'].forEach(w => {
+    const wAll  = document.querySelectorAll(`[data-week="${w}"] .cb`).length;
+    const wDone = document.querySelectorAll(`[data-week="${w}"] .cb:checked`).length;
+    const el = document.getElementById('prog-' + w);
+    if (el) el.textContent = wDone + ' / ' + wAll;
+  });
+
+  // Done row styling
+  document.querySelectorAll('.cb').forEach(cb => {
+    const row = cb.closest('tr');
+    if (cb.checked) row.classList.add('done');
+    else row.classList.remove('done');
+  });
+
+  saveState();
+}
+
+// ── TOGGLE WEEK ────────────────────────────────────────────────────
+function toggleWeek(id) {
+  const table   = document.getElementById('table-' + id);
+  const toggle  = document.getElementById('toggle-' + id);
+  if (!table) return;
+  const hidden = table.style.display === 'none';
+  table.style.display = hidden ? '' : 'none';
+  toggle.classList.toggle('open', hidden);
+}
+
+// ── FILTERS ────────────────────────────────────────────────────────
+let activeWeek = 'all';
+let activePlatform = 'all';
+let activeStatus = 'all';
+
+function applyFilters() {
+  document.querySelectorAll('[data-week]').forEach(row => {
+    const w  = row.dataset.week;
+    const p  = row.dataset.platform;
+    const cb = row.querySelector('.cb');
+    const isDone = cb && cb.checked;
+
+    let show = true;
+    if (activeWeek !== 'all' && w !== activeWeek) show = false;
+    if (activePlatform !== 'all' && p !== activePlatform) show = false;
+    if (activeStatus === 'pending' && isDone) show = false;
+    row.style.display = show ? '' : 'none';
+  });
+
+  // Show/hide week blocks based on filter
+  ['w1','w2','w3','w4','rubrics'].forEach(w => {
+    const block = document.getElementById('week-' + w);
+    if (!block) return;
+    if (activeWeek !== 'all' && w !== activeWeek) {
+      block.style.display = 'none';
+    } else {
+      block.style.display = '';
+    }
+  });
+}
+
+function filterWeek(w) {
+  activeWeek = w;
+  document.querySelectorAll('.filters .filter-btn').forEach(b => {
+    if (b.getAttribute('onclick') && b.getAttribute('onclick').includes('filterWeek')) {
+      b.classList.toggle('active', b.getAttribute('onclick').includes("'" + w + "'"));
+    }
+  });
+  applyFilters();
+}
+
+function filterPlatform(p) {
+  activePlatform = p;
+  document.querySelectorAll('.filters .filter-btn').forEach(b => {
+    if (b.getAttribute('onclick') && b.getAttribute('onclick').includes('filterPlatform')) {
+      b.classList.toggle('active', b.getAttribute('onclick').includes("'" + p + "'"));
+    }
+  });
+  applyFilters();
+}
+
+function filterStatus(s) {
+  activeStatus = s;
+  applyFilters();
+}
+
+// ── NOTES AUTO-SAVE ────────────────────────────────────────────────
+document.querySelectorAll('.notes-input').forEach(n => {
+  n.addEventListener('input', saveState);
+});
+
+// ── INIT ──────────────────────────────────────────────────────────
+loadState();
+updateStats();
+</script>
+</body>
+</html>
