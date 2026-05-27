@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Было / Стало — Курс Юлии Цезарь</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  font-family:'Inter', sans-serif;
+  background:#f0f2f5;
+  color:#1a1e2e;
+  line-height:1.6;
+}
+
+/* ── TOP HEADER ── */
+.page-header {
+  background:linear-gradient(135deg,#0d1830 0%,#1a3a6e 100%);
+  padding:40px 48px;
+  text-align:center;
+  border-bottom:3px solid #38c8f0;
+}
+.page-header h1 {
+  font-family:'Cormorant Garamond', Georgia, serif;
+  font-size:clamp(28px,4vw,44px);
+  font-weight:600;
+  color:#fff;
+  margin-bottom:10px;
+}
+.page-header h1 span { color:#38c8f0; }
+.page-header p {
+  font-size:15px;
+  color:rgba(221,234,252,.65);
+  max-width:680px;
+  margin:0 auto 20px;
+  line-height:1.7;
+}
+.header-meta {
+  display:flex; gap:20px; justify-content:center; flex-wrap:wrap;
+  margin-top:16px;
+}
+.header-chip {
+  font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+  padding:5px 14px; border-radius:20px;
+}
+.chip-concept {
+  background:rgba(56,200,240,.12);
+  color:#38c8f0;
+  border:1px solid rgba(56,200,240,.3);
+}
+.chip-audience {
+  background:rgba(212,134,10,.1);
+  color:#d4860a;
+  border:1px solid rgba(212,134,10,.3);
+}
+
+/* ── CONCEPT BLOCK ── */
+.concept-block {
+  max-width:900px;
+  margin:40px auto 0;
+  padding:0 24px;
+}
+.concept-card {
+  background:#fff;
+  border-radius:12px;
+  padding:28px 32px;
+  border:1px solid #e0e4ee;
+  box-shadow:0 2px 12px rgba(0,0,0,.06);
+}
+.concept-title {
+  font-size:12px; font-weight:700; letter-spacing:.1em;
+  text-transform:uppercase; color:#38c8f0; margin-bottom:14px;
+}
+.concept-grid {
+  display:grid; grid-template-columns:1fr 1fr; gap:20px;
+}
+.concept-from, .concept-to {
+  padding:16px 18px; border-radius:8px;
+}
+.concept-from { background:#fff5f5; border-left:3px solid #e05555; }
+.concept-to   { background:#f0faf8; border-left:3px solid #22b388; }
+.concept-label {
+  font-size:10px; font-weight:700; letter-spacing:.1em;
+  text-transform:uppercase; margin-bottom:8px;
+}
+.concept-from .concept-label { color:#e05555; }
+.concept-to   .concept-label { color:#22b388; }
+.concept-text { font-size:13.5px; color:#485070; line-height:1.6; }
+.concept-arrow {
+  text-align:center; padding:16px 0; font-size:22px; color:#7898c8;
+}
+
+/* ── SPLIT HEADER ── */
+.split-labels {
+  max-width:1100px;
+  margin:40px auto 0;
+  padding:0 24px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+}
+.split-label-cell {
+  padding:12px 20px;
+  border-radius:8px;
+  text-align:center;
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+}
+.label-before {
+  background:#ffe5e5;
+  color:#c0392b;
+  border:1.5px solid #f0a0a0;
+}
+.label-after {
+  background:#e3f8f1;
+  color:#1a8a60;
+  border:1.5px solid #7dcfb0;
+}
+
+/* ── COMPARE SECTION ── */
+.compare-wrap {
+  max-width:1100px;
+  margin:12px auto 0;
+  padding:0 24px 60px;
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+
+.compare-row {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:0;
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 2px 10px rgba(0,0,0,.07);
+}
+.cr-section-divider {
+  grid-column:1/-1;
+  background:#e8ecf5;
+  border-radius:8px;
+  padding:10px 20px;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:#7898c8;
+  margin-top:12px;
+}
+
+.before-cell, .after-cell {
+  padding:22px 24px;
+}
+.before-cell {
+  background:#fffbfb;
+  border:1px solid #f5d0d0;
+  border-right:none;
+  border-top-left-radius:0; border-bottom-left-radius:0;
+}
+.after-cell {
+  background:#f8fffe;
+  border:1px solid #c5e8dc;
+}
+
+.row-label {
+  font-size:10px; font-weight:700; letter-spacing:.1em;
+  text-transform:uppercase; margin-bottom:10px; display:block;
+}
+.before-cell .row-label { color:#c05050; }
+.after-cell  .row-label { color:#1a8a60; }
+
+.row-element {
+  font-size:11px; font-weight:500; letter-spacing:.04em;
+  text-transform:uppercase; color:#7898c8;
+  margin-bottom:6px; display:block;
+}
+
+/* Типографика контента */
+.text-h1 {
+  font-family:'Cormorant Garamond', Georgia, serif;
+  font-size:clamp(22px,3vw,32px);
+  font-weight:600;
+  line-height:1.2;
+  margin-bottom:4px;
+}
+.before-cell .text-h1 { color:#8b1a1a; }
+.after-cell  .text-h1 { color:#0d4a2e; }
+
+.text-sub {
+  font-size:14px;
+  line-height:1.65;
+  color:#485070;
+}
+.text-tag {
+  display:inline-block;
+  font-size:11px; font-weight:600;
+  padding:4px 12px; border-radius:20px;
+  margin:3px 4px 3px 0;
+}
+.tag-before { background:#ffe0e0; color:#b03030; border:1px solid #f0a8a8; }
+.tag-after  { background:#ddf5ec; color:#1a6a48; border:1px solid #8adcb8; }
+
+.text-pill {
+  display:inline-flex; align-items:center; gap:6px;
+  font-size:13px; padding:7px 14px;
+  border-radius:8px; margin:4px 0;
+  width:100%;
+}
+.pill-before { background:#fff0f0; border:1px solid #f0c0c0; color:#8b1a1a; }
+.pill-after  { background:#edfaf4; border:1px solid #a0dcc4; color:#0d4a2e; }
+.pill-before::before { content:'✗'; color:#e05555; font-weight:700; font-size:11px; }
+.pill-after::before  { content:'✓'; color:#22b388; font-weight:700; font-size:11px; }
+
+.text-block {
+  font-size:13.5px;
+  line-height:1.7;
+  color:#485070;
+  padding:12px 14px;
+  border-radius:6px;
+  margin-top:4px;
+}
+.before-cell .text-block {
+  background:#fff0f0;
+  border:1px solid #f0d0d0;
+}
+.after-cell .text-block {
+  background:#edfaf4;
+  border:1px solid #b0e4cc;
+}
+.text-block em { font-style:normal; font-weight:600; }
+.before-cell .text-block em { color:#c04040; }
+.after-cell  .text-block em { color:#1a7a50; }
+
+.module-list {
+  display:flex; flex-direction:column; gap:7px; margin-top:4px;
+}
+.module-item {
+  font-size:13px; padding:9px 14px; border-radius:6px;
+  border-left:3px solid;
+  line-height:1.45;
+}
+.before-cell .module-item {
+  background:#fff5f5; border-color:#e08080; color:#4a2020;
+}
+.after-cell .module-item {
+  background:#edfaf4; border-color:#48b890; color:#0a3a22;
+}
+.module-num {
+  font-size:10px; font-weight:700; letter-spacing:.06em;
+  text-transform:uppercase; margin-bottom:2px;
+}
+.before-cell .module-num { color:#c06060; }
+.after-cell  .module-num { color:#22a870; }
+.module-title { font-weight:500; }
+.module-desc { font-size:11.5px; opacity:.7; margin-top:1px; }
+
+.change-note {
+  font-size:11px; color:#7898c8; font-style:italic;
+  padding:8px 12px; border-radius:4px;
+  background:rgba(120,152,200,.07);
+  border:1px solid rgba(120,152,200,.15);
+  margin-top:10px;
+}
+
+/* ── FORMAT CARDS ── */
+.format-mini {
+  border-radius:8px; padding:14px 16px; margin:4px 0;
+  border:1px solid;
+}
+.fm-before { background:#fff5f5; border-color:#f0c0c0; }
+.fm-after  { background:#edfaf4; border-color:#a0dcc4; }
+.fm-tier { font-size:10px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; margin-bottom:4px; }
+.fm-before .fm-tier { color:#c06060; }
+.fm-after  .fm-tier { color:#22a870; }
+.fm-name { font-size:15px; font-weight:600; }
+.fm-before .fm-name { color:#8b2020; }
+.fm-after  .fm-name { color:#0a3a22; }
+.fm-sub { font-size:11.5px; opacity:.65; margin-top:2px; }
+
+/* ── SUMMARY SECTION ── */
+.summary {
+  max-width:1100px;
+  margin:0 auto 60px;
+  padding:0 24px;
+}
+.summary-card {
+  background:linear-gradient(145deg,#0d1830,#1a3a6e);
+  border-radius:16px;
+  padding:36px 40px;
+  color:#fff;
+  border:1px solid rgba(56,200,240,.15);
+}
+.summary-title {
+  font-family:'Cormorant Garamond', Georgia, serif;
+  font-size:clamp(22px,3vw,32px);
+  font-weight:600;
+  color:#fff;
+  margin-bottom:8px;
+}
+.summary-sub {
+  font-size:14px;
+  color:rgba(221,234,252,.6);
+  margin-bottom:28px;
+}
+.summary-grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+}
+.summary-item {
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(56,200,240,.12);
+  border-radius:10px;
+  padding:18px 16px;
+}
+.summary-item-num {
+  font-family:'Cormorant Garamond', serif;
+  font-size:28px;
+  font-weight:600;
+  color:#38c8f0;
+  line-height:1;
+  margin-bottom:6px;
+}
+.summary-item-text { font-size:13px; color:rgba(221,234,252,.75); line-height:1.5; }
+.summary-cta-note {
+  margin-top:24px;
+  padding:16px 20px;
+  background:rgba(56,200,240,.08);
+  border:1px solid rgba(56,200,240,.2);
+  border-radius:8px;
+  font-size:13.5px;
+  color:rgba(221,234,252,.8);
+  line-height:1.6;
+}
+
+@media(max-width:768px){
+  .compare-row { grid-template-columns:1fr; }
+  .split-labels { grid-template-columns:1fr; }
+  .before-cell { border-right:1px solid #f5d0d0; border-bottom:none; }
+  .concept-grid { grid-template-columns:1fr; }
+  .summary-grid { grid-template-columns:1fr; }
+  .page-header { padding:28px 20px; }
+  .compare-wrap,.concept-block,.split-labels,.summary { padding-left:14px; padding-right:14px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<div class="page-header">
+  <h1>Было <span>→</span> Стало</h1>
+  <p>Тестовый вариант переработки страницы курса Юлии Цезарь.<br>
+  Цель: убрать эзотерический флёр, сохранив рунический контекст и смысл программы.</p>
+  <div class="header-meta">
+    <span class="header-chip chip-concept">Концепция: Вариант Г — «Рунический инструментарий»</span>
+    <span class="header-chip chip-audience">Без картинок и видео — общий план текстов</span>
+  </div>
+</div>
+
+<!-- ── КОНЦЕПЦИЯ ── -->
+<div class="concept-block">
+  <div class="concept-card">
+    <div class="concept-title">В чём сдвиг позиционирования</div>
+    <div class="concept-arrow">↕</div>
+    <div class="concept-grid">
+      <div class="concept-from">
+        <div class="concept-label">Сейчас — «Судьба и магия»</div>
+        <div class="concept-text">Руны как инструмент, который позволяет <strong>читать судьбу</strong>, работает через <strong>энергоинформационные потоки</strong> и требует быть <strong>мастером рун</strong>. Аудитория — в том числе <strong>эзотерики</strong>.</div>
+      </div>
+      <div class="concept-to">
+        <div class="concept-label">Предлагается — «Диагностика и метод»</div>
+        <div class="concept-text">Руны как <strong>проективный инструментарий</strong> — аналог Роршаха или ТАТ. Психолог использует символы для <strong>диагностики состояний и паттернов</strong>. Аудитория — специалисты помогающих профессий.</div>
+      </div>
+    </div>
+    <p class="change-note">💡 Название курса сохраняет слово «рунический», но слово «инструментарий» даёт профессиональный, нейтральный фрейм. Официальное название диплома ДПО не меняется.</p>
+  </div>
+</div>
+
+<!-- ── МЕТКИ КОЛОНОК ── -->
+<div class="split-labels">
+  <div class="split-label-cell label-before">⬅ Было — текущая версия</div>
+  <div class="split-label-cell label-after">Стало — предлагаемая версия ➡</div>
+</div>
+
+<!-- ── СРАВНЕНИЯ ── -->
+<div class="compare-wrap">
+
+  <!-- ░░ СЕКЦИЯ: НАЗВАНИЕ ░░ -->
+  <div class="cr-section-divider">① Название курса</div>
+
+  <div class="compare-row">
+    <div class="before-cell">
+      <span class="row-element">Заголовок вкладки / H-тег курса</span>
+      <div class="text-h1">Психолог-консультант.<br>Система рун</div>
+    </div>
+    <div class="after-cell">
+      <span class="row-element">Заголовок вкладки / H-тег курса</span>
+      <div class="text-h1">Психолог-консультант.<br>Рунический инструментарий</div>
+      <p class="change-note">«Система» → «Инструментарий»: одно слово убирает мистику и добавляет профессиональный вес.</p>
+    </div>
+  </div>
+
+  <!-- ░░ СЕКЦИЯ: ГЕРОЙ ░░ -->
+  <div class="cr-section-divider">② Главный экран (Hero)</div>
+
+  <div class="compare-row">
+    <div class="before-cell">
+      <span class="row-element">Главный заголовок (H1)</span>
+      <div class="text-h1">Научитесь читать<br><em style="color:#c04040;">судьбу</em> как систему</div>
+    </div>
+    <div class="after-cell">
+      <span class="row-element">Главный заголовок (H1)</span>
+      <div class="text-h1">Профессиональный<br><em style="color:#1a7a50;">рунический инструментарий</em><br>для психолога</div>
+      <p class="change-note">Убрано «судьбу» — ключевое слово с магической коннотацией. Теперь акцент на профессии.</p>
+    </div>
+  </div>
+
+  <div class="compare-row">
+    <div class="before-cell">
+      <span class="row-element">Подзаголовок Hero</span>
+      <div class="text-sub">Профессиональная переподготовка по авторской методологии Юлии Цезарь. Диплом установленного образца с внесением в ФИС ФРДО и присвоение квалификации «Психолог-консультант с применением системы рун».</div>
+    </div>
+    <div class="after-cell">
+      <span class="row-element">Подзаголовок Hero</span>
+      <div class="text-sub">Профессиональная переподготовка по авторской методологии Юлии Цезарь. Освойте рунический инструментарий как инструмент глубокой диагностики — и получите диплом установленного образца с присвоением квалификации «Психолог-консультант».</div>
+      <p class="change-note">Официальное название квалификации «с применением системы рун» остаётся в документах, но в маркетинге акцент перенесён на диагностику.</p>
+    </div>
+  </div>
+
+  <!-- ░░ СЕКЦИЯ: 3 КИТА ░░ -->
+  <div class="cr-section-divider">③ Три кита программы</div>
+
+  <div class="compare-row">
+    <div class="before-cell">
+      <span class="row-element">Кит 1 — Психология</span>
+      <div class="text-block">
+        <em>Современная психология</em><br>
+        Методы работы с мышлением, состоянием, ограничивающими убеждениями и паттернами поведения.
+      </div>
+    </div>
+    <div class="after-cell">
+      <span class="row-element">Кит 1 — Психология</span>
+      <div class="text-block">
+        <em>Современная психология</em><br>
+        Методы работы с мышлением, состоянием, ограничивающими убеждениями и паттернами поведения.
+      </div>
+      <p class="change-note">✓ Без изменений — уже нейтрально и профессионально.</p>
+    </div>
+  </div>
+
+  <div class="compare-row">
+    <div class="before-cell">
+      <span class="row-element">Кит 2 — Руны</span>
+      <div class="text-block">
+        <em>Система рун</em><br>
+        <em>Древняя</em> система рун как инструмент анализа, диагностики и коррекции — 24 руны + бонусный модуль интеграции.
+      </div>
+    </div>
+    <div class="after-cell">
+      <span class="row-element">Кит 2 — Руны</span>
+      <div class="text-block">
+        <em>Рунический инструментарий</em><br>
+        Система рун как <em>проективный инструмент</em> — 24 архетипа для диагностики состояний, убеждений и жизненных паттернов клиента.
+      </div>
+      <p class="change-note">«Древняя» убрано — уводило в историю/мистику. Добавлено «проективный» — научный термин (как тест Роршаха).</p>
+    </div>
+  </div>
+
+  <div class="compare-row">
+    <div class="before-cell">
+      <span class="row-element">Кит 3 — Диплом</span>
+      <div class="text-block">
+        <em>Диплом установленного образца с внесением в ФИС ФРДО</em><br>
+        Диплом установленного образца с внесением в ФИС ФРДО. Квалификация «Психолог-консультант с применением системы рун».
+      </div>
+    </div>
+    <div class="after-cell">
+      <span class="row-element">Кит 3 — Диплом</span>
+      <div class="text-block">
+        <em>Официальный диплом ДПО · ФИС ФРДО</em><br>
+        Государственный диплом о профессиональной переподготовке. Квалификация «Психолог-консультант» с правом ведения деятельности.
+      </div>
+      <p class="change-note">Акцент смещён с «рун» на «право работать официально» — это сильнее для новой аудитории.</p>
+    </div>
+  </div>
+
+  <!-- ░░ СЕКЦИЯ: АВТОР ░░ -->
+  <div class="cr-section-divider">④ Блок об авторе — Юлия Цезарь</div>
+
+  <div class="compare-row">
+    <div class="before-cell">
+      <span class="row-element">Регалии под именем</span>
+      <div class="module-list">
+        <div class="module-item" style="background:#fff5f5;border-color:#e08080;">
+          <div class="module-title">Психолог-консультант, коуч, педагог · <em style="color:#c04040;">мастер рун</em></div>
+        </div>
+        <div class="module-item" style="background:#fff5f5;border-color:#e08080;">
+          <div class="module-title">Два высших образования · дипломы в психоанализе и психодиагностике</div>
+        </div>
+        <div class="module-item" style="background:#fff5f5;border-color:#e08080;">
+          <div class="module-title">Автор методологии РОМ · программ и книг по личностному развитию</div>
+        </div>
+      </div>
+    </div>
+    <div class="after-cell">
+      <span class="row-element">Регалии под именем</span>
+      <div class="module-list">
+        <div class="module-item">
+          <div class="module-title">Психолог-консультант, коуч, педагог · <em style="color:#1a7a50;">исследователь символических систем</em></div>
+        </div>
+        <div class="module-item">
+          <div class="module-title">Два высших образования · дипломы в психоанализе и психодиагностике</div>
+        </div>
+        <div class="module-item">
+          <div class="module-title">Автор методологии РОМ · программ и книг по личностному развитию</div>
+        </div>
+      </div>
+      <p class="change-note">«Мастер рун» → «Исследователь символических систем» — та же суть, другой регистр.</p>
+    </div>
+  </div>
+
+  <div class="compare-row">
+    <div class="before-cell">
+      <span class="row-element">Биография (первый абзац)</span>
+      <div class="text-block">Профессиональный психолог, практик и педагог. Автор системы рун как психологического инструмента — интегрирует современную психологию, <em>энергоинформационные методы</em> и авторскую методологию РОМ.</div>
+    </div>
+    <div class="after-cell">
+      <span class="row-element">Биография (первый абзац)</span>
+      <div class="text-block">Профессиональный психолог, практик и педагог. Автор системы рун как психодиагностического инструмента — интегрирует современную психологию, <em>архетипический и символический анализ</em> и авторскую методологию РОМ.</div>
+      <p class="change-note">«Энергоинформационные методы» → «архетипический и символический анализ» — то же содержание, юнгианский фрейм.</p>
+    </div>
+  </div>
+
+  <!-- ░░ СЕКЦИЯ: ДЛЯ КОГО ░░ -->
+  <div class="cr-section-divider">⑤ Раздел «Для кого»</div>
+
+  <div class="compare-row">
+    <div class="before-cell">
+      <span class="row-element">Пункты целевой аудитории</span>
+      <div style="display:flex;flex-direction:column;gap:6px;margin-top:4px;">
+        <span class="text-pill pill-before">Практикующий психолог, коуч или <strong>эзотерик</strong></span>
+        <span class="text-pill pill-before">Хотите сочетать научный и <strong>энергоинформационный</strong> подход</span>
+        <span class="text-pill pill-before">Ищете рабочий инструмент, который помогает быстро «считывать» состояние человека</span>
+        <span class="text-pill pill-before">Хотите выйти на новый уровень профессионализма</span>
+        <span class="text-pill pill-before">Готовы к глубокой личной трансформации</span>
+        <span class="text-pill pill-before">Хотите получить официальный диплом</span>
+      </div>
+    </div>
+    <div class="after-cell">
+      <span class="row-element">Пункты целевой аудитории</span>
+      <div style="display:flex;flex-direction:column;gap:6px;margin-top:4px;">
+        <span class="text-pill pill-after">Практикующий психолог, коуч или <strong>специалист помогающей профессии</strong></span>
+        <span class="text-pill pill-after">Хотите расширить <strong>диагностический инструментарий</strong> нестандартными методами</span>
+        <span class="text-pill pill-after">Ищете инструмент, позволяющий быстро выявлять состояние и ключевые запросы клиента</span>
+        <span class="text-pill pill-after">Хотите добавить глубину и точность в консультативную работу</span>
+        <span class="text-pill pill-after">Готовы к личностному росту параллельно с профессиональным</span>
+        <span class="text-pill pill-after">Хотите получить официальный диплом и работать легально</span>
+      </div>
+      <p class="change-note">Убраны «эзотерик» и «энергоинформационный». Аудитория стала шире, не уже.</p>
+    </div>
+  </div>
+
+  <!-- ░░ СЕКЦИЯ: МАРАФОН ░░ -->
+  <div class="cr-section-divider">⑥ Формат 01 — Марафон (входной продукт)</div>
+
+  <div class="compare-row">
+    <div class="before-cell">
+      <span class="row-element">Карточка марафона</span>
+      <div class="format-mini fm-before">
+        <div class="fm-tier">01 · Старт</div>
+        <div class="fm-name">Марафон</div>
+        <div class="fm-sub">«<strong>Тайны Мантики</strong>»</div>
+      </div>
+      <div class="text-block" style="margin-top:10px;font-size:12.5px;">
+        Описание: 5 дней · Выбор, активация и трактовка рун · 3 расклада: деньги, отношения, здоровье
+      </div>
+    </div>
+    <div class="after-cell">
+      <span class="row-element">Карточка марафона</span>
+      <div class="format-mini fm-after">
+        <div class="fm-tier">01 · Старт</div>
+        <div class="fm-name">Марафон</div>
+        <div class="fm-sub">«<strong>Введение в рунический инструментарий</strong>»</div>
+      </div>
+      <div class="text-block" style="margin-top:10px;font-size:12.5px;">
+        Описание: 5 дней · Принципы работы с рунами · 3 диагностических расклада: жизненные сферы
+      </div>
+      <p class="change-note">«Тайны Мантики» убрано — «мантика» = гадание. «Расклады» остаются — они нейтральны, это термин метода.</p>
+    </div>
+  </div>
+
+  <!-- ░░ СЕКЦИЯ: МОДУЛИ ░░ -->
+  <div class="cr-section-divider">⑦ Структура программы — модули</div>
+
+  <div class="compare-row">
+    <div class="before-cell">
+      <span class="row-element">Учебный план</span>
+      <div class="module-list">
+        <div class="module-item">
+          <div class="module-num">Модуль 1</div>
+          <div class="module-title">Введение в систему рун. Основы</div>
+          <div class="module-desc">История рунической системы. <em style="color:#c04040;">Руны как язык архетипов</em>. Начало практики.</div>
+        </div>
+        <div class="module-item">
+          <div class="module-num">Модуль 2</div>
+          <div class="module-title">Психодиагностика. Методы считывания состояния</div>
+          <div class="module-desc">Современные психологические техники в связке с рунической диагностикой.</div>
+        </div>
+        <div class="module-item">
+          <div class="module-num">Модуль 3</div>
+          <div class="module-title">24 руны. Углублённое изучение</div>
+          <div class="module-desc">Значения, связи, практика работы с каждой руной. Расклады и интерпретации.</div>
+        </div>
+        <div class="module-item">
+          <div class="module-num">Модуль 4</div>
+          <div class="module-title">Консультирование. Работа с клиентом</div>
+          <div class="module-desc">Структура сессии, ведение клиента, работа с запросами.</div>
+        </div>
+      </div>
+    </div>
+    <div class="after-cell">
+      <span class="row-element">Учебный план</span>
+      <div class="module-list">
+        <div class="module-item">
+          <div class="module-num">Модуль 1</div>
+          <div class="module-title">Рунический инструментарий. Основы</div>
+          <div class="module-desc">Принципы рунической системы. <em style="color:#1a7a50;">Руны как архетипические символы диагностики</em>. Начало практики.</div>
+        </div>
+        <div class="module-item">
+          <div class="module-num">Модуль 2</div>
+          <div class="module-title">Психодиагностика. Методы выявления состояний</div>
+          <div class="module-desc">Современные психологические техники в связке с рунической диагностикой.</div>
+        </div>
+        <div class="module-item">
+          <div class="module-num">Модуль 3</div>
+          <div class="module-title">24 руны. Архетипы и паттерны</div>
+          <div class="module-desc">Значения, связи, практика работы с каждой руной. Расклады и интерпретации.</div>
+        </div>
+        <div class="module-item">
+          <div class="module-num">Модуль 4</div>
+          <div class="module-title">Консультирование. Работа с клиентом</div>
+          <div class="module-desc">Структура сессии, ведение клиента, работа с запросами.</div>
+        </div>
+      </div>
+      <p class="change-note">Минимальные правки: заменить «считывание» на «выявление», добавить слово «архетипические» — это уже юнгианский научный термин.</p>
+    </div>
+  </div>
+
+  <!-- ░░ СЕКЦИЯ: ЧТО ОСТАЁТСЯ ░░ -->
+  <div class="cr-section-divider">⑧ Что остаётся без изменений</div>
+
+  <div class="compare-row">
+    <div class="before-cell">
+      <span class="row-element">Не трогаем</span>
+      <div style="display:flex;flex-direction:column;gap:7px;margin-top:4px;">
+        <span class="text-pill" style="background:#fff8ee;border:1px solid #f0d080;color:#6a4400;">Цены и форматы участия (2 990 / 30 000 / 60 000 / 150 000 ₽)</span>
+        <span class="text-pill" style="background:#fff8ee;border:1px solid #f0d080;color:#6a4400;">Официальное название квалификации в документах ДПО</span>
+        <span class="text-pill" style="background:#fff8ee;border:1px solid #f0d080;color:#6a4400;">Отзывы учениц — живой язык, трогать нельзя</span>
+        <span class="text-pill" style="background:#fff8ee;border:1px solid #f0d080;color:#6a4400;">Рунические символы в декоре Hero (они декоративные)</span>
+        <span class="text-pill" style="background:#fff8ee;border:1px solid #f0d080;color:#6a4400;">Структура страницы, навигация, дизайн</span>
+        <span class="text-pill" style="background:#fff8ee;border:1px solid #f0d080;color:#6a4400;">Блок «Что вы получите» — формулировки уже нейтральны</span>
+      </div>
+    </div>
+    <div class="after-cell">
+      <span class="row-element">Итог по объёму правок</span>
+      <div style="display:flex;flex-direction:column;gap:7px;margin-top:4px;">
+        <span class="text-pill pill-after">~12 точечных правок в тексте</span>
+        <span class="text-pill pill-after">Структура и дизайн страницы — без изменений</span>
+        <span class="text-pill pill-after">Смысл и суть курса — без изменений</span>
+        <span class="text-pill pill-after">Ключевые слова «руны», «рунический» — остаются</span>
+        <span class="text-pill pill-after">SEO и название курса для поиска — корректируется мягко</span>
+      </div>
+      <p class="change-note">Правки косметические по объёму, но сильные по восприятию. Массовый потребитель перестаёт видеть «гадалку», целевая аудитория остаётся.</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- ── ИТОГ ── -->
+<div class="summary">
+  <div class="summary-card">
+    <div class="summary-title">Итог: что даёт переработка</div>
+    <div class="summary-sub">Для отправки Юлии — финальный аргумент</div>
+    <div class="summary-grid">
+      <div class="summary-item">
+        <div class="summary-item-num">+</div>
+        <div class="summary-item-text"><strong style="color:#38c8f0;">Расширяется аудитория</strong><br>Психологи и коучи без эзотерического background теперь видят «профессиональный инструментарий», а не «гадание»</div>
+      </div>
+      <div class="summary-item">
+        <div class="summary-item-num">=</div>
+        <div class="summary-item-text"><strong style="color:#38c8f0;">Суть курса не меняется</strong><br>Юля преподаёт ровно то же самое. Меняется только язык описания — не содержание</div>
+      </div>
+      <div class="summary-item">
+        <div class="summary-item-num">✓</div>
+        <div class="summary-item-text"><strong style="color:#38c8f0;">Лояльная аудитория остаётся</strong><br>Слово «рунический» никуда не уходит. Те, кто ищёт Юлю — найдут. Новые — не испугаются</div>
+      </div>
+    </div>
+    <div class="summary-cta-note">
+      📋 <strong>Следующий шаг:</strong> Юля смотрит этот лист и говорит — какие формулировки ей ок, какие нет. После этого вносим правки прямо в рабочий <code>course-runes.html</code> за один проход.
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
