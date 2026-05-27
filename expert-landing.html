@@ -151,12 +151,13 @@ a { color:inherit; text-decoration:none; }
   box-shadow:0 4px 16px rgba(56,200,240,.07);
 }
 .benefit-icon {
-  width:38px; height:38px; border-radius:8px; flex-shrink:0;
+  width:72px; height:72px; border-radius:12px; flex-shrink:0;
   display:flex; align-items:center; justify-content:center;
-  font-size:18px;
+  overflow:hidden;
 }
+.benefit-icon img { width:100%; height:100%; object-fit:contain; }
 .bi-1 { background:linear-gradient(135deg,#e8f0fc,#d0e0f4); }
-.bi-2 { background:linear-gradient(135deg,#0d1830,#1a3a6e); }
+.bi-2 { background:linear-gradient(135deg,#1a2a3a,#0d1830); }
 .bi-3 { background:linear-gradient(135deg,#fdf3e0,#f8e4b8); }
 .bi-4 { background:linear-gradient(135deg,#edfaf4,#c8eedd); }
 .benefit-body strong {
@@ -380,7 +381,7 @@ a { color:inherit; text-decoration:none; }
   <div class="benefits-grid">
 
     <div class="benefit-card">
-      <div class="benefit-icon bi-1">🎓</div>
+      <div class="benefit-icon bi-1"><img src="assets/Сова + диплом (course-runes, кит 3).png" alt="Диплом"></div>
       <div class="benefit-body">
         <strong>Диплом государственного образца</strong>
         <span>Ваши студенты получают официальный диплом ДПО с внесением в ФИС ФРДО. Ни один сертификат не даёт такого веса.</span>
@@ -388,7 +389,7 @@ a { color:inherit; text-decoration:none; }
     </div>
 
     <div class="benefit-card">
-      <div class="benefit-icon bi-2">⚙️</div>
+      <div class="benefit-icon bi-2"><img src="assets/Сова с инструментами (course-samotera, практика).png" alt="Инфраструктура"></div>
       <div class="benefit-body">
         <strong>Готовая инфраструктура</strong>
         <span>Юридика, договоры, документооборот, лицензия — всё на Академии. Вы ведёте курс, мы берём на себя бумаги.</span>
@@ -396,7 +397,7 @@ a { color:inherit; text-decoration:none; }
     </div>
 
     <div class="benefit-card">
-      <div class="benefit-icon bi-3">👥</div>
+      <div class="benefit-icon bi-3"><img src="assets/Сова с учениками (course-pedagog, кит 2).png" alt="Аудитория"></div>
       <div class="benefit-body">
         <strong>Аудитория и продвижение</strong>
         <span>Ваш курс появляется на сайте Академии, в Telegram-канале и среди уже существующего сообщества слушателей.</span>
@@ -404,7 +405,7 @@ a { color:inherit; text-decoration:none; }
     </div>
 
     <div class="benefit-card">
-      <div class="benefit-icon bi-4">💰</div>
+      <div class="benefit-icon bi-4"><img src="assets/Сова-прорыв (course-samotera, результат).png" alt="Доход"></div>
       <div class="benefit-body">
         <strong>Выгодная модель дохода</strong>
         <span>Прозрачное разделение: большая часть выручки остаётся эксперту. Условия обсуждаются индивидуально на встрече.</span>
