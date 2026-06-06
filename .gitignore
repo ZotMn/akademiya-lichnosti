@@ -13,3 +13,16 @@ desktop.ini
 
 # Claude Code
 .superpowers/
+
+# Внутренние документы проекта (не для публичного репо)
+docs/
+apps-script/
+CLAUDE.md
+PROJECT_INDEX.md
+ROADMAP.md
+community-group-roadmap.md
+telegram-roadmap.md
+telegram-strategy-yulia.html
+site-concept-dark-v4.html
+site-concept.html
+course-runes-compare.html
