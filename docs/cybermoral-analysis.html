@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Аналитический отчёт · Киберморальная психология · Академия Личности</title>
+<style>
+  :root {
+    --primary: #2D1B69;
+    --primary-light: #4A2E9A;
+    --accent: #7B5EA7;
+    --accent-2: #C084FC;
+    --teal: #0D9488;
+    --teal-light: #14B8A6;
+    --gold: #F59E0B;
+    --gold-light: #FCD34D;
+    --bg: #F8F7FF;
+    --bg-card: #FFFFFF;
+    --text: #1E1B4B;
+    --text-muted: #6B7280;
+    --text-light: #9CA3AF;
+    --border: #E5E7EB;
+    --success: #059669;
+    --shadow: 0 4px 24px rgba(45,27,105,0.10);
+    --shadow-lg: 0 12px 48px rgba(45,27,105,0.16);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    background: linear-gradient(135deg, var(--primary) 0%, #1E1060 40%, #3B1F8C 100%);
+    color: white;
+    padding: 64px 48px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(123,94,167,0.35) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: 10%;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(192,132,252,0.2) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero-inner { max-width: 900px; margin: 0 auto; position: relative; z-index: 1; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 100px;
+    padding: 6px 16px;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--accent-2);
+    margin-bottom: 24px;
+  }
+  .hero-badge::before { content: '◆'; font-size: 8px; }
+  .hero h1 {
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 800; line-height: 1.15;
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+  }
+  .hero h1 span { color: var(--gold-light); }
+  .hero-subtitle {
+    font-size: 17px; color: rgba(255,255,255,0.72);
+    max-width: 600px; margin-bottom: 40px;
+  }
+  .hero-meta {
+    display: flex; flex-wrap: wrap; gap: 24px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    padding-top: 32px;
+  }
+  .hero-meta-item { display: flex; flex-direction: column; gap: 2px; }
+  .hero-meta-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.45); }
+  .hero-meta-value { font-size: 15px; font-weight: 600; color: rgba(255,255,255,0.9); }
+
+  /* ─── LAYOUT ─── */
+  .container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+
+  .section { padding: 64px 0; }
+  .section + .section { border-top: 1px solid var(--border); }
+
+  .section-label {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .section-title {
+    font-size: clamp(22px, 3vw, 32px); font-weight: 800;
+    color: var(--primary); line-height: 1.2;
+    margin-bottom: 16px; letter-spacing: -0.01em;
+  }
+  .section-lead {
+    font-size: 16px; color: var(--text-muted);
+    max-width: 680px; line-height: 1.7;
+    margin-bottom: 40px;
+  }
+
+  /* ─── STAT CARDS ─── */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px; margin-bottom: 48px;
+  }
+  .stat-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .stat-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+  .stat-card-icon { font-size: 28px; margin-bottom: 8px; }
+  .stat-card-value {
+    font-size: 36px; font-weight: 800;
+    color: var(--primary); letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .stat-card-unit { font-size: 16px; font-weight: 600; color: var(--accent); }
+  .stat-card-label { font-size: 13px; color: var(--text-muted); margin-top: 6px; }
+
+  /* ─── CHAPTER MAP ─── */
+  .chapter-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+  .chapter-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px 22px;
+    display: flex; gap: 16px; align-items: flex-start;
+    box-shadow: var(--shadow);
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .chapter-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .chapter-num {
+    flex-shrink: 0;
+    width: 40px; height: 40px;
+    background: linear-gradient(135deg, var(--primary-light), var(--accent));
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; font-weight: 800; color: white;
+  }
+  .chapter-info h4 { font-size: 14px; font-weight: 700; color: var(--primary); margin-bottom: 4px; }
+  .chapter-info p { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+  .chapter-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; }
+  .tag {
+    font-size: 10px; font-weight: 600;
+    padding: 2px 8px; border-radius: 100px;
+    background: #EDE9FE; color: var(--accent);
+  }
+  .tag.teal { background: #CCFBF1; color: var(--teal); }
+  .tag.gold { background: #FEF3C7; color: #92400E; }
+  .tag.red { background: #FEE2E2; color: #DC2626; }
+
+  /* ─── PROGRAM TABLE ─── */
+  .program-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    margin-bottom: 32px;
+  }
+  .program-table thead tr {
+    background: linear-gradient(90deg, var(--primary), var(--primary-light));
+    color: white;
+  }
+  .program-table th {
+    padding: 14px 18px;
+    text-align: left;
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .program-table td { padding: 14px 18px; font-size: 14px; border-top: 1px solid var(--border); }
+  .program-table tr:hover td { background: #F5F3FF; }
+  .program-table .module-num {
+    width: 36px; height: 36px;
+    background: linear-gradient(135deg, var(--primary-light), var(--accent));
+    border-radius: 8px;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 800; color: white;
+  }
+  .program-table .hours-badge {
+    display: inline-block;
+    background: #EDE9FE; color: var(--accent);
+    font-size: 12px; font-weight: 700;
+    padding: 3px 10px; border-radius: 100px;
+  }
+  .program-table tr.final-row td {
+    background: linear-gradient(90deg, #F5F3FF, #FEFCE8);
+    font-weight: 700; color: var(--primary);
+  }
+  .program-table tr.total-row td {
+    background: linear-gradient(90deg, var(--primary), var(--primary-light));
+    color: white; font-weight: 800; font-size: 15px;
+  }
+  .program-table .hours-badge.white { background: rgba(255,255,255,0.2); color: white; }
+
+  /* ─── DOCS GRID ─── */
+  .docs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+  }
+  .doc-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+  }
+  .doc-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+  }
+  .doc-card.required::before { background: linear-gradient(90deg, var(--primary), var(--accent)); }
+  .doc-card.state::before { background: linear-gradient(90deg, var(--teal), var(--teal-light)); }
+  .doc-card.system::before { background: linear-gradient(90deg, var(--gold), var(--gold-light)); }
+  .doc-card-icon { font-size: 28px; margin-bottom: 12px; }
+  .doc-card h4 { font-size: 15px; font-weight: 700; color: var(--primary); margin-bottom: 6px; }
+  .doc-card p { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+  .doc-card .doc-badge {
+    display: inline-block; margin-top: 12px;
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    padding: 4px 10px; border-radius: 100px;
+  }
+  .doc-badge.required-badge { background: #EDE9FE; color: var(--accent); }
+  .doc-badge.state-badge { background: #CCFBF1; color: var(--teal); }
+  .doc-badge.system-badge { background: #FEF3C7; color: #92400E; }
+
+  /* ─── TESTS ─── */
+  .tests-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 14px;
+  }
+  .test-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 18px;
+    display: flex; align-items: center; gap: 14px;
+    box-shadow: 0 2px 8px rgba(45,27,105,0.06);
+  }
+  .test-icon {
+    width: 38px; height: 38px; flex-shrink: 0;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+  }
+  .test-item h5 { font-size: 13px; font-weight: 700; color: var(--primary); margin-bottom: 2px; }
+  .test-item p { font-size: 11px; color: var(--text-muted); }
+
+  /* ─── AUDIENCE ─── */
+  .audience-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+  }
+  .audience-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px;
+    text-align: center;
+    box-shadow: var(--shadow);
+  }
+  .audience-card .aud-icon { font-size: 36px; margin-bottom: 10px; }
+  .audience-card h4 { font-size: 15px; font-weight: 700; color: var(--primary); margin-bottom: 6px; }
+  .audience-card p { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+
+  /* ─── HIGHLIGHT BOX ─── */
+  .highlight-box {
+    background: linear-gradient(135deg, #F5F3FF, #EDE9FE);
+    border: 1px solid #C4B5FD;
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin: 32px 0;
+  }
+  .highlight-box.teal {
+    background: linear-gradient(135deg, #F0FDFA, #CCFBF1);
+    border-color: #5EEAD4;
+  }
+  .highlight-box.gold {
+    background: linear-gradient(135deg, #FFFBEB, #FEF3C7);
+    border-color: #FCD34D;
+  }
+  .highlight-box h3 { font-size: 18px; font-weight: 700; color: var(--primary); margin-bottom: 10px; }
+  .highlight-box.teal h3 { color: var(--teal); }
+  .highlight-box.gold h3 { color: #92400E; }
+  .highlight-box p { font-size: 14px; color: var(--text); line-height: 1.7; }
+  .highlight-box ul { padding-left: 20px; margin-top: 10px; }
+  .highlight-box ul li { font-size: 14px; color: var(--text); margin-bottom: 6px; }
+
+  /* ─── OUTCOMES ─── */
+  .outcomes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  @media (max-width: 600px) { .outcomes-grid { grid-template-columns: 1fr; } }
+  .outcome-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+  }
+  .outcome-card h4 { font-size: 14px; font-weight: 700; color: var(--primary); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .outcome-card ul { list-style: none; padding: 0; }
+  .outcome-card ul li { font-size: 13px; color: var(--text-muted); padding: 5px 0; display: flex; gap: 8px; align-items: flex-start; border-top: 1px solid var(--border); }
+  .outcome-card ul li:first-child { border-top: none; }
+  .outcome-card ul li::before { content: '✓'; color: var(--success); font-weight: 700; flex-shrink: 0; }
+
+  /* ─── DIPLOMA SHOWCASE ─── */
+  .diploma-showcase {
+    background: linear-gradient(135deg, var(--teal) 0%, #0F766E 100%);
+    border-radius: 20px;
+    padding: 40px;
+    color: white;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    margin: 40px 0;
+  }
+  .diploma-showcase::before {
+    content: '🏛️';
+    position: absolute;
+    font-size: 200px;
+    opacity: 0.06;
+    top: -20px; right: -20px;
+  }
+  .diploma-showcase h3 { font-size: 22px; font-weight: 800; margin-bottom: 8px; }
+  .diploma-showcase p { font-size: 15px; opacity: 0.85; margin-bottom: 24px; max-width: 500px; margin-left: auto; margin-right: auto; }
+  .diploma-items {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 16px;
+  }
+  .diploma-item {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 12px;
+    padding: 16px 22px;
+    min-width: 200px;
+  }
+  .diploma-item .di-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.65; margin-bottom: 4px; }
+  .diploma-item .di-value { font-size: 16px; font-weight: 700; }
+
+  /* ─── STEPS ─── */
+  .steps-list { list-style: none; padding: 0; }
+  .step-item {
+    display: flex; gap: 20px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .step-item:last-child { border-bottom: none; }
+  .step-num {
+    flex-shrink: 0;
+    width: 44px; height: 44px;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; font-weight: 800; color: white;
+  }
+  .step-content h4 { font-size: 16px; font-weight: 700; color: var(--primary); margin-bottom: 4px; }
+  .step-content p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+
+  /* ─── FOOTER ─── */
+  .footer {
+    background: var(--primary);
+    color: rgba(255,255,255,0.7);
+    padding: 40px 48px;
+    text-align: center;
+  }
+  .footer-logo { font-size: 18px; font-weight: 800; color: white; margin-bottom: 8px; }
+  .footer p { font-size: 13px; }
+
+  /* ─── PRINT ─── */
+  @media print {
+    .hero { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .section { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ HERO ═══ -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">Аналитический отчёт · Академия Личности</div>
+    <h1>«Киберморальная психология»:<br><span>потенциал для ДПО-программы</span></h1>
+    <p class="hero-subtitle">Анализ монографии и концепция образовательной программы повышения квалификации по стандартам Российской Федерации</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Автор</span>
+        <span class="hero-meta-value">Рыжиков С.Н.</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Издательство</span>
+        <span class="hero-meta-value">Инфра-Инженерия, Вологда</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Год издания</span>
+        <span class="hero-meta-value">2025</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Объём</span>
+        <span class="hero-meta-value">176 страниц</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Лиц. договор</span>
+        <span class="hero-meta-value">297-НИ от 23.09.2025</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ КЛЮЧЕВЫЕ ЦИФРЫ ═══ -->
+<div class="section">
+  <div class="container">
+    <p class="section-label">Ключевые показатели</p>
+    <h2 class="section-title">Монография в цифрах</h2>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-card-icon">📖</div>
+        <div class="stat-card-value">8</div>
+        <div class="stat-card-label">тематических глав — готовых модулей курса</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-icon">📊</div>
+        <div class="stat-card-value">11</div>
+        <div class="stat-card-label">диагностических тестов для самоанализа</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-icon">🎓</div>
+        <div class="stat-card-value">72 <span class="stat-card-unit">ч.</span></div>
+        <div class="stat-card-label">объём ДПО-программы на базе книги</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-icon">🏛️</div>
+        <div class="stat-card-value">6</div>
+        <div class="stat-card-label">учёных-рецензентов из вузов РФ</div>
+      </div>
+    </div>
+
+    <div class="highlight-box teal">
+      <h3>🔑 Главный вывод</h3>
+      <p>Монография имеет структуру, <strong>полностью соответствующую требованиям к ДПО-программе</strong> повышения квалификации по ФЗ № 273 «Об образовании в Российской Федерации». Каждая глава — самостоятельный учебный модуль. Приложения (тесты) — готовый фонд оценочных средств (ФОС). Академический аппарат и рецензирование обеспечивают научную состоятельность программы.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ТРИ ВАРИАНТА КУРСОВ ═══ -->
+<div style="background: linear-gradient(180deg, #F8F7FF 0%, #EDE9FE 100%); padding: 64px 0;">
+  <div class="container">
+    <p class="section-label">Линейка образовательных продуктов</p>
+    <h2 class="section-title">3 варианта курсов на базе монографии</h2>
+    <p class="section-lead">Одна книга — три уровня продуктов для разных аудиторий и ценовых сегментов. От массового до профессионального.</p>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-bottom: 40px;">
+
+      <!-- УРОВЕНЬ 1 -->
+      <div style="background: white; border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-lg); display: flex; flex-direction: column;">
+        <div style="background: linear-gradient(135deg, #6366F1, #8B5CF6); padding: 28px 28px 24px; color: white; position: relative; overflow: hidden;">
+          <div style="position: absolute; top: -20px; right: -20px; font-size: 80px; opacity: 0.12;">🌐</div>
+          <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; opacity: 0.7; margin-bottom: 10px;">Уровень 1 · Массовый</div>
+          <div style="font-size: 28px; font-weight: 800; line-height: 1.15; margin-bottom: 8px;">«Я в интернете»</div>
+          <div style="font-size: 14px; opacity: 0.8;">Психология цифрового поведения</div>
+        </div>
+        <div style="padding: 24px 28px; flex: 1; display: flex; flex-direction: column; gap: 0;">
+          <table style="width: 100%; border-collapse: collapse; font-size: 13px; flex: 1;">
+            <tr style="border-bottom: 1px solid #F3F4F6;">
+              <td style="padding: 10px 0; color: #9CA3AF; font-weight: 600; width: 44%;">Объём</td>
+              <td style="padding: 10px 0; color: #1E1B4B; font-weight: 700;">8–12 часов</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #F3F4F6;">
+              <td style="padding: 10px 0; color: #9CA3AF; font-weight: 600;">Формат</td>
+              <td style="padding: 10px 0; color: #1E1B4B; font-weight: 700;">Онлайн, самостоятельно</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #F3F4F6;">
+              <td style="padding: 10px 0; color: #9CA3AF; font-weight: 600;">Аудитория</td>
+              <td style="padding: 10px 0; color: #1E1B4B; font-weight: 700;">Все взрослые пользователи</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #F3F4F6;">
+              <td style="padding: 10px 0; color: #9CA3AF; font-weight: 600;">Документ</td>
+              <td style="padding: 10px 0;">
+                <span style="background: #EDE9FE; color: #6366F1; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 100px;">Сертификат Академии</span>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 10px 0; color: #9CA3AF; font-weight: 600;">Стоимость</td>
+              <td style="padding: 10px 0; color: #1E1B4B; font-weight: 800; font-size: 16px;">3 000 – 7 000 ₽</td>
+            </tr>
+          </table>
+          <div style="margin-top: 20px; padding: 14px 16px; background: #F5F3FF; border-radius: 10px;">
+            <p style="font-size: 12px; color: #6B7280; line-height: 1.5;"><strong style="color: #6366F1;">Главы книги:</strong> все 8 в формате видеоуроков, акцент на самодиагностику через 11 тестов</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- УРОВЕНЬ 2 -->
+      <div style="background: white; border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-lg); display: flex; flex-direction: column;">
+        <div style="background: linear-gradient(135deg, #0D9488, #0891B2); padding: 28px 28px 24px; color: white; position: relative; overflow: hidden;">
+          <div style="position: absolute; top: -20px; right: -20px; font-size: 80px; opacity: 0.12;">👨‍👩‍👧</div>
+          <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; opacity: 0.7; margin-bottom: 10px;">Уровень 2 · Для родителей</div>
+          <div style="font-size: 28px; font-weight: 800; line-height: 1.15; margin-bottom: 8px;">«Цифровое воспитание»</div>
+          <div style="font-size: 14px; opacity: 0.8;">Как защитить ребёнка в сети</div>
+        </div>
+        <div style="padding: 24px 28px; flex: 1; display: flex; flex-direction: column; gap: 0;">
+          <table style="width: 100%; border-collapse: collapse; font-size: 13px; flex: 1;">
+            <tr style="border-bottom: 1px solid #F3F4F6;">
+              <td style="padding: 10px 0; color: #9CA3AF; font-weight: 600; width: 44%;">Объём</td>
+              <td style="padding: 10px 0; color: #1E1B4B; font-weight: 700;">16–20 часов</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #F3F4F6;">
+              <td style="padding: 10px 0; color: #9CA3AF; font-weight: 600;">Формат</td>
+              <td style="padding: 10px 0; color: #1E1B4B; font-weight: 700;">Онлайн + 2 живых вебинара</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #F3F4F6;">
+              <td style="padding: 10px 0; color: #9CA3AF; font-weight: 600;">Аудитория</td>
+              <td style="padding: 10px 0; color: #1E1B4B; font-weight: 700;">Родители детей 8–17 лет</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #F3F4F6;">
+              <td style="padding: 10px 0; color: #9CA3AF; font-weight: 600;">Документ</td>
+              <td style="padding: 10px 0;">
+                <span style="background: #CCFBF1; color: #0D9488; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 100px;">Сертификат Академии</span>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 10px 0; color: #9CA3AF; font-weight: 600;">Стоимость</td>
+              <td style="padding: 10px 0; color: #1E1B4B; font-weight: 800; font-size: 16px;">8 000 – 15 000 ₽</td>
+            </tr>
+          </table>
+          <div style="margin-top: 20px; padding: 14px 16px; background: #F0FDFA; border-radius: 10px;">
+            <p style="font-size: 12px; color: #6B7280; line-height: 1.5;"><strong style="color: #0D9488;">Главы книги:</strong> гл. 3 (семья), гл. 5 (возраст), гл. 7 (зависимости), гл. 8 (кибергигиена)</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- УРОВЕНЬ 3 -->
+      <div style="background: white; border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-lg); display: flex; flex-direction: column; position: relative;">
+        <!-- Значок рекомендуется -->
+        <div style="position: absolute; top: 16px; right: 16px; background: #F59E0B; color: white; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; padding: 4px 12px; border-radius: 100px; z-index: 2;">★ Приоритет</div>
+        <div style="background: linear-gradient(135deg, #2D1B69, #4A2E9A); padding: 28px 28px 24px; color: white; position: relative; overflow: hidden;">
+          <div style="position: absolute; top: -20px; right: -20px; font-size: 80px; opacity: 0.12;">🎓</div>
+          <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; opacity: 0.7; margin-bottom: 10px;">Уровень 3 · Профессиональный · ДПО</div>
+          <div style="font-size: 24px; font-weight: 800; line-height: 1.2; margin-bottom: 8px;">«Киберморальная психология: инструментарий специалиста»</div>
+          <div style="font-size: 14px; opacity: 0.8;">Для психологов, педагогов, HR, соцработников</div>
+        </div>
+        <div style="padding: 24px 28px; flex: 1; display: flex; flex-direction: column; gap: 0;">
+          <table style="width: 100%; border-collapse: collapse; font-size: 13px; flex: 1;">
+            <tr style="border-bottom: 1px solid #F3F4F6;">
+              <td style="padding: 10px 0; color: #9CA3AF; font-weight: 600; width: 44%;">Объём</td>
+              <td style="padding: 10px 0; color: #1E1B4B; font-weight: 700;">72 академических часа</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #F3F4F6;">
+              <td style="padding: 10px 0; color: #9CA3AF; font-weight: 600;">Формат</td>
+              <td style="padding: 10px 0; color: #1E1B4B; font-weight: 700;">Онлайн + практикумы + аттестация</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #F3F4F6;">
+              <td style="padding: 10px 0; color: #9CA3AF; font-weight: 600;">Аудитория</td>
+              <td style="padding: 10px 0; color: #1E1B4B; font-weight: 700;">Специалисты помогающих профессий</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #F3F4F6;">
+              <td style="padding: 10px 0; color: #9CA3AF; font-weight: 600;">Документ</td>
+              <td style="padding: 10px 0;">
+                <span style="background: #EDE9FE; color: #2D1B69; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 100px;">🏛 Удостоверение о ПК (гос.)</span>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 10px 0; color: #9CA3AF; font-weight: 600;">Стоимость</td>
+              <td style="padding: 10px 0; color: #2D1B69; font-weight: 800; font-size: 18px;">25 000 – 45 000 ₽</td>
+            </tr>
+          </table>
+          <div style="margin-top: 20px; padding: 14px 16px; background: #F5F3FF; border-radius: 10px; border-left: 3px solid #2D1B69;">
+            <p style="font-size: 12px; color: #6B7280; line-height: 1.5;"><strong style="color: #2D1B69;">Все 8 глав книги</strong> — полная программа с ФОС (11 тестов), итоговой аттестацией и регистрацией в ФИС ФРДО</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Сравнительная таблица документов -->
+    <div style="background: white; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow);">
+      <div style="background: var(--primary); padding: 16px 24px; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 16px; color: white;">
+        <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;">Параметр</div>
+        <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; text-align: center;">Уровень 1</div>
+        <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; text-align: center;">Уровень 2</div>
+        <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; text-align: center; color: #FCD34D;">Уровень 3 ★</div>
+      </div>
+      <div style="padding: 0 24px;">
+        <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 16px; padding: 14px 0; border-bottom: 1px solid #F3F4F6; align-items: center;">
+          <div style="font-size: 13px; color: #6B7280; font-weight: 600;">Объём</div>
+          <div style="font-size: 13px; text-align: center; font-weight: 700;">8–12 ч.</div>
+          <div style="font-size: 13px; text-align: center; font-weight: 700;">16–20 ч.</div>
+          <div style="font-size: 13px; text-align: center; font-weight: 700; color: #2D1B69;">72 ч.</div>
+        </div>
+        <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 16px; padding: 14px 0; border-bottom: 1px solid #F3F4F6; align-items: center;">
+          <div style="font-size: 13px; color: #6B7280; font-weight: 600;">Документ</div>
+          <div style="font-size: 12px; text-align: center; color: #6B7280;">Сертификат</div>
+          <div style="font-size: 12px; text-align: center; color: #6B7280;">Сертификат</div>
+          <div style="font-size: 12px; text-align: center; color: #059669; font-weight: 700;">Удостоверение ПК</div>
+        </div>
+        <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 16px; padding: 14px 0; border-bottom: 1px solid #F3F4F6; align-items: center;">
+          <div style="font-size: 13px; color: #6B7280; font-weight: 600;">Гос. реестр (ФИС ФРДО)</div>
+          <div style="text-align: center; font-size: 18px;">—</div>
+          <div style="text-align: center; font-size: 18px;">—</div>
+          <div style="text-align: center; font-size: 18px; color: #059669;">✓</div>
+        </div>
+        <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 16px; padding: 14px 0; border-bottom: 1px solid #F3F4F6; align-items: center;">
+          <div style="font-size: 13px; color: #6B7280; font-weight: 600;">Нужна лицензия ДПО</div>
+          <div style="text-align: center; font-size: 18px; color: #6B7280;">—</div>
+          <div style="text-align: center; font-size: 18px; color: #6B7280;">—</div>
+          <div style="text-align: center; font-size: 18px; color: #059669;">✓</div>
+        </div>
+        <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 16px; padding: 14px 0; align-items: center;">
+          <div style="font-size: 13px; color: #6B7280; font-weight: 600;">Стоимость</div>
+          <div style="font-size: 14px; text-align: center; font-weight: 700;">3–7 тыс. ₽</div>
+          <div style="font-size: 14px; text-align: center; font-weight: 700;">8–15 тыс. ₽</div>
+          <div style="font-size: 14px; text-align: center; font-weight: 800; color: #2D1B69;">25–45 тыс. ₽</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══ КАРТА ГЛАВ ═══ -->
+<div class="section">
+  <div class="container">
+    <p class="section-label">Содержание книги</p>
+    <h2 class="section-title">8 глав — 8 готовых модулей</h2>
+    <p class="section-lead">Структура монографии органично трансформируется в учебный план программы повышения квалификации без значительных доработок.</p>
+    <div class="chapter-grid">
+
+      <div class="chapter-card">
+        <div class="chapter-num">1</div>
+        <div class="chapter-info">
+          <h4>Понятие и система киберморальной психологии</h4>
+          <p>Моральные аспекты поведения, факторы специфики, сетевая этика, феномен принятия этических решений, самоидентификация</p>
+          <div class="chapter-tags">
+            <span class="tag">теория</span>
+            <span class="tag teal">этика</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="chapter-card">
+        <div class="chapter-num">2</div>
+        <div class="chapter-info">
+          <h4>Романтические отношения и онлайн-неверность</h4>
+          <p>Психология интернет-знакомств, онлайн-неверность, последствия и методы профилактики</p>
+          <div class="chapter-tags">
+            <span class="tag">отношения</span>
+            <span class="tag gold">практика</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="chapter-card">
+        <div class="chapter-num">3</div>
+        <div class="chapter-info">
+          <h4>Киберпсихология семейных отношений</h4>
+          <p>Интернет-мамы, цифровое воспитание, виртуальные семьи, онлайн-ресурсы для семьи</p>
+          <div class="chapter-tags">
+            <span class="tag">семья</span>
+            <span class="tag teal">воспитание</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="chapter-card">
+        <div class="chapter-num">4</div>
+        <div class="chapter-info">
+          <h4>Прикладные аспекты киберморальной психологии</h4>
+          <p>Информационная грамотность, прокрастинация, киберальтруизм, краудфандинг, IoT, цифровое гражданство</p>
+          <div class="chapter-tags">
+            <span class="tag gold">прикладное</span>
+            <span class="tag">навыки</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="chapter-card">
+        <div class="chapter-num">5</div>
+        <div class="chapter-info">
+          <h4>Гендерные и возрастные аспекты виртуального поведения</h4>
+          <p>Различия поведения мужчин и женщин в сети, возрастные группы, детская и подростковая киберпсихология</p>
+          <div class="chapter-tags">
+            <span class="tag">гендер</span>
+            <span class="tag teal">возраст</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="chapter-card">
+        <div class="chapter-num">6</div>
+        <div class="chapter-info">
+          <h4>Виртуальная идентичность</h4>
+          <p>Цифровой психологический портрет, онлайн-самооценка, факторы идентичности, самовыражение</p>
+          <div class="chapter-tags">
+            <span class="tag">идентичность</span>
+            <span class="tag">психология</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="chapter-card">
+        <div class="chapter-num">7</div>
+        <div class="chapter-info">
+          <h4>Негативные последствия использования интернета</h4>
+          <p>Фейки, социальная изоляция, зависимости, номофобия, зависимость от соцсетей, игровая зависимость, кибербуллинг, виктимность</p>
+          <div class="chapter-tags">
+            <span class="tag red">риски</span>
+            <span class="tag gold">зависимости</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="chapter-card">
+        <div class="chapter-num">8</div>
+        <div class="chapter-info">
+          <h4>Кибергигиена и цифровой этикет</h4>
+          <p>Принципы и практика кибергигиены, цифровой этикет, детоксикация, управление привычками соцсетей</p>
+          <div class="chapter-tags">
+            <span class="tag teal">гигиена</span>
+            <span class="tag gold">практика</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ПРОГРАММА ═══ -->
+<div class="section">
+  <div class="container">
+    <p class="section-label">Образовательная программа ДПО</p>
+    <h2 class="section-title">Учебный план: 72 академических часа</h2>
+    <p class="section-lead">Программа повышения квалификации «Киберморальная психология: инструментарий специалиста» — для психологов, педагогов, социальных работников, HR-специалистов.</p>
+
+    <table class="program-table">
+      <thead>
+        <tr>
+          <th>№</th>
+          <th>Название модуля</th>
+          <th>Часы</th>
+          <th>Формат</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="module-num">1</span></td>
+          <td><strong>Система киберморальной психологии</strong><br><small style="color:#6B7280">Теоретические основы, этические принципы, сетевая этика</small></td>
+          <td><span class="hours-badge">8 ч.</span></td>
+          <td>Лекция + тест</td>
+        </tr>
+        <tr>
+          <td><span class="module-num">2</span></td>
+          <td><strong>Онлайн-отношения и романтическая сфера</strong><br><small style="color:#6B7280">Интернет-знакомства, онлайн-неверность, профилактика</small></td>
+          <td><span class="hours-badge">8 ч.</span></td>
+          <td>Лекция + кейсы</td>
+        </tr>
+        <tr>
+          <td><span class="module-num">3</span></td>
+          <td><strong>Цифровое воспитание и семья</strong><br><small style="color:#6B7280">Киберпсихология семейных отношений, детский интернет</small></td>
+          <td><span class="hours-badge">8 ч.</span></td>
+          <td>Лекция + практикум</td>
+        </tr>
+        <tr>
+          <td><span class="module-num">4</span></td>
+          <td><strong>Прикладная киберэтика</strong><br><small style="color:#6B7280">Информационная грамотность, прокрастинация, альтруизм, IoT</small></td>
+          <td><span class="hours-badge">8 ч.</span></td>
+          <td>Практикум</td>
+        </tr>
+        <tr>
+          <td><span class="module-num">5</span></td>
+          <td><strong>Гендер и возраст в цифровой среде</strong><br><small style="color:#6B7280">Дифференциация поведения, возрастные особенности</small></td>
+          <td><span class="hours-badge">8 ч.</span></td>
+          <td>Лекция + кейсы</td>
+        </tr>
+        <tr>
+          <td><span class="module-num">6</span></td>
+          <td><strong>Виртуальная идентичность и самооценка</strong><br><small style="color:#6B7280">Цифровой портрет пользователя, онлайн-Я</small></td>
+          <td><span class="hours-badge">8 ч.</span></td>
+          <td>Практикум + тест</td>
+        </tr>
+        <tr>
+          <td><span class="module-num">7</span></td>
+          <td><strong>Диагностика и коррекция интернет-зависимостей</strong><br><small style="color:#6B7280">Зависимости, кибербуллинг, виктимность, методы помощи</small></td>
+          <td><span class="hours-badge">10 ч.</span></td>
+          <td>Лекция + диагностика</td>
+        </tr>
+        <tr>
+          <td><span class="module-num">8</span></td>
+          <td><strong>Кибергигиена и цифровой этикет</strong><br><small style="color:#6B7280">Принципы, практики, детоксикация, профилактика</small></td>
+          <td><span class="hours-badge">8 ч.</span></td>
+          <td>Практикум</td>
+        </tr>
+        <tr class="final-row">
+          <td>★</td>
+          <td><strong>Итоговая аттестация</strong><br><small style="color:#6B7280">Комплексный тест + защита практического кейса</small></td>
+          <td><span class="hours-badge">6 ч.</span></td>
+          <td>Аттестация</td>
+        </tr>
+        <tr class="total-row">
+          <td colspan="2"><strong>ИТОГО по программе</strong></td>
+          <td><span class="hours-badge white">72 ч.</span></td>
+          <td>—</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="highlight-box gold">
+      <h3>⚖️ Соответствие стандартам РФ</h3>
+      <ul>
+        <li><strong>ФЗ № 273</strong> «Об образовании в Российской Федерации», ст. 76 — программы ДПО</li>
+        <li><strong>Приказ Минобрнауки № 499</strong> от 01.07.2013 — порядок организации и осуществления образовательной деятельности по ДПО</li>
+        <li>72 часа соответствуют требованиям к программам <strong>повышения квалификации</strong> (не менее 16 ч.)</li>
+        <li>Структура: учебный план + рабочая программа + ФОС + итоговая аттестация</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ДИПЛОМ СЕКЦИЯ ═══ -->
+<div style="background: #F0FDFA; padding: 64px 0;">
+  <div class="container">
+    <p class="section-label" style="color: var(--teal)">Документ государственного образца</p>
+    <h2 class="section-title">Что получает слушатель по окончании</h2>
+    <p class="section-lead">Наличие лицензии ДПО у Академии Личности даёт право выдавать официальные документы государственного образца, регистрируемые в федеральном реестре.</p>
+
+    <div class="diploma-showcase">
+      <h3>🎓 Удостоверение о повышении квалификации</h3>
+      <p>Государственный документ, регистрируемый в ФИС ФРДО — Федеральной информационной системе «Федеральный реестр документов об образовании»</p>
+      <div class="diploma-items">
+        <div class="diploma-item">
+          <div class="di-label">Документ</div>
+          <div class="di-value">Удостоверение о ПК</div>
+        </div>
+        <div class="diploma-item">
+          <div class="di-label">Объём программы</div>
+          <div class="di-value">72 академических часа</div>
+        </div>
+        <div class="diploma-item">
+          <div class="di-label">Реестр</div>
+          <div class="di-value">ФИС ФРДО (обязательно)</div>
+        </div>
+        <div class="diploma-item">
+          <div class="di-label">Правовая база</div>
+          <div class="di-value">ФЗ № 273, ст. 76</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      <h3>🏆 Конкурентное преимущество на рынке</h3>
+      <p>Большинство онлайн-школ психологии выдают лишь <em>коммерческие сертификаты</em> без юридической силы. Академия Личности с лицензией ДПО выдаёт <strong>документ государственного образца</strong>, который котируется работодателями, подтверждается через федеральный реестр и повышает профессиональный статус специалиста. Это принципиальное отличие от конкурентов.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 11 ТЕСТОВ ═══ -->
+<div class="section">
+  <div class="container">
+    <p class="section-label">Фонд оценочных средств</p>
+    <h2 class="section-title">11 диагностических тестов — готовый ФОС</h2>
+    <p class="section-lead">Все тесты разработаны автором и включены в монографию. Они составляют готовый Фонд оценочных средств (ФОС) — обязательный компонент любой ДПО-программы по требованиям Минобрнауки.</p>
+
+    <div class="tests-grid">
+      <div class="test-item">
+        <div class="test-icon">⚖️</div>
+        <div>
+          <h5>Тест 1. Этичность поведения в интернете</h5>
+          <p>Диагностика соблюдения сетевой этики</p>
+        </div>
+      </div>
+      <div class="test-item">
+        <div class="test-icon">💔</div>
+        <div>
+          <h5>Тест 2. Склонность к онлайн-неверности</h5>
+          <p>Риски романтической измены в сети</p>
+        </div>
+      </div>
+      <div class="test-item">
+        <div class="test-icon">⏸️</div>
+        <div>
+          <h5>Тест 3. Интернет-прокрастинация</h5>
+          <p>Выявление откладывания дел через сеть</p>
+        </div>
+      </div>
+      <div class="test-item">
+        <div class="test-icon">🪞</div>
+        <div>
+          <h5>Тест 4. Онлайн-идентичность vs реальность</h5>
+          <p>Соответствие виртуального образа подлинному Я</p>
+        </div>
+      </div>
+      <div class="test-item">
+        <div class="test-icon">📱</div>
+        <div>
+          <h5>Тест 5. Онлайн-зависимость</h5>
+          <p>Классическая шкала интернет-зависимости</p>
+        </div>
+      </div>
+      <div class="test-item">
+        <div class="test-icon">📵</div>
+        <div>
+          <h5>Тест 6. Номофобия</h5>
+          <p>Зависимость от смартфона</p>
+        </div>
+      </div>
+      <div class="test-item">
+        <div class="test-icon">👥</div>
+        <div>
+          <h5>Тест 7. Зависимость от социальных сетей</h5>
+          <p>Патологическое использование соцсетей</p>
+        </div>
+      </div>
+      <div class="test-item">
+        <div class="test-icon">🎮</div>
+        <div>
+          <h5>Тест 8. Игровая зависимость</h5>
+          <p>Признаки патологического гейминга</p>
+        </div>
+      </div>
+      <div class="test-item">
+        <div class="test-icon">🌐</div>
+        <div>
+          <h5>Тест 9. «Неформальные законы» интернета</h5>
+          <p>Понимание неформальных норм сети</p>
+        </div>
+      </div>
+      <div class="test-item">
+        <div class="test-icon">🎯</div>
+        <div>
+          <h5>Тест 10. Виктимное поведение в интернете</h5>
+          <p>Предрасположенность к роли жертвы</p>
+        </div>
+      </div>
+      <div class="test-item">
+        <div class="test-icon">🛡️</div>
+        <div>
+          <h5>Тест 11. Соблюдение кибергигиены</h5>
+          <p>Оценка цифровой безопасности поведения</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 24px; padding: 16px 20px; background: #EDE9FE; border-radius: 12px; border-left: 4px solid var(--accent);">
+      <p style="font-size: 14px; color: var(--text);">💡 <strong>Важно:</strong> По требованиям Приказа Минобрнауки № 499, программа ДПО должна содержать ФОС — перечень форм контроля, критерии оценки. Все 11 тестов монографии являются основой ФОС и <strong>не требуют разработки с нуля</strong>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ АУДИТОРИЯ ═══ -->
+<div class="section" style="background: #F8F7FF;">
+  <div class="container">
+    <p class="section-label">Целевая аудитория</p>
+    <h2 class="section-title">Кому адресована программа</h2>
+    <p class="section-lead">Программа охватывает несколько профессиональных групп с высоким спросом на компетенции в области цифровой психологии.</p>
+
+    <div class="audience-grid">
+      <div class="audience-card">
+        <div class="aud-icon">🧠</div>
+        <h4>Психологи и психотерапевты</h4>
+        <p>Работают с клиентами, имеющими цифровые зависимости, проблемы онлайн-отношений, кибербуллинг</p>
+      </div>
+      <div class="audience-card">
+        <div class="aud-icon">👩‍🏫</div>
+        <h4>Педагоги и классные руководители</h4>
+        <p>Нуждаются в инструментах работы с цифровым поведением учеников, профилактики зависимостей</p>
+      </div>
+      <div class="audience-card">
+        <div class="aud-icon">👨‍👩‍👧</div>
+        <h4>Специалисты по социальной работе</h4>
+        <p>Работают с семьями в трудных ситуациях, где цифровая среда — значимый фактор</p>
+      </div>
+      <div class="audience-card">
+        <div class="aud-icon">💼</div>
+        <h4>HR и руководители</h4>
+        <p>Управляют цифровой коммуникацией в команде, решают вопросы этики в корпоративной среде</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ДОКУМЕНТАЦИЯ ═══ -->
+<div class="section">
+  <div class="container">
+    <p class="section-label">Методическая документация</p>
+    <h2 class="section-title">Что нужно разработать для запуска</h2>
+    <p class="section-lead">Для официального старта программы ДПО по стандартам РФ требуется комплект из 4 документов. Содержательная база — уже в книге.</p>
+
+    <div class="docs-grid">
+
+      <div class="doc-card required">
+        <div class="doc-card-icon">📋</div>
+        <h4>Учебный план</h4>
+        <p>Перечень модулей, распределение часов по видам занятий (лекции, практика, самостоятельная работа), форма итоговой аттестации</p>
+        <span class="doc-badge required-badge">Обязательно</span>
+      </div>
+
+      <div class="doc-card required">
+        <div class="doc-card-icon">📝</div>
+        <h4>Рабочая программа</h4>
+        <p>Цели обучения, планируемые результаты, содержание каждого модуля, рекомендуемая литература (монография — основной источник)</p>
+        <span class="doc-badge required-badge">Обязательно</span>
+      </div>
+
+      <div class="doc-card required">
+        <div class="doc-card-icon">📊</div>
+        <h4>Фонд оценочных средств (ФОС)</h4>
+        <p>11 тестов из Приложений уже являются основой ФОС. Нужно добавить критерии оценки и шкалы интерпретации результатов</p>
+        <span class="doc-badge required-badge">Обязательно</span>
+      </div>
+
+      <div class="doc-card state">
+        <div class="doc-card-icon">🏛️</div>
+        <h4>Регистрация в ФИС ФРДО</h4>
+        <p>Федеральная информационная система «Реестр документов об образовании». Каждое выданное удостоверение ПК вносится в реестр — обязательное условие легитимности</p>
+        <span class="doc-badge state-badge">Государственная система</span>
+      </div>
+
+      <div class="doc-card system">
+        <div class="doc-card-icon">📱</div>
+        <h4>Платформа и LMS</h4>
+        <p>Система управления обучением для дистанционного формата. Возможно использование GetCourse, Teachable, собственной платформы Академии</p>
+        <span class="doc-badge system-badge">Техническая часть</span>
+      </div>
+
+      <div class="doc-card state">
+        <div class="doc-card-icon">📜</div>
+        <h4>Бланки удостоверений</h4>
+        <p>Утверждённая форма удостоверения о повышении квалификации с реквизитами Академии, номером лицензии ДПО и подписью руководителя</p>
+        <span class="doc-badge state-badge">Государственный образец</span>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ═══ РЕЗУЛЬТАТЫ ОБУЧЕНИЯ ═══ -->
+<div class="section" style="background: #F8F7FF;">
+  <div class="container">
+    <p class="section-label">Результаты обучения</p>
+    <h2 class="section-title">Что умеет выпускник программы</h2>
+    <p class="section-lead">Компетентностный подход по ФГОС: знания, умения, навыки и владение инструментарием.</p>
+
+    <div class="outcomes-grid">
+      <div class="outcome-card">
+        <h4>📚 Знает</h4>
+        <ul>
+          <li>Теоретические основы киберморальной психологии</li>
+          <li>Механизмы формирования онлайн-зависимостей</li>
+          <li>Феноменологию кибербуллинга и виктимности</li>
+          <li>Гендерные и возрастные особенности поведения в сети</li>
+          <li>Принципы сетевой этики и кибергигиены</li>
+        </ul>
+      </div>
+      <div class="outcome-card">
+        <h4>🛠️ Умеет</h4>
+        <ul>
+          <li>Проводить диагностику интернет-зависимостей (11 методик)</li>
+          <li>Выявлять признаки виктимного поведения онлайн</li>
+          <li>Консультировать по вопросам цифрового этикета</li>
+          <li>Строить профилактические программы для разных групп</li>
+          <li>Анализировать цифровой психологический портрет</li>
+        </ul>
+      </div>
+      <div class="outcome-card">
+        <h4>🎯 Владеет</h4>
+        <ul>
+          <li>Инструментарием диагностики онлайн-поведения</li>
+          <li>Методами коррекции цифровых зависимостей</li>
+          <li>Навыками цифровой детоксикации клиентов</li>
+          <li>Технологиями работы с онлайн-идентичностью</li>
+        </ul>
+      </div>
+      <div class="outcome-card">
+        <h4>💡 Применяет в практике</h4>
+        <ul>
+          <li>Индивидуальное консультирование по цифровому поведению</li>
+          <li>Групповые тренинги кибергигиены</li>
+          <li>Работа с семьями по цифровому воспитанию</li>
+          <li>Корпоративные программы цифровой этики</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ СЛЕДУЮЩИЕ ШАГИ ═══ -->
+<div class="section">
+  <div class="container">
+    <p class="section-label">Дорожная карта</p>
+    <h2 class="section-title">Следующие шаги для запуска</h2>
+    <p class="section-lead">Программа готова концептуально. До официального запуска остаётся оформить методическую документацию и технически подготовить платформу.</p>
+
+    <ul class="steps-list">
+      <li class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h4>Разработать учебный план и рабочую программу</h4>
+          <p>На основе оглавления монографии и предложенной структуры 72 часов. Содержательная база уже готова — нужна формальная упаковка по требованиям Приказа Минобрнауки № 499.</p>
+        </div>
+      </li>
+      <li class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h4>Оформить ФОС на базе 11 тестов</h4>
+          <p>Добавить к каждому тесту: критерии интерпретации, пороговые значения, шкалы оценки. Сформировать итоговый аттестационный кейс.</p>
+        </div>
+      </li>
+      <li class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h4>Записать видеолекции по модулям</h4>
+          <p>8 основных модулей × 60–90 минут видеоконтента. Рекомендуется авторское изложение: научная достоверность + практические кейсы.</p>
+        </div>
+      </li>
+      <li class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h4>Разработать практические задания</h4>
+          <p>По каждому модулю — 1–2 практических задания (разбор кейса, анализ ситуации, самодиагностика). Итоговая аттестация — комплексный кейс из практики слушателя.</p>
+        </div>
+      </li>
+      <li class="step-item">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <h4>Настроить регистрацию в ФИС ФРДО</h4>
+          <p>Убедиться, что Академия Личности подключена к федеральному реестру документов об образовании. Без этого выдача удостоверений ПК невозможна.</p>
+        </div>
+      </li>
+      <li class="step-item">
+        <div class="step-num">6</div>
+        <div class="step-content">
+          <h4>Запустить пилотный поток</h4>
+          <p>Первый набор — 10–15 слушателей в тестовом формате. Сбор обратной связи, доработка материалов, отладка процессов аттестации и выдачи документов.</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- ═══ ФИНАЛЬНЫЙ БЛОК ═══ -->
+<div style="background: linear-gradient(135deg, var(--primary) 0%, #1E1060 100%); padding: 64px 48px; text-align: center;">
+  <div class="container">
+    <p style="font-size: 13px; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.5); margin-bottom: 12px;">Заключение</p>
+    <h2 style="font-size: clamp(22px, 3vw, 36px); font-weight: 800; color: white; margin-bottom: 16px; line-height: 1.2; letter-spacing: -0.01em;">Монография полностью готова<br>стать основой программы ДПО</h2>
+    <p style="font-size: 16px; color: rgba(255,255,255,0.7); max-width: 580px; margin: 0 auto 40px; line-height: 1.7;">Академическая структура, 11 диагностических инструментов, официальное издание с лицензионным договором — всё необходимое уже есть. Остаётся только методически упаковать и запустить.</p>
+
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 16px;">
+      <div style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15); border-radius: 12px; padding: 16px 24px; color: white; text-align: center; min-width: 160px;">
+        <div style="font-size: 28px; font-weight: 800;">72</div>
+        <div style="font-size: 12px; opacity: 0.65; margin-top: 2px;">академических часа</div>
+      </div>
+      <div style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15); border-radius: 12px; padding: 16px 24px; color: white; text-align: center; min-width: 160px;">
+        <div style="font-size: 28px; font-weight: 800;">ПК</div>
+        <div style="font-size: 12px; opacity: 0.65; margin-top: 2px;">Удостоверение гос. образца</div>
+      </div>
+      <div style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15); border-radius: 12px; padding: 16px 24px; color: white; text-align: center; min-width: 160px;">
+        <div style="font-size: 28px; font-weight: 800;">4</div>
+        <div style="font-size: 12px; opacity: 0.65; margin-top: 2px;">аудиторных сегмента</div>
+      </div>
+      <div style="background: rgba(14,165,133,0.25); border: 1px solid rgba(20,184,166,0.35); border-radius: 12px; padding: 16px 24px; color: white; text-align: center; min-width: 160px;">
+        <div style="font-size: 22px; font-weight: 800; color: #5EEAD4;">ФИС ФРДО</div>
+        <div style="font-size: 12px; opacity: 0.65; margin-top: 2px;">Федеральный реестр</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── FOOTER ─── -->
+<div class="footer">
+  <div class="footer-logo">Академия Личности</div>
+  <p>Аналитический отчёт подготовлен для внутреннего использования · 2026</p>
+  <p style="margin-top: 6px; font-size: 11px; opacity: 0.5;">Рыжиков С.Н. «Киберморальная психология» · Изд-во Инфра-Инженерия · Лиц. договор 297-НИ · 2025</p>
+</div>
+
+</body>
+</html>

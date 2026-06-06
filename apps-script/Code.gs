@@ -90,6 +90,7 @@ function writeToSheets(data) {
   var row = [
     id,
     data.name         || '',
+    '',                               // Решение академии — заполняется вручную
     data.telegram     || '',
     data.phone        || '',
     data.email        || '',
@@ -102,12 +103,12 @@ function writeToSheets(data) {
     '',
     'Изучить анкету и принять решение',
     '',
-    '',
+    (function(s){ return s==='green'?'Зелёный':s==='yellow'?'Жёлтый':'Красный'; })(autoScore(data)),
     data.years_practice   || '',
     data.has_product      || '',
     audience,
     data.income           || '',
-    (function(s){ return s==='green'?'Зелёный':s==='yellow'?'Жёлтый':'Красный'; })(autoScore(data)),
+    '',
     '',
     data.program_name     || '',
     data.hours            || '',

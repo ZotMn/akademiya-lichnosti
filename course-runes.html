@@ -6,6 +6,24 @@
 <title>Психолог-консультант. Рунический инструментарий — Академия Развития Личности</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Inter:wght@300;400;500;600&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+<script src="https://lidrekon.ru/slep/js/jquery.js"></script>
+<script src="https://lidrekon.ru/slep/js/uhpv-full.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+  var btn=document.getElementById('specialButton');
+  if(!btn)return;
+  btn.addEventListener('click',function(e){
+    var panel=document.getElementById('special');
+    if(panel&&panel.offsetHeight>0){
+      e.stopImmediatePropagation();
+      e.preventDefault();
+      panel.style.display='none';
+      var h=document.documentElement;
+      h.className=h.className.split(' ').filter(function(c){return c.indexOf('special')===-1;}).join(' ');
+    }
+  },true);
+});
+</script>
 <style>
 :root {
   --dark-bg:    #090f1e;
@@ -326,10 +344,54 @@ footer { background:var(--dark-bg); padding:32px 48px; border-top:1px solid rgba
   .hero-stats { gap:24px; flex-wrap:wrap; }
   footer { padding:24px 20px; }
 }
-#glazd-wrap{position:fixed;top:80px;right:32px;z-index:9999;}
-#glazd{display:block;width:44px;height:44px;background:#fff;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,.18);padding:6px;cursor:pointer;border:1px solid #ddd;transition:box-shadow .2s;}
-#glazd:hover{box-shadow:0 4px 20px rgba(0,0,0,.25);}
-@media(max-width:980px){#glazd-wrap{top:auto;bottom:80px;right:16px;}#glazd{width:40px;height:40px;}}
+#glazd-wrap{display:flex;align-items:center;margin-left:12px;}
+#specialButton{cursor:pointer;width:36px;height:36px;border-radius:7px;box-shadow:0 2px 10px rgba(0,0,0,.25);border:1px solid #ccc;background:#fff;padding:5px;display:block;}
+@media(max-width:768px){#glazd-wrap{margin-left:8px;}#specialButton{width:32px;height:32px;}}
+</style>
+<style>
+/* === LIDREKON ACCESSIBILITY BRIDGE === */
+html.special-color-1{--dark-bg:#fff;--dark-panel:#f0f0f0;--dark-ink:#000;--dark-mid:#333;--bg:#fff;--panel:#fff;--ink:#000;--mid:#333;--muted:#555;--navy:#00008b;--crystal:#0000cc;--gold:#884400;}
+html.special-color-1 body{background:#fff!important;color:#000!important;}
+html.special-color-1 nav,html.special-color-1 footer{background:#fff!important;border-color:#333!important;}
+html.special-color-1 section,html.special-color-1 .hero{background:#fff!important;}
+html.special-color-1 *{color:#000!important;background-image:none!important;text-shadow:none!important;box-shadow:none!important;}
+html.special-color-1 a{color:#00008b!important;text-decoration:underline!important;}
+html.special-color-1 img:not(#specialButton){filter:grayscale(100%) contrast(110%);}
+html.special-color-2{--dark-bg:#000;--dark-panel:#111;--dark-ink:#fff;--dark-mid:#ccc;--bg:#000;--panel:#111;--ink:#fff;--mid:#ccc;--muted:#999;}
+html.special-color-2 body{background:#000!important;color:#fff!important;}
+html.special-color-2 nav,html.special-color-2 footer{background:#111!important;}
+html.special-color-2 *{color:#fff!important;background-color:transparent!important;background-image:none!important;}
+html.special-color-2 a{color:#ff0!important;text-decoration:underline!important;}
+html.special-color-3{--bg:#9dd1ff;--dark-bg:#9dd1ff;--ink:#003366;--dark-ink:#003366;--mid:#003366;--dark-mid:#003366;}
+html.special-color-3 body{background:#9dd1ff!important;color:#003366!important;}
+html.special-color-3 nav,html.special-color-3 footer{background:#7fbfe0!important;}
+html.special-color-3 *{color:#003366!important;background-color:transparent!important;background-image:none!important;}
+html.special-color-4{--bg:#f5deb3;--dark-bg:#f5deb3;--ink:#4a2c0a;--dark-ink:#4a2c0a;--mid:#4a2c0a;--dark-mid:#4a2c0a;}
+html.special-color-4 body{background:#f5deb3!important;color:#4a2c0a!important;}
+html.special-color-4 nav,html.special-color-4 footer{background:#e8d09a!important;}
+html.special-color-4 *{color:#4a2c0a!important;background-color:transparent!important;background-image:none!important;}
+html.special-color-5{--bg:#3d2b1f;--dark-bg:#3d2b1f;--ink:#00a550;--dark-ink:#00a550;--mid:#00a550;--dark-mid:#00a550;}
+html.special-color-5 body{background:#3d2b1f!important;color:#00a550!important;}
+html.special-color-5 nav,html.special-color-5 footer{background:#2a1e15!important;}
+html.special-color-5 *{color:#00a550!important;background-color:transparent!important;background-image:none!important;}
+html.special-font-family-1 *{font-family:Arial,sans-serif!important;}
+html.special-font-family-2 *{font-family:'Times New Roman',Times,serif!important;}
+html.special-font-size-2 p,html.special-font-size-2 li,html.special-font-size-2 span,html.special-font-size-2 a,html.special-font-size-2 div{font-size:20px!important;}
+html.special-font-size-3 p,html.special-font-size-3 li,html.special-font-size-3 span,html.special-font-size-3 a,html.special-font-size-3 div{font-size:24px!important;}
+html.special-line-height-2 *{line-height:1.9!important;}
+html.special-line-height-3 *{line-height:2.4!important;}
+html.special-letter-spacing-2 *{letter-spacing:.05em!important;}
+html.special-letter-spacing-3 *{letter-spacing:.1em!important;}
+html.special-images-0 img:not(#specialButton){display:none!important;}
+#special{all:revert;position:fixed!important;top:68px!important;left:0!important;right:0!important;z-index:9999!important;}
+#special *{all:revert;}
+.special-panel{display:flex!important;flex-direction:row!important;flex-wrap:wrap!important;align-items:center!important;gap:6px 20px!important;padding:8px 20px!important;background:#ddeeff!important;border-bottom:1px solid #aaccee!important;font-family:Arial,Helvetica,sans-serif!important;font-size:13px!important;}
+.special-font-size,.special-color,.special-images,.special-audio,.special-settings,.special-quit{display:flex!important;align-items:center!important;gap:4px!important;white-space:nowrap!important;font-family:Arial,Helvetica,sans-serif!important;font-size:13px!important;color:#003366!important;}
+.special-font-size span,.special-color span,.special-images span,.special-audio span,.special-settings span,.special-quit span{font-size:13px!important;color:#003366!important;margin-right:2px!important;}
+.special-font-size button,.special-color button,.special-images button,.special-audio button,.special-settings button,.special-quit button{font-family:Arial,Helvetica,sans-serif!important;font-size:13px!important;padding:3px 8px!important;border:1px solid #6699cc!important;background:#fff!important;color:#003366!important;cursor:pointer!important;border-radius:3px!important;line-height:1.3!important;}
+.special-font-size button.active,.special-color button.active,.special-images button.active,.special-audio button.active,.special-settings button.active{background:#003366!important;color:#fff!important;}
+#special-settings-body{font-family:Arial,Helvetica,sans-serif!important;font-size:14px!important;padding:12px 20px!important;background:#f5f9ff!important;border-bottom:1px solid #aaccee!important;}
+html[class*="special-"] #specialButton{background:#fff!important;border:2px solid #000!important;outline:none!important;filter:none!important;display:block!important;}
 </style>
 </head>
 <body>
@@ -340,9 +402,11 @@ footer { background:var(--dark-bg); padding:32px 48px; border-top:1px solid rgba
     <div class="logo-fallback">Академия<br>Развития Личности</div>
   </div>
   <a href="site-concept-v6.html#programs" class="nav-back">← Все программы</a>
-  <a href="#cta" class="nav-cta">Записаться →</a>
+  <div style="display:flex;align-items:center;">
+    <a href="#cta" class="nav-cta">Записаться →</a>
+    <div id="glazd-wrap"><img id="specialButton" src="https://lidrekon.ru/images/special.png" alt="ВЕРСИЯ ДЛЯ СЛАБОВИДЯЩИХ" title="ВЕРСИЯ ДЛЯ СЛАБОВИДЯЩИХ"></div>
+  </div>
 </nav>
-<div id="glazd-wrap"><a id="specialButton" href="https://lidrekon.ru/slep/" target="_blank" title="Версия для слабовидящих"><img src="https://lidrekon.ru/images/special.png" id="glazd" alt="Версия для слабовидящих"></a></div>
 
 <!-- HERO -->
 <section class="hero">
@@ -829,21 +893,41 @@ footer { background:var(--dark-bg); padding:32px 48px; border-top:1px solid rgba
   <div class="container">
     <div class="cta-title">Начните путь к новой профессии</div>
     <p class="cta-sub">Оставьте контакт — мы свяжемся для записи на собеседование</p>
-    <form class="cta-form" onsubmit="return false;">
-      <input class="cta-input" type="text" placeholder="Ваше имя">
-      <input class="cta-input" type="tel" placeholder="Телефон / Telegram">
+    <form class="cta-form" id="question-form" onsubmit="submitQuestion(event);">
+      <input class="cta-input" type="text" id="q-name" placeholder="Ваше имя">
+      <input class="cta-input" type="tel" id="q-contact" placeholder="Телефон / Telegram">
       <button class="cta-submit" type="submit">Записаться</button>
     </form>
-    <div class="cta-note">Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности</div>
+    <div id="q-thanks" style="display:none;margin-top:16px;color:#38c8f0;font-size:15px;">Спасибо! Переходим в Telegram Юлии...</div>
+    <script>
+    function submitQuestion(e){
+      e.preventDefault();
+      document.getElementById('question-form').style.display='none';
+      document.getElementById('q-thanks').style.display='block';
+      setTimeout(function(){ window.open('https://t.me/Julia_Tsezar','_blank'); }, 800);
+    }
+    </script>
+    <div class="cta-note">Нажимая кнопку, вы соглашаетесь с <a href="privacy.html" style="color:rgba(221,234,252,.35);text-decoration:underline;">политикой конфиденциальности</a></div>
   </div>
 </section>
 
 <footer>
   <div class="footer-inner">
     <div class="footer-logo">Академия Развития Личности · АНО ДПО «АРЛ»</div>
-    <a href="site-concept-v6.html" class="footer-back">← Вернуться на главную</a>
+    <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:center;">
+      <a href="privacy.html" class="footer-back">Политика конфиденциальности</a>
+      <a href="offer.html" class="footer-back">Договор-оферта</a>
+      <a href="site-concept-v6.html" class="footer-back">← На главную</a>
+    </div>
   </div>
 </footer>
+
+<!-- COOKIE BANNER -->
+<div id="cookie-bar" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9998;background:#0d1a33;border-top:1px solid rgba(56,200,240,.18);padding:14px 24px;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:'Inter',sans-serif;font-size:13px;color:rgba(255,255,255,.7);">
+  <span>Сайт использует файлы cookie для корректной работы. Продолжая использование, вы соглашаетесь с <a href="privacy.html" style="color:#38c8f0;text-decoration:underline;">Политикой конфиденциальности</a>.</span>
+  <button onclick="document.getElementById('cookie-bar').style.display='none';localStorage.setItem('cookie_ok','1');" style="cursor:pointer;background:#38c8f0;color:#060c18;border:none;border-radius:6px;padding:8px 20px;font-size:13px;font-weight:600;white-space:nowrap;">Принять</button>
+</div>
+<script>if(!localStorage.getItem('cookie_ok')){document.getElementById('cookie-bar').style.display='flex';}</script>
 
 </body>
 </html>

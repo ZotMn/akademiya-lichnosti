@@ -10,3 +10,6 @@ desktop.ini
 # Editor
 .vscode/
 *.swp
+
+# Claude Code
+.superpowers/

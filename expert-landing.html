@@ -103,6 +103,7 @@ a { color:inherit; text-decoration:none; }
   border-bottom:1px solid rgba(26,58,110,.07);
 }
 .kp-section:last-of-type { border-bottom:none; }
+.kp-section:first-of-type { border-bottom:none; }
 .sec-label {
   font-size:10px; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
   color:var(--crystal); margin-bottom:10px;
@@ -123,7 +124,7 @@ a { color:inherit; text-decoration:none; }
   gap:12px; margin-top:24px;
 }
 .stat {
-  background:linear-gradient(135deg,#f0f4fc,#e8eef8);
+  background:#eef2fb;
   border:1px solid rgba(26,58,110,.1); border-radius:8px;
   padding:16px 12px; text-align:center;
 }
@@ -164,6 +165,33 @@ a { color:inherit; text-decoration:none; }
   display:block; font-size:13px; font-weight:600; color:var(--ink); margin-bottom:4px;
 }
 .benefit-body span { font-size:12px; color:var(--mid); line-height:1.55; }
+
+/* ── FOUNDER QUOTE ── */
+.founder-quote {
+  margin-top:24px;
+  padding:22px 24px;
+  background:#f4f7fd;
+  border-left:3px solid var(--navy);
+  border-radius:0 8px 8px 0;
+  position:relative;
+}
+.founder-quote::before {
+  content:'\201C';
+  font-family:var(--serif); font-size:72px; line-height:1;
+  color:rgba(26,58,110,.12);
+  position:absolute; top:-4px; left:14px;
+  pointer-events:none;
+}
+.founder-quote-text {
+  font-family:var(--serif); font-size:15px; font-style:italic;
+  color:var(--ink); line-height:1.7;
+  position:relative; z-index:1;
+}
+.founder-quote-author {
+  margin-top:10px;
+  font-size:12px; font-weight:600; color:var(--navy);
+  letter-spacing:.04em;
+}
 
 /* ── WHO WE NEED ── */
 .criteria-list { display:flex; flex-direction:column; gap:10px; margin-top:20px; }
@@ -322,11 +350,59 @@ a { color:inherit; text-decoration:none; }
   body { background:white; }
   .page { box-shadow:none; max-width:100%; }
 
+  /* Все фоны — сохранять точно */
   .kp-header  { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
   .steps-block{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
   .kp-footer  { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
   .stat       { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .bi-1       { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
   .bi-2       { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .bi-3       { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .bi-4       { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .cta-block  { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .cta-btn    { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .ci-mark    { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .benefit-card { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .criteria-item  { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .founder-quote  { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+
+  /* Разрывы страниц:
+     стр. 1 = хедер + О нас + статы
+     стр. 2 = Что вы получаете + Кого мы ищем
+     стр. 3 = Как это работает + CTA + футер */
+  #what-you-get {
+    page-break-before: always;
+    break-before: page;
+  }
+  .steps-block {
+    page-break-before: always;
+    break-before: page;
+  }
+
+  /* Не разрывать карточки и шаги внутри */
+  .benefit-card  { break-inside:avoid; page-break-inside:avoid; }
+  .criteria-item { break-inside:avoid; page-break-inside:avoid; }
+  .benefits-grid { break-inside:avoid; page-break-inside:avoid; }
+  .steps-row     { break-inside:avoid; page-break-inside:avoid; }
+  .cta-block     { break-inside:avoid; page-break-inside:avoid; }
+  .kp-footer     { break-inside:avoid; page-break-inside:avoid; }
+
+  /* Убираем разделительные полоски между секциями */
+  .kp-section { border-bottom: none; }
+
+  /* Уменьшаем отступы чтобы уместиться в 3 листа */
+  .kp-header  { padding-top:30px; padding-bottom:32px; }
+  .kp-section { padding-top:22px; padding-bottom:22px; }
+  .steps-block{ padding-top:22px; padding-bottom:22px; }
+  .cta-block  { padding-top:24px; padding-bottom:24px; }
+  .kp-footer  { padding-top:20px; padding-bottom:24px; }
+  .stats-row  { margin-top:16px; }
+  .benefits-grid { margin-top:14px; gap:10px; }
+  .criteria-list { gap:8px; margin-top:14px; }
+  .steps-row  { margin-top:18px; }
+
+  /* Сова в хедере — не обрезать */
+  .header-owl { overflow:visible; }
 
   @page { margin:0; size:A4; }
 }
@@ -382,21 +458,30 @@ a { color:inherit; text-decoration:none; }
   </div>
   <div class="stats-row">
     <div class="stat">
-      <div class="stat-val">АНО</div>
-      <div class="stat-lab">официальная<br>организация ДПО</div>
+      <div class="stat-val">ДПО</div>
+      <div class="stat-lab">бессрочная<br>государственная лицензия</div>
     </div>
     <div class="stat">
-      <div class="stat-val">376</div>
-      <div class="stat-lab">акад. часов<br>в флагмане</div>
+      <div class="stat-val">1000+</div>
+      <div class="stat-lab">учеников прошли<br>программы</div>
     </div>
     <div class="stat">
-      <div class="stat-val">3+</div>
-      <div class="stat-lab">программы<br>с дипломом</div>
+      <div class="stat-val">4</div>
+      <div class="stat-lab">авторские программы<br>с дипломом</div>
     </div>
     <div class="stat">
       <div class="stat-val">ФИС</div>
-      <div class="stat-lab">ФРДО — внесение<br>в реестр РФ</div>
+      <div class="stat-lab">ФРДО — дипломы<br>вносятся в реестр РФ</div>
     </div>
+  </div>
+
+  <div class="founder-quote">
+    <div class="founder-quote-text">
+      Мне важно, чтобы каждый эксперт в Академии чувствовал: здесь есть система.
+      Не просто площадка — а партнёрство, где у вас есть лицензия за спиной
+      и аудитория впереди.
+    </div>
+    <div class="founder-quote-author">— Юлия Цезарь, основатель</div>
   </div>
 </div>
 
@@ -404,7 +489,7 @@ a { color:inherit; text-decoration:none; }
 <!-- ══════════════════════════════════════
      ЧТО ВЫ ПОЛУЧАЕТЕ
 ══════════════════════════════════════ -->
-<div class="kp-section" style="background:#fafbff;">
+<div class="kp-section" id="what-you-get" style="background:#fafbff;">
   <div class="sec-label">Что вы получаете</div>
   <h2 class="sec-h">Четыре причины<br>работать с <em>Академией</em></h2>
   <div class="benefits-grid">
@@ -448,7 +533,7 @@ a { color:inherit; text-decoration:none; }
 <!-- ══════════════════════════════════════
      КОГО ИЩЕМ
 ══════════════════════════════════════ -->
-<div class="kp-section">
+<div class="kp-section" id="who-we-need">
   <div class="sec-label">Кого мы ищем</div>
   <h2 class="sec-h">Требования<br>к <em>партнёру-эксперту</em></h2>
   <div class="criteria-list">
@@ -534,7 +619,7 @@ a { color:inherit; text-decoration:none; }
     </svg>
     Заполнить анкету эксперта
   </a>
-  <div class="cta-note">Или напишите в Telegram: <a href="https://t.me/Julia_Tsezar" target="_blank" style="color:var(--crystal);">@Julia_Tsezar</a></div>
+  <div class="cta-note">Или напишите нам: <a href="mailto:ano.dpo.arl@yandex.ru" style="color:var(--crystal);">ano.dpo.arl@yandex.ru</a></div>
 </div>
 
 
@@ -549,13 +634,13 @@ a { color:inherit; text-decoration:none; }
       <div class="footer-contact-name">Юлия Цезарь</div>
       <div class="footer-contact-role">Основатель · Академия Развития Личности</div>
       <div class="footer-links">
-        <a href="https://t.me/Julia_Tsezar" target="_blank" class="footer-link">
-          <div class="footer-link-icon">✈</div>
-          <span>Telegram: <span class="hl">@Julia_Tsezar</span></span>
-        </a>
-        <a href="https://t.me/tsezar_evolution" target="_blank" class="footer-link">
+        <a href="https://t.me/tsezaracademy" target="_blank" class="footer-link">
           <div class="footer-link-icon">📢</div>
-          <span>Канал: <span class="hl">@tsezar_evolution</span></span>
+          <span>Канал: <span class="hl">@tsezaracademy</span></span>
+        </a>
+        <a href="https://t.me/academy_veb" target="_blank" class="footer-link">
+          <div class="footer-link-icon">✈</div>
+          <span>Сообщество: <span class="hl">@academy_veb</span></span>
         </a>
         <a href="https://tsezaracademy.ru" target="_blank" class="footer-link">
           <div class="footer-link-icon">🌐</div>

@@ -6,6 +6,24 @@
 <title>Академия Развития Личности</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Inter:wght@300;400;500;600&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+<script src="https://lidrekon.ru/slep/js/jquery.js"></script>
+<script src="https://lidrekon.ru/slep/js/uhpv-full.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+  var btn=document.getElementById('specialButton');
+  if(!btn)return;
+  btn.addEventListener('click',function(e){
+    var panel=document.getElementById('special');
+    if(panel&&panel.offsetHeight>0){
+      e.stopImmediatePropagation();
+      e.preventDefault();
+      panel.style.display='none';
+      var h=document.documentElement;
+      h.className=h.className.split(' ').filter(function(c){return c.indexOf('special')===-1;}).join(' ');
+    }
+  },true);
+});
+</script>
 <style>
 
 :root {
@@ -1113,6 +1131,29 @@ footer { background:#060c18; padding:56px 56px 36px; border-top:1px solid rgba(5
   .footer-grid { grid-template-columns:1fr 1fr; gap:32px; }
   .section { padding:64px 28px; }
 }
+
+/* ── RESPONSIVE: 768px (планшет → телефон) ── */
+@media(max-width:768px) {
+  .eco-cards { grid-template-columns:1fr; }
+  .eco-card { grid-column:1 !important; padding:28px 24px; }
+  .docs-inner { grid-template-columns:1fr; gap:36px; }
+  .docs-section { padding:56px 28px; }
+  .case-slide { grid-template-columns:1fr; gap:24px; }
+}
+
+/* ── RESPONSIVE: 520px (телефон) ── */
+@media(max-width:520px) {
+  nav { padding:0 16px; }
+  .nav-menu > li:not(:nth-last-child(-n+2)) { display:none; }
+  .nav-menu { gap:8px; }
+  .section { padding:44px 20px; }
+  .hero { padding:76px 20px 44px; }
+  .experts-grid { grid-template-columns:1fr; }
+  .footer-grid { grid-template-columns:1fr; gap:20px; }
+  .footer-bottom { flex-direction:column; gap:10px; text-align:center; }
+  footer { padding:40px 20px 24px; }
+}
+
 /* ── PARTNERS ── */
 .partners-section { background:var(--bg); }
 .partners-grid {
@@ -1154,6 +1195,69 @@ footer { background:#060c18; padding:56px 56px 36px; border-top:1px solid rgba(5
 #glazd:hover{box-shadow:0 4px 18px rgba(0,0,0,.28);}
 @media(max-width:980px){#glazd{width:32px;height:32px;}}
 </style>
+<style>
+/* === LIDREKON ACCESSIBILITY BRIDGE === */
+/* Scheme 1: Черным по белому */
+html.special-color-1{--dark-bg:#fff;--dark-panel:#f0f0f0;--dark-ink:#000;--dark-mid:#333;--bg:#fff;--panel:#fff;--ink:#000;--mid:#333;--muted:#555;--navy:#00008b;--crystal:#0000cc;--gold:#884400;--blue:#00008b;--ice:#0000cc;}
+html.special-color-1 body{background:#fff!important;color:#000!important;}
+html.special-color-1 nav,html.special-color-1 footer{background:#fff!important;border-color:#333!important;}
+html.special-color-1 section,html.special-color-1 .hero{background:#fff!important;}
+html.special-color-1 *{color:#000!important;background-image:none!important;text-shadow:none!important;box-shadow:none!important;}
+html.special-color-1 a{color:#00008b!important;text-decoration:underline!important;}
+html.special-color-1 img:not(#specialButton){filter:grayscale(100%) contrast(110%);}
+/* Scheme 2: Белым по черному */
+html.special-color-2{--dark-bg:#000;--dark-panel:#111;--dark-ink:#fff;--dark-mid:#ccc;--bg:#000;--panel:#111;--ink:#fff;--mid:#ccc;--muted:#999;--navy:#fff;--crystal:#fff;--gold:#fc0;}
+html.special-color-2 body{background:#000!important;color:#fff!important;}
+html.special-color-2 nav,html.special-color-2 footer{background:#111!important;border-color:#fff!important;}
+html.special-color-2 section,html.special-color-2 .hero{background:#000!important;}
+html.special-color-2 *{color:#fff!important;background-color:transparent!important;background-image:none!important;text-shadow:none!important;}
+html.special-color-2 a{color:#ff0!important;text-decoration:underline!important;}
+/* Scheme 3: Темно-синим по голубому */
+html.special-color-3{--dark-bg:#9dd1ff;--dark-panel:#7fbfe0;--dark-ink:#003366;--dark-mid:#003366;--bg:#9dd1ff;--panel:#c5e5ff;--ink:#003366;--mid:#003366;--muted:#003366;}
+html.special-color-3 body{background:#9dd1ff!important;color:#003366!important;}
+html.special-color-3 nav,html.special-color-3 footer{background:#7fbfe0!important;}
+html.special-color-3 *{color:#003366!important;background-color:transparent!important;background-image:none!important;}
+html.special-color-3 a{color:#001a4d!important;text-decoration:underline!important;}
+/* Scheme 4: Коричневым по бежевому */
+html.special-color-4{--dark-bg:#f5deb3;--dark-panel:#e8d09a;--dark-ink:#4a2c0a;--dark-mid:#4a2c0a;--bg:#f5deb3;--panel:#fff8e7;--ink:#4a2c0a;--mid:#4a2c0a;--muted:#4a2c0a;}
+html.special-color-4 body{background:#f5deb3!important;color:#4a2c0a!important;}
+html.special-color-4 nav,html.special-color-4 footer{background:#e8d09a!important;}
+html.special-color-4 *{color:#4a2c0a!important;background-color:transparent!important;background-image:none!important;}
+html.special-color-4 a{color:#8b0000!important;text-decoration:underline!important;}
+/* Scheme 5: Зеленым по темно-коричневому */
+html.special-color-5{--dark-bg:#3d2b1f;--dark-panel:#2a1e15;--dark-ink:#00a550;--dark-mid:#00a550;--bg:#3d2b1f;--panel:#2a1e15;--ink:#00a550;--mid:#00a550;--muted:#007a3d;}
+html.special-color-5 body{background:#3d2b1f!important;color:#00a550!important;}
+html.special-color-5 nav,html.special-color-5 footer{background:#2a1e15!important;}
+html.special-color-5 *{color:#00a550!important;background-color:transparent!important;background-image:none!important;}
+html.special-color-5 a{color:#00ff7f!important;text-decoration:underline!important;}
+/* Font Families */
+html.special-font-family-1{--sans:Arial,sans-serif;--serif:Arial,sans-serif;}
+html.special-font-family-1 *{font-family:Arial,sans-serif!important;}
+html.special-font-family-2{--sans:'Times New Roman',Times,serif;--serif:'Times New Roman',Times,serif;}
+html.special-font-family-2 *{font-family:'Times New Roman',Times,serif!important;}
+/* Font Sizes */
+html.special-font-size-2 p,html.special-font-size-2 li,html.special-font-size-2 span,html.special-font-size-2 a,html.special-font-size-2 div{font-size:20px!important;}
+html.special-font-size-3 p,html.special-font-size-3 li,html.special-font-size-3 span,html.special-font-size-3 a,html.special-font-size-3 div{font-size:24px!important;}
+/* Line Heights */
+html.special-line-height-2 *{line-height:1.9!important;}
+html.special-line-height-3 *{line-height:2.4!important;}
+/* Letter Spacing */
+html.special-letter-spacing-2 *{letter-spacing:.05em!important;}
+html.special-letter-spacing-3 *{letter-spacing:.1em!important;}
+/* Images off */
+html.special-images-0 img:not(#specialButton){display:none!important;}
+/* Panel: fixed below our nav, own styles, Arial */
+#special{all:revert;position:fixed!important;top:68px!important;left:0!important;right:0!important;z-index:9999!important;}
+#special *{all:revert;}
+/* Horizontal quick bar */
+.special-panel{display:flex!important;flex-direction:row!important;flex-wrap:wrap!important;align-items:center!important;gap:6px 20px!important;padding:8px 20px!important;background:#ddeeff!important;border-bottom:1px solid #aaccee!important;font-family:Arial,Helvetica,sans-serif!important;font-size:13px!important;}
+.special-font-size,.special-color,.special-images,.special-audio,.special-settings,.special-quit{display:flex!important;align-items:center!important;gap:4px!important;white-space:nowrap!important;font-family:Arial,Helvetica,sans-serif!important;font-size:13px!important;color:#003366!important;}
+.special-font-size span,.special-color span,.special-images span,.special-audio span,.special-settings span,.special-quit span{font-size:13px!important;color:#003366!important;margin-right:2px!important;}
+.special-font-size button,.special-color button,.special-images button,.special-audio button,.special-settings button,.special-quit button{font-family:Arial,Helvetica,sans-serif!important;font-size:13px!important;padding:3px 8px!important;border:1px solid #6699cc!important;background:#fff!important;color:#003366!important;cursor:pointer!important;border-radius:3px!important;line-height:1.3!important;}
+.special-font-size button.active,.special-color button.active,.special-images button.active,.special-audio button.active,.special-settings button.active{background:#003366!important;color:#fff!important;}
+#special-settings-body{font-family:Arial,Helvetica,sans-serif!important;font-size:14px!important;padding:12px 20px!important;background:#f5f9ff!important;border-bottom:1px solid #aaccee!important;}
+html[class*="special-"] #specialButton{background:#fff!important;border:2px solid #000!important;outline:none!important;filter:none!important;display:block!important;}
+</style>
 </head>
 <body>
 
@@ -1173,7 +1277,7 @@ footer { background:#060c18; padding:56px 56px 36px; border-top:1px solid rgba(5
     <li><a href="#community">Сообщество</a></li>
     <li><a href="info.html">Об организации</a></li>
     <li><a href="#cta" class="nav-btn">Войти →</a></li>
-    <li><a id="specialButton" href="https://lidrekon.ru/slep/" target="_blank" title="Версия для слабовидящих" style="display:flex;align-items:center;"><img src="https://lidrekon.ru/images/special.png" id="glazd" alt="Версия для слабовидящих"></a></li>
+    <li style="display:flex;align-items:center;"><img id="specialButton" style="cursor:pointer;width:36px;height:36px;border-radius:7px;box-shadow:0 2px 10px rgba(0,0,0,.25);border:1px solid #ccc;background:#fff;padding:5px;" src="https://lidrekon.ru/images/special.png" alt="ВЕРСИЯ ДЛЯ СЛАБОВИДЯЩИХ" title="ВЕРСИЯ ДЛЯ СЛАБОВИДЯЩИХ"></li>
   </ul>
 </nav>
 
@@ -1354,7 +1458,6 @@ footer { background:#060c18; padding:56px 56px 36px; border-top:1px solid rgba(5
       </div>
     </div>
     <div class="experts-grid">
-      <!-- Команда Академии — с фото -->
       <div class="expert-card">
         <div class="expert-photo ep-1">
           <img src="assets/Соустова Кристина Эдуардовна.png" alt="Кристина Соустова">
@@ -1380,18 +1483,6 @@ footer { background:#060c18; padding:56px 56px 36px; border-top:1px solid rgba(5
         </div>
       </div>
       <div class="expert-card">
-        <div class="expert-photo ep-3">
-          <img src="assets/Голубаева Анна Дмитриевна.png" alt="Анна Голубаева">
-          <div class="ep-badge">Маркетинг</div>
-        </div>
-        <div class="expert-body">
-          <div class="expert-name">Анна Голубаева</div>
-          <div class="expert-spec">Маркетолог · SMM · 5+ лет</div>
-          <p class="expert-bio">Продвижение в социальных сетях, работа с экспертами и компаниями. Магистр медиакоммуникаций.</p>
-          <a href="https://t.me/academy_veb" class="expert-link" target="_blank">В сообщество</a>
-        </div>
-      </div>
-      <div class="expert-card">
         <div class="expert-photo ep-4">
           <img src="assets/Лобанова Юлия.png" alt="Юлия Лобанова">
           <div class="ep-badge">Финансы и учёт</div>
@@ -1403,53 +1494,18 @@ footer { background:#060c18; padding:56px 56px 36px; border-top:1px solid rgba(5
           <a href="https://t.me/academy_veb" class="expert-link" target="_blank">В сообщество</a>
         </div>
       </div>
-      <!-- Входящие эксперты -->
-      <div class="expert-card">
-        <div class="expert-photo ep-5"><div class="ep-figure"><div class="ep-initial">А</div></div><div class="ep-badge">Голос и речь</div></div>
-        <div class="expert-body">
-          <div class="expert-name">Анастасия</div>
-          <div class="expert-spec">Тренер по голосу · 20+ лет</div>
-          <p class="expert-bio">Постановка голоса, ораторское мастерство, сценическое присутствие.</p>
-          <a href="https://t.me/academy_veb" class="expert-link" target="_blank">В сообщество</a>
-        </div>
-      </div>
-      <div class="expert-card">
-        <div class="expert-photo ep-1"><div class="ep-figure"><div class="ep-initial">Ю</div></div><div class="ep-badge">Психология</div></div>
-        <div class="expert-body">
-          <div class="expert-name">Юлия Киянова</div>
-          <div class="expert-spec">Психолог · Краснодар</div>
-          <p class="expert-bio">Психосоматика, отношения, личная реализация.</p>
-          <a href="https://t.me/academy_veb" class="expert-link" target="_blank">В сообщество</a>
-        </div>
-      </div>
-      <div class="expert-card">
-        <div class="expert-photo ep-2"><div class="ep-figure"><div class="ep-initial">И</div></div><div class="ep-badge">Публичность</div></div>
-        <div class="expert-body">
-          <div class="expert-name">Ирина Харькова</div>
-          <div class="expert-spec">Канд. филол. наук · 3500+ подписчиков</div>
-          <p class="expert-bio">Публичные выступления, нетворкинг и социальный капитал.</p>
-          <a href="https://t.me/academy_veb" class="expert-link" target="_blank">В сообщество</a>
-        </div>
-      </div>
-      <div class="expert-card">
-        <div class="expert-photo ep-3"><div class="ep-figure"><div class="ep-initial">Е</div></div><div class="ep-badge">Женщины 40+</div></div>
-        <div class="expert-body">
-          <div class="expert-name">Елена Мохова</div>
-          <div class="expert-spec">Метод «Живая среда»</div>
-          <p class="expert-bio">Помогает женщинам после 40 найти себя и реализоваться.</p>
-          <a href="https://t.me/academy_veb" class="expert-link" target="_blank">В сообщество</a>
-        </div>
-      </div>
-      <div class="expert-card" style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:36px;background:rgba(56,200,240,.04);border:1.5px dashed rgba(56,200,240,.25);box-shadow:none;">
-        <svg viewBox="0 0 60 100" style="width:44px;margin-bottom:14px;opacity:.7;">
+      <div class="expert-card" style="grid-column:1/-1;display:flex;flex-direction:row;justify-content:center;align-items:center;gap:32px;text-align:left;padding:28px 36px;background:rgba(56,200,240,.04);border:1.5px dashed rgba(56,200,240,.25);box-shadow:none;">
+        <svg viewBox="0 0 60 100" style="width:36px;flex-shrink:0;opacity:.7;">
           <polygon style="fill:rgba(56,200,240,.25)" points="30,0 60,28 30,42 0,28"/>
           <polygon style="fill:rgba(56,200,240,.15)" points="0,28 30,42 30,100 0,72"/>
           <polygon style="fill:rgba(56,200,240,.35)" points="60,28 30,42 30,100 60,72"/>
           <polygon style="fill:none;stroke:rgba(56,200,240,.6);stroke-width:.9" points="30,0 60,28 60,72 30,100 0,72 0,28"/>
         </svg>
-        <div style="font-family:var(--serif);font-size:20px;font-weight:600;color:var(--navy);margin-bottom:8px;">Вы следующий?</div>
-        <p style="font-size:13px;color:var(--mid);line-height:1.6;margin-bottom:20px;">Ищем экспертов в психологии, коучинге, развитии личности</p>
-        <a href="https://script.google.com/macros/s/AKfycbz0_luUFLWwvcy_0XhtB30gKWLyHi6UHJWVvKTmlGNQCfhbNeUG4t8ka7_K13zUZB61Ww/exec" target="_blank" class="btn-primary" style="font-size:13px;padding:11px 22px;">Заполнить анкету →</a>
+        <div>
+          <div style="font-family:var(--serif);font-size:20px;font-weight:600;color:var(--navy);margin-bottom:4px;">Вы следующий?</div>
+          <p style="font-size:13px;color:var(--mid);line-height:1.6;">Ищем экспертов в психологии, коучинге, развитии личности</p>
+        </div>
+        <a href="https://script.google.com/macros/s/AKfycbz0_luUFLWwvcy_0XhtB30gKWLyHi6UHJWVvKTmlGNQCfhbNeUG4t8ka7_K13zUZB61Ww/exec" target="_blank" class="btn-primary" style="font-size:13px;padding:11px 24px;flex-shrink:0;">Заполнить анкету →</a>
       </div>
     </div>
   </div>
@@ -1999,8 +2055,8 @@ footer { background:#060c18; padding:56px 56px 36px; border-top:1px solid rgba(5
   <h2 class="cta-headline">Готовы войти<br>в <em>экосистему?</em></h2>
   <p class="cta-sub">Войдите в бесплатное сообщество прямо сейчас или оставьте заявку — ответим в течение часа.</p>
   <div class="cta-btns">
-    <a href="https://t.me/tsezar_evolution" class="cta-btn-main" target="_blank">Войти в Telegram-сообщество</a>
-    <a href="https://t.me/Julia_Tsezar" class="cta-btn-sec" target="_blank">Написать Юлии Цезарь</a>
+    <a href="https://t.me/academy_veb" class="cta-btn-main" target="_blank">Войти в Telegram-сообщество</a>
+    <a href="https://t.me/tsezaracademy" class="cta-btn-sec" target="_blank">Telegram-канал Академии</a>
   </div>
 </section>
 
@@ -2033,9 +2089,9 @@ footer { background:#060c18; padding:56px 56px 36px; border-top:1px solid rgba(5
     <div class="footer-col">
       <div class="footer-col-title">Контакты</div>
       <ul>
-        <li><a href="https://t.me/Julia_Tsezar" target="_blank">Юлия Цезарь</a></li>
-        <li><a href="https://t.me/tsezar_evolution" target="_blank">Telegram-канал</a></li>
-        <li><a href="https://t.me/tsezar_evolution" target="_blank">Telegram-группа</a></li>
+        <li><a href="https://t.me/tsezaracademy" target="_blank">Telegram-канал</a></li>
+        <li><a href="https://t.me/academy_veb" target="_blank">Telegram-сообщество</a></li>
+        <li><a href="mailto:ano.dpo.arl@yandex.ru">ano.dpo.arl@yandex.ru</a></li>
         <li><a href="#cta">Оставить заявку</a></li>
       </ul>
     </div>
@@ -2043,8 +2099,8 @@ footer { background:#060c18; padding:56px 56px 36px; border-top:1px solid rgba(5
   <div class="footer-bottom">
     <div class="footer-copy">© 2024–2026 Академия Развития Личности. Все права защищены.</div>
     <div class="footer-legal">
-      <a href="#">Политика конфиденциальности</a>
-      <a href="#">Оферта</a>
+      <a href="privacy.html">Политика конфиденциальности</a>
+      <a href="offer.html">Договор-оферта</a>
     </div>
   </div>
 </footer>
@@ -2158,6 +2214,13 @@ function toggleFunnelPanel() {
   }
 }
 </script>
+
+<!-- COOKIE BANNER -->
+<div id="cookie-bar" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9998;background:#0d1a33;border-top:1px solid rgba(56,200,240,.18);padding:14px 24px;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:'Inter',sans-serif;font-size:13px;color:rgba(255,255,255,.7);">
+  <span>Сайт использует файлы cookie для корректной работы. Продолжая использование, вы соглашаетесь с <a href="privacy.html" style="color:#38c8f0;text-decoration:underline;">Политикой конфиденциальности</a>.</span>
+  <button onclick="document.getElementById('cookie-bar').style.display='none';localStorage.setItem('cookie_ok','1');" style="cursor:pointer;background:#38c8f0;color:#060c18;border:none;border-radius:6px;padding:8px 20px;font-size:13px;font-weight:600;white-space:nowrap;">Принять</button>
+</div>
+<script>if(!localStorage.getItem('cookie_ok')){document.getElementById('cookie-bar').style.display='flex';}</script>
 
 </body>
 </html>
