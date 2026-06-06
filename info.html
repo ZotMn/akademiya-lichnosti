@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Сведения об образовательной организации — Академия Развития Личности</title>
+<meta name="description" content="Сведения об образовательной организации АНО ДПО «Академия развития личности»">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --dark-bg:    #090f1e;
+  --dark-mid:   #7898c8;
+  --bg:         #f8f6f2;
+  --panel:      #ffffff;
+  --ink:        #1a1e2e;
+  --mid:        #485070;
+  --muted:      #8890a8;
+  --navy:       #1a3a6e;
+  --crystal:    #38c8f0;
+  --serif:      'Cormorant Garamond', Georgia, serif;
+  --sans:       'Inter', sans-serif;
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:var(--sans); background:var(--bg); color:var(--ink); line-height:1.6; }
+a { color:var(--navy); text-decoration:underline; text-underline-offset:3px; }
+a:hover { color:var(--crystal); }
+
+/* NAV */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:190;
+  height:68px; display:flex; align-items:center; justify-content:space-between;
+  padding:0 48px;
+  background:rgba(9,15,30,.92); backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(56,200,240,.1);
+}
+.nav-logo { font-family:var(--serif); font-size:13px; font-weight:600; color:var(--crystal); line-height:1.25; text-decoration:none; }
+.nav-back { font-size:13px; color:var(--dark-mid); text-decoration:none; transition:color .2s; }
+.nav-back:hover { color:var(--crystal); }
+
+/* ACCESSIBILITY BUTTON */
+#glazd-wrap {
+  position:fixed; top:80px; right:32px; z-index:9999;
+}
+#glazd {
+  display:block; width:44px; height:44px;
+  background:#fff; border-radius:8px;
+  box-shadow:0 2px 12px rgba(0,0,0,.18);
+  padding:6px; cursor:pointer; border:1px solid #ddd;
+  transition:box-shadow .2s;
+}
+#glazd:hover { box-shadow:0 4px 20px rgba(0,0,0,.25); }
+@media(max-width:980px){
+  #glazd-wrap { top:auto; bottom:80px; right:16px; }
+  #glazd { width:40px; height:40px; }
+}
+
+/* PAGE WRAPPER */
+.page { padding-top:68px; }
+
+/* PAGE HEADER */
+.page-header {
+  background:var(--dark-bg); padding:64px 48px 48px;
+  border-bottom:1px solid rgba(56,200,240,.08);
+}
+.page-header-inner { max-width:860px; margin:0 auto; }
+.page-eyebrow { font-size:11px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--crystal); margin-bottom:12px; }
+.page-title { font-family:var(--serif); font-size:clamp(28px,3.5vw,44px); font-weight:600; color:#fff; line-height:1.2; margin-bottom:10px; }
+.page-subtitle { font-size:15px; color:rgba(221,234,252,.55); }
+
+/* MAIN CONTENT */
+.content { max-width:860px; margin:0 auto; padding:48px; }
+
+/* SECTION TITLE */
+.section-heading {
+  font-family:var(--serif); font-size:24px; font-weight:600;
+  color:var(--navy); margin:48px 0 20px;
+  padding-bottom:10px; border-bottom:2px solid rgba(56,200,240,.2);
+}
+.section-heading:first-child { margin-top:0; }
+
+/* TABLE */
+.info-table {
+  width:100%; border-collapse:collapse;
+  background:var(--panel); border-radius:8px; overflow:hidden;
+  box-shadow:0 1px 4px rgba(0,0,0,.06);
+}
+.info-table tr:nth-child(even) { background:#f4f6fb; }
+.info-table tr:hover { background:#eef2fa; }
+.info-table td {
+  padding:14px 18px; font-size:14px; line-height:1.55;
+  border-bottom:1px solid #e8ecf4; vertical-align:top;
+}
+.info-table td:first-child {
+  width:42%; font-weight:500; color:var(--mid);
+  border-right:1px solid #e8ecf4;
+}
+.info-table td:last-child { color:var(--ink); }
+.info-table tr:last-child td { border-bottom:none; }
+
+/* LICENSE DOWNLOAD */
+.license-btn {
+  display:inline-flex; align-items:center; gap:12px;
+  margin:20px 0;
+  padding:16px 24px;
+  background:var(--panel); border:1px solid rgba(26,58,110,.15);
+  border-radius:8px; text-decoration:none; color:var(--navy);
+  font-size:14px; font-weight:500; line-height:1.4;
+  transition:border-color .2s, box-shadow .2s;
+  max-width:600px;
+}
+.license-btn:hover { border-color:var(--crystal); box-shadow:0 4px 16px rgba(56,200,240,.1); color:var(--navy); text-decoration:none; }
+.license-icon { flex-shrink:0; color:var(--navy); opacity:.7; }
+
+/* ACCORDION */
+.accordion { border:1px solid #e0e6f0; border-radius:8px; overflow:hidden; margin-bottom:8px; background:var(--panel); }
+.accordion-btn {
+  width:100%; background:none; border:none; cursor:pointer;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:18px 22px; text-align:left;
+  font-family:var(--sans); font-size:15px; font-weight:600; color:var(--ink);
+  transition:background .15s;
+}
+.accordion-btn:hover { background:#f4f6fb; }
+.accordion-btn.open { background:#f0f4fc; color:var(--navy); }
+.accordion-icon {
+  flex-shrink:0; width:28px; height:28px; border-radius:50%;
+  background:rgba(26,58,110,.08); display:flex; align-items:center; justify-content:center;
+  transition:transform .25s, background .2s;
+}
+.accordion-btn.open .accordion-icon { transform:rotate(45deg); background:rgba(56,200,240,.15); }
+.accordion-icon svg { width:14px; height:14px; stroke:var(--navy); fill:none; }
+.accordion-body { display:none; padding:4px 22px 22px; }
+.accordion-body.open { display:block; }
+.accordion-body p, .accordion-body li { font-size:14px; color:var(--mid); line-height:1.7; margin-bottom:6px; }
+.accordion-body ol, .accordion-body ul { padding-left:20px; }
+.accordion-body strong { color:var(--ink); font-weight:600; }
+.accordion-body a { color:var(--navy); }
+.accordion-body .doc-list { list-style:none; padding:0; display:flex; flex-direction:column; gap:8px; margin-top:8px; }
+.accordion-body .doc-list li { display:flex; align-items:flex-start; gap:8px; }
+.accordion-body .doc-list li::before { content:'📄'; font-size:13px; flex-shrink:0; margin-top:1px; }
+.accordion-body .in-dev { font-style:italic; color:var(--muted); }
+.not-applicable {
+  display:inline-block; margin:4px 0;
+  padding:3px 10px; border-radius:4px;
+  background:#f0f4fb; border:1px solid #d8e0ee;
+  font-size:13px; color:var(--muted);
+}
+.section-divider { height:1px; background:#e0e6f0; margin:40px 0; }
+
+/* FOOTER */
+footer { background:var(--dark-bg); padding:32px 48px; margin-top:0; border-top:1px solid rgba(56,200,240,.08); }
+.footer-inner { max-width:860px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; }
+.footer-logo { font-family:var(--serif); font-size:12px; color:var(--crystal); text-decoration:none; }
+.footer-back { font-size:13px; color:var(--dark-mid); text-decoration:none; transition:color .2s; }
+.footer-back:hover { color:var(--crystal); }
+
+@media(max-width:768px){
+  nav { padding:0 16px; }
+  .page-header { padding:48px 20px 36px; }
+  .content { padding:32px 20px; }
+  .info-table td { padding:10px 12px; font-size:13px; }
+  .info-table td:first-child { width:40%; }
+  footer { padding:24px 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="site-concept-v6.html" class="nav-logo">Академия<br>Развития Личности</a>
+  <a href="site-concept-v6.html" class="nav-back">← На главную</a>
+</nav>
+
+<!-- ACCESSIBILITY -->
+<div id="glazd-wrap">
+  <a id="specialButton" href="https://lidrekon.ru/slep/" target="_blank" title="Версия для слабовидящих">
+    <img src="https://lidrekon.ru/images/special.png" id="glazd" alt="Версия для слабовидящих">
+  </a>
+</div>
+
+<div class="page">
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="page-eyebrow">Официальная информация</div>
+    <h1 class="page-title">Сведения об образовательной организации</h1>
+    <p class="page-subtitle">АНО ДПО «Академия развития личности» — в соответствии с требованиями Минпросвещения России</p>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="content">
+
+  <!-- ОСНОВНЫЕ СВЕДЕНИЯ -->
+  <h2 class="section-heading">Основные сведения</h2>
+
+  <table class="info-table">
+    <tbody>
+      <tr>
+        <td>Полное наименование</td>
+        <td>Автономная некоммерческая организация дополнительного профессионального образования «АКАДЕМИЯ РАЗВИТИЯ ЛИЧНОСТИ»</td>
+      </tr>
+      <tr>
+        <td>Сокращённое наименование</td>
+        <td>АНО ДПО «АРЛ»</td>
+      </tr>
+      <tr>
+        <td>Дата создания</td>
+        <td>04.06.2024</td>
+      </tr>
+      <tr>
+        <td>Учредитель</td>
+        <td>Демидова Юлия Михайловна<br>
+            Телефон: <a href="tel:+79937067575">+7 993 706-75-75</a><br>
+            E-mail: <a href="mailto:ano.dpo.arl@yandex.ru">ano.dpo.arl@yandex.ru</a></td>
+      </tr>
+      <tr>
+        <td>Представительства и филиалы</td>
+        <td>У образовательной организации нет филиалов и представительств</td>
+      </tr>
+      <tr>
+        <td>Место нахождения организации</td>
+        <td>107497, г. Москва, вн. тер. г. муниципальный округ Гольяново, ул. Монтажная, д. 9, стр. 1, помещ. 13Н/3</td>
+      </tr>
+      <tr>
+        <td>Место осуществления образовательной деятельности</td>
+        <td>107497, г. Москва, вн. тер. г. муниципальный округ Гольяново, ул. Монтажная, д. 9, стр. 1, помещ. 13Н/3</td>
+      </tr>
+      <tr>
+        <td>Режим и график работы</td>
+        <td>Рабочие дни: с 11:00 до 20:00<br>
+            Выходные: суббота, воскресенье<br>
+            Доступ обучающихся к образовательной платформе — круглосуточно</td>
+      </tr>
+      <tr>
+        <td>Контактный телефон</td>
+        <td><a href="tel:+79937067575">+7 993 706-75-75</a></td>
+      </tr>
+      <tr>
+        <td>Адрес электронной почты</td>
+        <td><a href="mailto:ano.dpo.arl@yandex.ru">ano.dpo.arl@yandex.ru</a></td>
+      </tr>
+      <tr>
+        <td>Официальный сайт</td>
+        <td><a href="https://tsezaracademy.ru/" target="_blank" rel="noopener">https://tsezaracademy.ru/</a></td>
+      </tr>
+      <tr>
+        <td>Лицензия на образовательную деятельность</td>
+        <td>Регистрационный номер: <strong>№ Л035-01298-77/01379643</strong><br>
+            Дата выдачи: 06.09.2024</td>
+      </tr>
+      <tr>
+        <td>Государственная аккредитация</td>
+        <td>Не предусмотрено</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ЛИЦЕНЗИЯ — СКАЧАТЬ -->
+  <a class="license-btn" href="https://disk.yandex.ru/i/YTfeaXRKeA8iUw" target="_blank" rel="noopener">
+    <svg class="license-icon" width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5">
+      <rect x="4" y="2" width="18" height="24" rx="2"/>
+      <path d="M8 8h10M8 12h10M8 16h6"/>
+      <path d="M20 22l4 4M20 26l4-4" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+    Лицензия на осуществление образовательной деятельности<br>
+    <span style="font-size:12px;font-weight:400;color:var(--muted);">№ Л035-01298-77/01379643 — открыть PDF</span>
+  </a>
+
+  <div class="section-divider"></div>
+
+  <!-- АККОРДЕОНЫ -->
+
+  <div class="accordion">
+    <button class="accordion-btn" onclick="toggleAcc(this)">
+      Структура и органы управления образовательной организацией
+      <span class="accordion-icon"><svg viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke-linecap="round"/></svg></span>
+    </button>
+    <div class="accordion-body">
+      <p>Структурных подразделений, филиалов, представительств в АНО ДПО — нет.</p>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <button class="accordion-btn" onclick="toggleAcc(this)">
+      Документы
+      <span class="accordion-icon"><svg viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke-linecap="round"/></svg></span>
+    </button>
+    <div class="accordion-body">
+      <ul class="doc-list">
+        <li><a href="https://disk.yandex.ru/i/jLXlh1WeMdzMaw" target="_blank" rel="noopener">Устав</a></li>
+        <li><a href="https://docs.yandex.ru/docs/view?url=ya-disk-public%3A%2F%2F12QzN1SSDYdVLrR1USL0wauaCWV%2Fc6PRpPFChFod7EQteL715pJb2RzkuvMjQRi8q%2FJ6bpmRyOJonT3VoXnDag%3D%3D%3A%2F%D0%BF%D1%80%D0%B8%D0%BA%D0%B0%D0%B7%2010.pdf&name=%D0%BF%D1%80%D0%B8%D0%BA%D0%B0%D0%B7%2010.pdf" target="_blank" rel="noopener">Правила внутреннего трудового распорядка</a></li>
+        <li><span class="in-dev">Правила внутреннего распорядка обучающихся (в разработке)</span></li>
+      </ul>
+      <p style="margin-top:14px;"><strong>Локальные нормативные акты по основным вопросам образовательной деятельности:</strong></p>
+      <ul class="doc-list">
+        <li><a href="https://disk.yandex.ru/i/JORbRn1OCbjepw" target="_blank" rel="noopener">Правила приёма</a></li>
+        <li><a href="https://docs.yandex.ru/docs/view?url=ya-disk-public%3A%2F%2F12QzN1SSDYdVLrR1USL0wauaCWV%2Fc6PRpPFChFod7EQteL715pJb2RzkuvMjQRi8q%2FJ6bpmRyOJonT3VoXnDag%3D%3D%3A%2F%D0%BF%D1%80%D0%B8%D0%BA%D0%B0%D0%B7%201.pdf&name=%D0%BF%D1%80%D0%B8%D0%BA%D0%B0%D0%B7%201.pdf&nosw=1" target="_blank" rel="noopener">Режим занятий обучающихся</a></li>
+        <li><a href="https://docs.yandex.ru/docs/view?url=ya-disk-public%3A%2F%2F12QzN1SSDYdVLrR1USL0wauaCWV%2Fc6PRpPFChFod7EQteL715pJb2RzkuvMjQRi8q%2FJ6bpmRyOJonT3VoXnDag%3D%3D%3A%2F%D0%BF%D1%80%D0%B8%D0%BA%D0%B0%D0%B7%202.pdf&name=%D0%BF%D1%80%D0%B8%D0%BA%D0%B0%D0%B7%202.pdf" target="_blank" rel="noopener">Положение о формах, периодичности и порядке текущего контроля успеваемости и промежуточной аттестации обучающихся</a></li>
+        <li><a href="https://docs.yandex.ru/docs/view?url=ya-disk-public%3A%2F%2F12QzN1SSDYdVLrR1USL0wauaCWV%2Fc6PRpPFChFod7EQteL715pJb2RzkuvMjQRi8q%2FJ6bpmRyOJonT3VoXnDag%3D%3D%3A%2F%D0%BF%D1%80%D0%B8%D0%BA%D0%B0%D0%B7%207.pdf&name=%D0%BF%D1%80%D0%B8%D0%BA%D0%B0%D0%B7%207.pdf" target="_blank" rel="noopener">Порядок проведения итоговой аттестации</a></li>
+        <li><span class="in-dev">Порядок оформления документов об образовании (в разработке)</span></li>
+        <li><a href="https://docs.yandex.ru/docs/view?url=ya-disk-public%3A%2F%2F12QzN1SSDYdVLrR1USL0wauaCWV%2Fc6PRpPFChFod7EQteL715pJb2RzkuvMjQRi8q%2FJ6bpmRyOJonT3VoXnDag%3D%3D%3A%2F%D0%BF%D1%80%D0%B8%D0%BA%D0%B0%D0%B7%205.pdf&name=%D0%BF%D1%80%D0%B8%D0%BA%D0%B0%D0%B7%205.pdf" target="_blank" rel="noopener">Положение о порядке и основаниях перевода, отчисления и восстановления обучающихся</a></li>
+        <li><a href="https://docs.yandex.ru/docs/view?url=ya-disk-public%3A%2F%2F12QzN1SSDYdVLrR1USL0wauaCWV%2Fc6PRpPFChFod7EQteL715pJb2RzkuvMjQRi8q%2FJ6bpmRyOJonT3VoXnDag%3D%3D%3A%2F%D0%BF%D1%80%D0%B8%D0%BA%D0%B0%D0%B7%2011-%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D1%8B.pdf&name=%D0%BF%D1%80%D0%B8%D0%BA%D0%B0%D0%B7%2011-%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D1%8B.pdf&nosw=1" target="_blank" rel="noopener">Порядок разработки и реализации программы ДПО (ПК и ПП)</a></li>
+        <li><a href="https://docs.yandex.ru/docs/view?url=ya-disk-public%3A%2F%2F12QzN1SSDYdVLrR1USL0wauaCWV%2Fc6PRpPFChFod7EQteL715pJb2RzkuvMjQRi8q%2FJ6bpmRyOJonT3VoXnDag%3D%3D%3A%2F%D0%BF%D1%80%D0%B8%D0%BA%D0%B0%D0%B7%2018.pdf&name=%D0%BF%D1%80%D0%B8%D0%BA%D0%B0%D0%B7%2018.pdf&nosw=1" target="_blank" rel="noopener">Отчёт о результатах самообследования</a></li>
+        <li><a href="https://disk.yandex.ru/i/tG92zRKbz8p5Mg" target="_blank" rel="noopener">Положение о порядке проведения самообследования</a></li>
+        <li><a href="https://docs.yandex.ru/docs/view?url=ya-disk-public%3A%2F%2F12QzN1SSDYdVLrR1USL0wauaCWV%2Fc6PRpPFChFod7EQteL715pJb2RzkuvMjQRi8q%2FJ6bpmRyOJonT3VoXnDag%3D%3D%3A%2F%D0%BF%D1%80%D0%B8%D0%BA%D0%B0%D0%B7%206.pdf&name=%D0%BF%D1%80%D0%B8%D0%BA%D0%B0%D0%B7%206.pdf" target="_blank" rel="noopener">Положение о применении электронного обучения, дистанционных образовательных технологий и сервиса прокторинга при реализации образовательных программ</a></li>
+        <li><a href="https://docs.yandex.ru/docs/view?url=ya-disk-public%3A%2F%2F12QzN1SSDYdVLrR1USL0wauaCWV%2Fc6PRpPFChFod7EQteL715pJb2RzkuvMjQRi8q%2FJ6bpmRyOJonT3VoXnDag%3D%3D%3A%2F%D0%BF%D1%80%D0%B8%D0%BA%D0%B0%D0%B7%209.pdf&name=%D0%BF%D1%80%D0%B8%D0%BA%D0%B0%D0%B7%209.pdf" target="_blank" rel="noopener">Порядок оформления возникновения, приостановления и прекращения отношений между АНО ДПО «Академия развития личности» и обучающимися</a></li>
+        <li><p style="font-size:13px;color:var(--muted);margin-left:-24px;margin-top:6px;">Предписания органов, осуществляющих государственный контроль (надзор) в сфере образования — предписаний нет. Копии отчётов об исполнении предписаний — отсутствуют.</p></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <button class="accordion-btn" onclick="toggleAcc(this)">
+      Образование
+      <span class="accordion-icon"><svg viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke-linecap="round"/></svg></span>
+    </button>
+    <div class="accordion-body">
+      <p><strong>Перечень реализуемых образовательных программ:</strong></p>
+      <ul class="doc-list" style="margin-top:10px;">
+        <li><a href="https://disk.yandex.ru/i/kO-6TUDznFQ1Xg" target="_blank" rel="noopener">Программа дополнительного образования: «Современные методы самодиагностики и корректировки психологического состояния с применением системы рун»</a></li>
+        <li><a href="https://docs.yandex.ru/docs/view?url=ya-disk-public%3A%2F%2F12QzN1SSDYdVLrR1USL0wauaCWV%2Fc6PRpPFChFod7EQteL715pJb2RzkuvMjQRi8q%2FJ6bpmRyOJonT3VoXnDag%3D%3D%3A%2F%D0%9F%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B0_%D0%94%D0%9F%D0%9E_%D0%9F%D0%9F_%D0%9A%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%86%D0%B8%D1%8F_docx_%D0%B2%D1%8B%D1%85%D0%BE%D0%B4.pdf&name=%D0%9F%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B0_%D0%94%D0%9F%D0%9E_%D0%9F%D0%9F_%D0%9A%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%86%D0%B8%D1%8F_docx_%D0%B2%D1%8B%D1%85%D0%BE%D0%B4.pdf" target="_blank" rel="noopener">Программа ДПО (профессиональная переподготовка): «Современные методы психологической диагностики и консультирования с применением системы рун»</a></li>
+        <li>Программа профессиональной переподготовки: «Педагог дополнительного профессионального образования»</li>
+        <li>Программа профессиональной переподготовки: «Педагог дополнительного образования детей и взрослых»</li>
+      </ul>
+      <p style="margin-top:14px;"><a href="http://tsezaracademy.ru/student" target="_blank" rel="noopener">Сведения о численности обучающихся</a></p>
+      <p style="margin-top:8px;">Обучение ведётся на русском языке. <a href="https://docs.yandex.ru/docs/view?url=ya-disk-public%3A%2F%2F12QzN1SSDYdVLrR1USL0wauaCWV%2Fc6PRpPFChFod7EQteL715pJb2RzkuvMjQRi8q%2FJ6bpmRyOJonT3VoXnDag%3D%3D%3A%2F%D0%BF%D1%80%D0%B8%D0%BA%D0%B0%D0%B7%203.pdf&name=%D0%BF%D1%80%D0%B8%D0%BA%D0%B0%D0%B7%203.pdf" target="_blank" rel="noopener">Положение о языке обучения</a></p>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <button class="accordion-btn" onclick="toggleAcc(this)">
+      Руководство
+      <span class="accordion-icon"><svg viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke-linecap="round"/></svg></span>
+    </button>
+    <div class="accordion-body">
+      <ul class="doc-list">
+        <li><a href="http://tsezaracademy.ru/doc2" target="_blank" rel="noopener">Руководство АНО ДПО «Академия развития личности»</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <button class="accordion-btn" onclick="toggleAcc(this)">
+      Педагогический состав
+      <span class="accordion-icon"><svg viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke-linecap="round"/></svg></span>
+    </button>
+    <div class="accordion-body">
+      <ul class="doc-list">
+        <li><a href="http://tsezaracademy.ru/doc3" target="_blank" rel="noopener">Педагогический состав АНО ДПО «Академия развития личности»</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <button class="accordion-btn" onclick="toggleAcc(this)">
+      Материально-техническое обеспечение. Доступная среда
+      <span class="accordion-icon"><svg viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke-linecap="round"/></svg></span>
+    </button>
+    <div class="accordion-body">
+      <ul class="doc-list">
+        <li><a href="http://tsezaracademy.ru/doc4" target="_blank" rel="noopener">Информация о материально-техническом обеспечении образовательной деятельности, в том числе в отношении инвалидов и лиц с ограниченными возможностями здоровья</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <button class="accordion-btn" onclick="toggleAcc(this)">
+      Финансово-хозяйственная деятельность
+      <span class="accordion-icon"><svg viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke-linecap="round"/></svg></span>
+    </button>
+    <div class="accordion-body">
+      <p class="in-dev">Информация об объёме образовательной деятельности по разным источникам финансирования (в разработке)</p>
+      <p class="in-dev">Информация о поступлении и расходовании финансовых и материальных средств по итогам финансового года (в разработке)</p>
+      <p class="in-dev">План финансово-хозяйственной деятельности (в разработке)</p>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <button class="accordion-btn" onclick="toggleAcc(this)">
+      Платные образовательные услуги
+      <span class="accordion-icon"><svg viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke-linecap="round"/></svg></span>
+    </button>
+    <div class="accordion-body">
+      <ul class="doc-list">
+        <li><span class="in-dev">Образец договора об оказании платных образовательных услуг (в разработке)</span></li>
+        <li><a href="https://drive.google.com/file/d/1L0oEaMoMl5RjKJWj0ybiliVbHSmk46yd/view?usp=sharing" target="_blank" rel="noopener">Положение о порядке оказания платных образовательных услуг</a></li>
+        <li><a href="https://disk.yandex.ru/i/7NKKRwI1uUImsQ" target="_blank" rel="noopener">Приказ об утверждении стоимости платных образовательных услуг и вакантных мест для приёма по программам ДПО на 2025 год</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <button class="accordion-btn" onclick="toggleAcc(this)">
+      Вакантные места для приёма (перевода) обучающихся
+      <span class="accordion-icon"><svg viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke-linecap="round"/></svg></span>
+    </button>
+    <div class="accordion-body">
+      <ul class="doc-list">
+        <li><a href="http://tsezaracademy.ru/doc1" target="_blank" rel="noopener">Информация о вакантных местах для приёма (перевода) обучающихся</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <button class="accordion-btn" onclick="toggleAcc(this)">
+      Стипендии и меры поддержки обучающихся
+      <span class="accordion-icon"><svg viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke-linecap="round"/></svg></span>
+    </button>
+    <div class="accordion-body">
+      <p>О наличии и условиях предоставления стипендий: <span class="not-applicable">не предусмотрено</span></p>
+      <p>Меры социальной поддержки обучающихся: <span class="not-applicable">не предусмотрено</span></p>
+      <p>Общежитие / интернат: <span class="not-applicable">не предусмотрено</span></p>
+      <p>Жилые помещения для иногородних обучающихся: <span class="not-applicable">не предусмотрено</span></p>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <button class="accordion-btn" onclick="toggleAcc(this)">
+      Международное сотрудничество
+      <span class="accordion-icon"><svg viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke-linecap="round"/></svg></span>
+    </button>
+    <div class="accordion-body">
+      <p>АНО ДПО «Академия развития личности» не имеет заключённых и планируемых к заключению договоров с иностранными и (или) международными организациями по вопросам образования и науки.</p>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <button class="accordion-btn" onclick="toggleAcc(this)">
+      Организация питания
+      <span class="accordion-icon"><svg viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke-linecap="round"/></svg></span>
+    </button>
+    <div class="accordion-body">
+      <p>Питание в образовательной организации не осуществляется.</p>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <button class="accordion-btn" onclick="toggleAcc(this)">
+      Образовательные стандарты и требования
+      <span class="accordion-icon"><svg viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke-linecap="round"/></svg></span>
+    </button>
+    <div class="accordion-body">
+      <p>В АНО ДПО «Академия развития личности» не реализуются образовательные программы, для разработки которых используются федеральные государственные образовательные стандарты и федеральные требования.</p>
+    </div>
+  </div>
+
+</div><!-- /content -->
+</div><!-- /page -->
+
+<footer>
+  <div class="footer-inner">
+    <a href="site-concept-v6.html" class="footer-logo">Академия Развития Личности · АНО ДПО «АРЛ»</a>
+    <a href="site-concept-v6.html" class="footer-back">← На главную</a>
+  </div>
+</footer>
+
+<script>
+function toggleAcc(btn) {
+  const body = btn.nextElementSibling;
+  const isOpen = btn.classList.contains('open');
+  btn.classList.toggle('open', !isOpen);
+  body.classList.toggle('open', !isOpen);
+}
+</script>
+</body>
+</html>
