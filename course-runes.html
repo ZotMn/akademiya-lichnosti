@@ -348,6 +348,8 @@ footer { background:var(--dark-bg); padding:32px 48px; border-top:1px solid rgba
 #glazd-wrap{display:flex;align-items:center;margin-left:12px;}
 #specialButton{cursor:pointer;width:36px;height:36px;border-radius:7px;box-shadow:0 2px 10px rgba(0,0,0,.25);border:1px solid #ccc;background:#fff;padding:5px;display:block;}
 @media(max-width:768px){#glazd-wrap{margin-left:8px;}#specialButton{width:32px;height:32px;}}
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .65s cubic-bezier(.16,1,.3,1),transform .65s cubic-bezier(.16,1,.3,1);}
+.reveal.visible{opacity:1;transform:translateY(0);}
 </style>
 <style>
 /* === LIDREKON ACCESSIBILITY BRIDGE === */
@@ -929,6 +931,17 @@ html[class*="special-"] #specialButton{background:#fff!important;border:2px soli
   <button onclick="document.getElementById('cookie-bar').style.display='none';localStorage.setItem('cookie_ok','1');" style="cursor:pointer;background:#38c8f0;color:#060c18;border:none;border-radius:6px;padding:8px 20px;font-size:13px;font-weight:600;white-space:nowrap;">Принять</button>
 </div>
 <script>if(!localStorage.getItem('cookie_ok')){document.getElementById('cookie-bar').style.display='flex';}</script>
+<script>
+(function(){
+  if(!window.IntersectionObserver)return;
+  var io=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});},{threshold:0.08,rootMargin:'0px 0px -32px 0px'});
+  function obs(sel,stagger){document.querySelectorAll(sel).forEach(function(el,i){el.classList.add('reveal');if(stagger)el.style.transitionDelay=(i*80)+'ms';io.observe(el);});}
+  obs('.sec-eyebrow');obs('.sec-title');obs('.sec-lead');
+  obs('.pillar',true);obs('.format-card',true);obs('.result-item',true);
+  obs('.prog-pillars,.rune-step,.author-card,.guarantee-block,.review-card',false);
+  obs('.review-card',true);
+})();
+</script>
 
 </body>
 </html>

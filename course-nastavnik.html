@@ -78,6 +78,8 @@ footer{background:var(--dark-bg);padding:32px 48px;border-top:1px solid rgba(212
 #glazd{display:block;width:44px;height:44px;background:#fff;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,.18);padding:6px;cursor:pointer;border:1px solid #ddd;transition:box-shadow .2s;}
 #glazd:hover{box-shadow:0 4px 20px rgba(0,0,0,.25);}
 @media(max-width:980px){#glazd-wrap{top:auto;bottom:80px;right:16px;}#glazd{width:40px;height:40px;}}
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .65s cubic-bezier(.16,1,.3,1),transform .65s cubic-bezier(.16,1,.3,1);}
+.reveal.visible{opacity:1;transform:translateY(0);}
 </style>
 </head>
 <body>
@@ -175,6 +177,14 @@ footer{background:var(--dark-bg);padding:32px 48px;border-top:1px solid rgba(212
     <a href="site-concept-v6.html" class="footer-back">← Вернуться на главную</a>
   </div>
 </footer>
+<script>
+(function(){
+  if(!window.IntersectionObserver)return;
+  var io=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});},{threshold:0.08,rootMargin:'0px 0px -32px 0px'});
+  function obs(sel,stagger){document.querySelectorAll(sel).forEach(function(el,i){el.classList.add('reveal');if(stagger)el.style.transitionDelay=(i*80)+'ms';io.observe(el);});}
+  obs('h2,h3');obs('.feature-card',true);obs('.step-item',true);obs('.benefit-item',true);obs('.meet-card,section',false);
+})();
+</script>
 
 </body>
 </html>
