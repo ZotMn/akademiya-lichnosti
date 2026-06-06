@@ -1140,7 +1140,8 @@ footer { background:#060c18; padding:56px 56px 36px; border-top:1px solid rgba(5
   .docs-section { padding:56px 28px; }
   .case-slide { grid-template-columns:1fr; gap:24px; }
   /* Programs section */
-  .prog-tabs { width:100%; overflow-x:auto; -webkit-overflow-scrolling:touch; }
+  .prog-tabs { width:100%; flex-wrap:wrap; gap:6px; }
+  .prog-tab { padding:8px 16px; font-size:13px; }
   .prog-row { grid-template-columns:1fr; }
   .prog-photo { min-height:160px; }
   .prog-content { padding:20px 20px; }
@@ -1148,6 +1149,9 @@ footer { background:#060c18; padding:56px 56px 36px; border-top:1px solid rgba(5
   .prog-cta-btn { width:100%; justify-content:center; }
   .prog-title-new { font-size:22px; }
   .prog-price-new { font-size:24px; }
+  /* "Вы следующий?" */
+  .expert-cta-row { flex-direction:column !important; text-align:center !important; gap:16px !important; padding:24px 20px !important; }
+  .expert-cta-row .btn-primary { width:100%; text-align:center; justify-content:center; }
 }
 
 /* ── RESPONSIVE: 520px (телефон) ── */
@@ -1503,7 +1507,7 @@ html[class*="special-"] #specialButton{background:#fff!important;border:2px soli
           <a href="https://t.me/academy_veb" class="expert-link" target="_blank">В сообщество</a>
         </div>
       </div>
-      <div class="expert-card" style="grid-column:1/-1;display:flex;flex-direction:row;justify-content:center;align-items:center;gap:32px;text-align:left;padding:28px 36px;background:rgba(56,200,240,.04);border:1.5px dashed rgba(56,200,240,.25);box-shadow:none;">
+      <div class="expert-card expert-cta-row" style="grid-column:1/-1;display:flex;flex-direction:row;justify-content:center;align-items:center;gap:32px;text-align:left;padding:28px 36px;background:rgba(56,200,240,.04);border:1.5px dashed rgba(56,200,240,.25);box-shadow:none;">
         <svg viewBox="0 0 60 100" style="width:36px;flex-shrink:0;opacity:.7;">
           <polygon style="fill:rgba(56,200,240,.25)" points="30,0 60,28 30,42 0,28"/>
           <polygon style="fill:rgba(56,200,240,.15)" points="0,28 30,42 30,100 0,72"/>
