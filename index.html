@@ -1159,6 +1159,14 @@ footer { background:#060c18; padding:56px 56px 36px; border-top:1px solid rgba(5
   .expert-cta-row .btn-primary { width:100%; text-align:center; justify-content:center; }
 }
 
+/* ── SCROLL REVEAL ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity .65s cubic-bezier(.16,1,.3,1), transform .65s cubic-bezier(.16,1,.3,1);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
 /* ── BURGER MENU ── */
 .nav-burger {
   display:none; flex-direction:column; gap:5px; align-items:center;
@@ -2264,6 +2272,37 @@ function toggleFunnelPanel() {
     }, 60);
   }
 }
+
+// ── SCROLL REVEAL ──
+(function() {
+  if (!window.IntersectionObserver) return;
+
+  var io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' });
+
+  function observe(el, delay) {
+    el.classList.add('reveal');
+    if (delay) el.style.transitionDelay = delay + 'ms';
+    io.observe(el);
+  }
+
+  // Заголовки секций
+  document.querySelectorAll('.sec-eyebrow, .sec-title, .sec-lead').forEach(function(el) { observe(el, 0); });
+
+  // Одиночные блоки
+  document.querySelectorAll('.runes-funnel, .prog-wip, .prog-row, .founder-card, .forwho-grid').forEach(function(el) { observe(el, 0); });
+
+  // Сетки — с задержкой для каждого элемента
+  ['.experts-grid .expert-card', '.tiers .tier', '.eco-cards .eco-card', '.test-grid .test-card', '.partners-grid .partner-card'].forEach(function(sel) {
+    document.querySelectorAll(sel).forEach(function(el, i) { observe(el, i * 80); });
+  });
+
+  // CTA и футер
+  document.querySelectorAll('.cta-section, .cta-btns').forEach(function(el) { observe(el, 0); });
+})();
 
 function toggleNavMenu() {
   var menu = document.getElementById('nav-menu');
