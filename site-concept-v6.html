@@ -1159,11 +1159,41 @@ footer { background:#060c18; padding:56px 56px 36px; border-top:1px solid rgba(5
   .expert-cta-row .btn-primary { width:100%; text-align:center; justify-content:center; }
 }
 
+/* ── BURGER MENU ── */
+.nav-burger {
+  display:none; flex-direction:column; gap:5px; align-items:center;
+  background:none; border:none; cursor:pointer; padding:10px 8px;
+  margin-left:auto; flex-shrink:0;
+}
+.nav-burger span { display:block; width:22px; height:2px; background:var(--dark-ink); border-radius:2px; transition:all .25s; }
+.nav-burger.open span:nth-child(1) { transform:rotate(45deg) translate(5px,5px); }
+.nav-burger.open span:nth-child(2) { opacity:0; transform:scaleX(0); }
+.nav-burger.open span:nth-child(3) { transform:rotate(-45deg) translate(5px,-5px); }
+
 /* ── RESPONSIVE: 520px (телефон) ── */
 @media(max-width:520px) {
   nav { padding:0 16px; }
-  .nav-menu > li:not(:nth-last-child(-n+2)) { display:none; }
-  .nav-menu { gap:8px; }
+  .nav-burger { display:flex; }
+  .nav-menu { display:none; }
+  .nav-menu.open {
+    display:flex !important; flex-direction:column; gap:0;
+    position:fixed; top:68px; left:0; right:0;
+    background:rgba(9,15,30,.97); backdrop-filter:blur(20px);
+    padding:8px 20px 20px; z-index:189;
+    border-bottom:1px solid rgba(56,200,240,.12);
+    box-shadow:0 8px 32px rgba(0,0,0,.3);
+  }
+  .nav-menu.open > li { display:flex !important; align-items:center; }
+  .nav-menu.open > li > a:not(.nav-btn):not(#specialButton) {
+    display:block; padding:13px 0; font-size:15px;
+    color:var(--dark-mid); width:100%;
+    border-bottom:1px solid rgba(56,200,240,.07);
+  }
+  .nav-menu.open > li > a:not(.nav-btn):not(#specialButton):hover { color:var(--crystal); }
+  .nav-menu.open .nav-btn {
+    display:block; margin-top:12px; text-align:center;
+    padding:12px; border-radius:8px; width:100%;
+  }
   .section { padding:44px 20px; }
   .hero { padding:76px 20px 44px; }
   .experts-grid { grid-template-columns:1fr; }
@@ -1288,7 +1318,10 @@ html[class*="special-"] #specialButton{background:#fff!important;border:2px soli
     <img src="assets/logo.png" alt="" style="height:36px;" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none'">
     <div class="logo-fallback">Академия<br>Развития Личности</div>
   </div>
-  <ul class="nav-menu">
+  <button class="nav-burger" id="nav-burger" onclick="toggleNavMenu()" aria-label="Меню">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-menu" id="nav-menu">
     <li><a href="#about">О нас</a></li>
     <li><a href="#experts">Эксперты</a></li>
     <li><a href="#programs">Программы</a></li>
@@ -2231,6 +2264,22 @@ function toggleFunnelPanel() {
     }, 60);
   }
 }
+
+function toggleNavMenu() {
+  var menu = document.getElementById('nav-menu');
+  var burger = document.getElementById('nav-burger');
+  menu.classList.toggle('open');
+  burger.classList.toggle('open');
+}
+// Закрываем меню при клике на ссылку
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('#nav-menu a').forEach(function(a) {
+    a.addEventListener('click', function() {
+      document.getElementById('nav-menu').classList.remove('open');
+      document.getElementById('nav-burger').classList.remove('open');
+    });
+  });
+});
 </script>
 
 <!-- COOKIE BANNER -->
