@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Анкета эксперта — Академия Развития Личности</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:   #1a3a6e;
+  --crystal:#38c8f0;
+  --gold:   #d4860a;
+  --bg:     #f8f6f2;
+  --mid:    #6b7a9a;
+  --white:  #ffffff;
+  --border: #dde3ef;
+  --red:    #e04848;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--navy); min-height: 100vh; }
+
+/* SITE HEADER */
+.site-header {
+  text-align: center;
+  padding: 28px 20px 0;
+}
+.site-header a {
+  display: inline-flex; align-items: center; gap: 12px;
+  text-decoration: none;
+}
+.site-header img { height: 60px; width: auto; }
+
+/* PROGRESS HEADER */
+.progress-header {
+  padding: 20px 24px 0;
+}
+.progress-meta {
+  max-width: 700px; margin: 0 auto;
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 12px; color: var(--mid); font-weight: 500;
+  margin-bottom: 8px;
+}
+.progress-track {
+  max-width: 700px; margin: 0 auto;
+  background: #e8ecf4; height: 5px; border-radius: 4px; overflow: hidden;
+}
+.progress-fill {
+  background: var(--navy);
+  height: 5px; border-radius: 4px;
+  transition: width .4s ease;
+}
+
+/* WRAP */
+.form-wrap {
+  max-width: 700px;
+  margin: 28px auto 80px;
+  padding: 0 20px;
+}
+
+/* STEP */
+.step { display: none; }
+.step.active { display: block; }
+
+/* BLOCK */
+.form-block {
+  background: var(--white); border-radius: 16px;
+  padding: 32px 36px; margin-bottom: 20px;
+  border: 1px solid var(--border);
+  box-shadow: 0 2px 14px rgba(26,58,110,.05);
+}
+@media(max-width:560px) { .form-block { padding: 22px 18px; } }
+
+.block-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px; font-weight: 700; color: var(--navy);
+  margin-bottom: 28px; padding-bottom: 14px;
+  border-bottom: 2px solid var(--crystal);
+  display: flex; align-items: center; gap: 10px;
+}
+.block-subtitle {
+  font-size: 13px; color: var(--mid); font-weight: 400;
+  margin-top: 3px; display: block;
+}
+
+/* QUESTION */
+.q { margin-bottom: 26px; }
+.q:last-child { margin-bottom: 0; }
+.q-label {
+  display: block; font-size: 14px; font-weight: 600; color: var(--navy);
+  margin-bottom: 10px; line-height: 1.5;
+}
+.q-label .req { color: var(--crystal); margin-left: 2px; }
+.q-hint {
+  display: block; font-size: 12px; font-weight: 400;
+  color: var(--mid); margin-top: 3px; line-height: 1.5;
+}
+
+/* INPUTS */
+input[type="text"], input[type="tel"], input[type="email"],
+input[type="number"], select, textarea {
+  width: 100%; padding: 11px 14px;
+  border: 1.5px solid var(--border); border-radius: 10px;
+  font-family: 'Inter', sans-serif; font-size: 14px; color: var(--navy);
+  background: var(--white); transition: border-color .2s, box-shadow .2s;
+  outline: none; appearance: none;
+}
+input:focus, select:focus, textarea:focus {
+  border-color: var(--crystal); box-shadow: 0 0 0 3px rgba(56,200,240,.12);
+}
+select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%231a3a6e' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 14px center;
+  padding-right: 36px; cursor: pointer;
+}
+textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
+input.invalid, select.invalid, textarea.invalid { border-color: var(--red) !important; }
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+@media(max-width:560px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+
+/* OPTIONS */
+.options-list { display: flex; flex-direction: column; gap: 8px; }
+.options-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+@media(max-width:480px) { .options-cols { grid-template-columns: 1fr; } }
+
+.opt {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 11px 14px; border: 1.5px solid var(--border);
+  border-radius: 10px; cursor: pointer;
+  transition: border-color .15s, background .15s;
+}
+.opt:hover { border-color: var(--crystal); background: rgba(56,200,240,.04); }
+.opt.selected { border-color: var(--crystal); background: rgba(56,200,240,.07); }
+.opt input[type="radio"], .opt input[type="checkbox"] {
+  width: 18px; height: 18px; min-width: 18px; margin-top: 1px;
+  cursor: pointer; accent-color: var(--navy);
+  border: none; padding: 0; box-shadow: none; appearance: auto;
+}
+.opt input:focus { box-shadow: none; border-color: transparent; }
+.opt-text { font-size: 14px; line-height: 1.5; }
+.opt-warn { font-size: 11px; color: var(--gold); margin-top: 3px; }
+
+/* AUDIENCE */
+.aud-table { display: grid; grid-template-columns: 130px 1fr; gap: 8px 12px; align-items: center; }
+.aud-table label { font-size: 13px; color: var(--mid); font-weight: 500; }
+
+/* PROGRAM TABLE */
+.prog-table { display: grid; grid-template-columns: 160px 1fr; gap: 8px 12px; align-items: center; }
+.prog-table label { font-size: 13px; color: var(--mid); font-weight: 500; }
+
+/* PRIORITY */
+.priority-list { display: flex; flex-direction: column; gap: 8px; }
+.priority-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 14px; border: 1.5px solid var(--border);
+  border-radius: 10px;
+}
+.priority-item select { width: 72px; min-width: 72px; padding: 7px 26px 7px 10px; font-size: 14px; }
+.priority-item .pi-text { font-size: 14px; flex: 1; }
+
+/* NOTE BOX */
+.note-box {
+  background: rgba(56,200,240,.06); border: 1px solid rgba(56,200,240,.22);
+  border-radius: 10px; padding: 12px 15px;
+  font-size: 12px; color: var(--mid); line-height: 1.6; margin-top: 10px;
+}
+.note-box strong { color: var(--navy); }
+
+/* NAVIGATION */
+.step-nav {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-top: 8px;
+}
+.btn-next {
+  background: var(--navy); color: var(--white);
+  border: none; padding: 14px 36px; border-radius: 30px;
+  font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 600;
+  cursor: pointer; letter-spacing: .02em;
+  transition: transform .2s, box-shadow .2s;
+  box-shadow: 0 4px 14px rgba(26,58,110,.25);
+  margin-left: auto;
+}
+.btn-next:hover { transform: translateY(-2px); box-shadow: 0 7px 20px rgba(26,58,110,.32); }
+.btn-prev {
+  background: transparent; color: var(--mid);
+  border: 1.5px solid var(--border); padding: 13px 28px;
+  border-radius: 30px; font-family: 'Inter', sans-serif;
+  font-size: 14px; font-weight: 500; cursor: pointer;
+  transition: border-color .2s, color .2s;
+}
+.btn-prev:hover { border-color: var(--navy); color: var(--navy); }
+.btn-submit-final {
+  background: var(--crystal); color: var(--navy);
+  border: none; padding: 15px 44px; border-radius: 30px;
+  font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 700;
+  cursor: pointer; letter-spacing: .03em;
+  transition: transform .2s, box-shadow .2s, opacity .2s;
+  box-shadow: 0 4px 20px rgba(56,200,240,.35);
+  margin-left: auto;
+}
+.btn-submit-final:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(56,200,240,.45); }
+.btn-submit-final:disabled { opacity: .6; cursor: not-allowed; transform: none; }
+
+/* SUCCESS */
+#success-msg {
+  display: none; text-align: center; padding: 70px 24px;
+  background: var(--white); border-radius: 16px;
+  border: 1px solid var(--border);
+}
+.success-icon {
+  width: 80px; height: 80px;
+  background: rgba(56,200,240,.12); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 24px; font-size: 40px; color: var(--crystal);
+}
+#success-msg h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 34px; font-weight: 700; color: var(--navy); margin-bottom: 14px;
+}
+#success-msg p { color: var(--mid); font-size: 15px; line-height: 1.7; max-width: 440px; margin: 0 auto 28px; }
+.btn-home {
+  display: inline-block; background: var(--navy); color: var(--white);
+  text-decoration: none; padding: 13px 32px;
+  border-radius: 30px; font-size: 14px; font-weight: 600;
+}
+
+/* REJECT */
+#reject-msg {
+  display: none; text-align: center; padding: 60px 36px;
+  background: var(--white); border-radius: 16px;
+  border: 1px solid var(--border);
+}
+.reject-icon { font-size: 52px; margin-bottom: 20px; }
+#reject-msg h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px; font-weight: 700; color: var(--red); margin-bottom: 16px;
+}
+#reject-msg p { color: var(--mid); font-size: 15px; line-height: 1.7; max-width: 480px; margin: 0 auto 10px; }
+.btn-change-status {
+  display: inline-block; margin-top: 24px;
+  background: var(--bg); color: var(--navy);
+  border: 1.5px solid var(--border); padding: 12px 28px;
+  border-radius: 30px; font-size: 14px; font-weight: 600;
+  cursor: pointer; transition: border-color .2s;
+}
+.btn-change-status:hover { border-color: var(--navy); }
+
+#submit-error { color: var(--red); font-size: 13px; margin-top: 12px; text-align: right; display: none; }
+</style>
+</head>
+<body>
+
+<div class="site-header">
+  <a href="site-concept-v6.html">
+    <img src="assets/logo.png" alt="Академия Развития Личности">
+  </a>
+</div>
+
+<div class="progress-header" id="progress-header">
+  <div class="progress-meta">
+    <span id="step-label">Шаг 1 из 5</span>
+    <span id="step-name">О вас</span>
+  </div>
+  <div class="progress-track">
+    <div class="progress-fill" id="progress-fill" style="width:20%"></div>
+  </div>
+</div>
+
+<div class="form-wrap">
+
+  <!-- SUCCESS -->
+  <div id="success-msg">
+    <div class="success-icon">✓</div>
+    <h2>Анкета отправлена!</h2>
+    <p>Мы получили вашу анкету и свяжемся с вами в Telegram в течение 1–2 рабочих дней.</p>
+    <a href="site-concept-v6.html" class="btn-home">Вернуться на сайт</a>
+  </div>
+
+  <!-- REJECT -->
+  <div id="reject-msg">
+    <div class="reject-icon">🚫</div>
+    <h2>К сожалению, мы не работаем с физическими лицами</h2>
+    <p>Академия Личности заключает партнёрские договоры только с ИП, юридическими лицами и самозанятыми.</p>
+    <p>Если вы планируете оформить статус — мы будем рады рассмотреть вашу кандидатуру после регистрации.</p>
+    <p style="margin-top:8px">По вопросам пишите в Telegram: <a href="https://t.me/Aleksei_Zotov" style="color:var(--navy);font-weight:600">@Aleksei_Zotov</a></p>
+    <button class="btn-change-status" onclick="backFromReject()">← Изменить статус</button>
+  </div>
+
+  <form id="expert-form">
+    <input type="hidden" id="legal-status-hidden" name="legal_status">
+
+    <!-- ══════════ ШАГ 1 ══════════ -->
+    <div class="step active" id="step-1">
+      <div class="form-block">
+        <div class="block-title">
+          Блок 1 — О вас и вашей экспертизе
+          <span class="block-subtitle">Время заполнения всей анкеты: 10–15 минут</span>
+        </div>
+
+        <div class="q">
+          <label class="q-label">Ваш правовой статус <span class="req">*</span></label>
+          <div class="options-list" id="status-group">
+            <label class="opt"><input type="radio" name="legal_status" value="Индивидуальный предприниматель (ИП)"><span class="opt-text">Индивидуальный предприниматель (ИП)</span></label>
+            <label class="opt"><input type="radio" name="legal_status" value="ООО / другое юридическое лицо"><span class="opt-text">ООО / другое юридическое лицо</span></label>
+            <label class="opt"><input type="radio" name="legal_status" value="Самозанятый"><span class="opt-text">Самозанятый</span></label>
+            <label class="opt"><input type="radio" name="legal_status" value="Физическое лицо"><span class="opt-text">Физическое лицо</span></label>
+          </div>
+        </div>
+
+        <div class="q">
+          <label class="q-label">1.1 Имя, город, контакт <span class="req">*</span></label>
+          <div class="grid-2" style="margin-bottom:10px">
+            <input type="text" id="name" placeholder="Имя и фамилия">
+            <input type="text" id="city" placeholder="Город">
+          </div>
+          <div class="grid-2" style="margin-bottom:10px">
+            <input type="text" id="telegram" placeholder="Telegram @username">
+            <input type="tel" id="phone" placeholder="Телефон">
+          </div>
+          <input type="email" id="email" placeholder="Email">
+        </div>
+
+        <div class="q">
+          <label class="q-label">1.2 Направление деятельности <span class="req">*</span>
+            <span class="q-hint">Выберите основное. Если несколько — отметьте все</span>
+          </label>
+          <div class="options-cols" id="direction-group">
+            <label class="opt"><input type="checkbox" name="direction[]" value="Психология / психотерапия"><span class="opt-text">Психология / психотерапия</span></label>
+            <label class="opt"><input type="checkbox" name="direction[]" value="Коучинг / трансформационная работа"><span class="opt-text">Коучинг / трансформационная работа</span></label>
+            <label class="opt"><input type="checkbox" name="direction[]" value="Нутрициология / питание"><span class="opt-text">Нутрициология / питание</span></label>
+            <label class="opt"><input type="checkbox" name="direction[]" value="Телесные практики / соматика"><span class="opt-text">Телесные практики / соматика</span></label>
+            <label class="opt"><input type="checkbox" name="direction[]" value="Голос / речь / публичность"><span class="opt-text">Голос / речь / публичность</span></label>
+            <label class="opt"><input type="checkbox" name="direction[]" value="Публичные выступления"><span class="opt-text">Публичные выступления</span></label>
+            <label class="opt"><input type="checkbox" name="direction[]" value="Нейрофизиология / нейронауки"><span class="opt-text">Нейрофизиология / нейронауки</span></label>
+            <label class="opt"><input type="checkbox" name="direction[]" value="Эзотерика / руны / астрология"><span class="opt-text">Эзотерика / руны / астрология</span></label>
+          </div>
+          <input type="text" id="direction-other" placeholder="Другое направление" style="margin-top:10px">
+        </div>
+
+        <div class="q">
+          <label class="q-label">1.3 Сколько лет вы практикуете? <span class="req">*</span></label>
+          <div class="options-list" id="years-group">
+            <label class="opt"><input type="radio" name="years_practice" value="Менее 3 лет">
+              <span class="opt-text">Менее 3 лет<div class="opt-warn">⚠ Менее 3 лет — минимальный порог для рассмотрения ДПО-программ</div></span>
+            </label>
+            <label class="opt"><input type="radio" name="years_practice" value="3–5 лет"><span class="opt-text">3–5 лет</span></label>
+            <label class="opt"><input type="radio" name="years_practice" value="5–10 лет"><span class="opt-text">5–10 лет</span></label>
+            <label class="opt"><input type="radio" name="years_practice" value="Более 10 лет"><span class="opt-text">Более 10 лет</span></label>
+          </div>
+        </div>
+
+        <div class="q">
+          <label class="q-label">1.4 Ваше образование
+            <span class="q-hint">Высшее, СПО, курсы переподготовки — название, направление, год</span>
+          </label>
+          <textarea id="education" placeholder="МГУ, психологический факультет, 2010; Курс ICF-коучинга, 2018"></textarea>
+        </div>
+
+        <div class="q">
+          <label class="q-label">1.5 Педагогический стаж или опыт преподавания?</label>
+          <div class="options-list">
+            <label class="opt"><input type="radio" name="teaching" value="Да, официальный (вуз, школа)"><span class="opt-text">Да, официальный (вуз, школа)</span></label>
+            <label class="opt"><input type="radio" name="teaching" value="Да, неофициальный (курсы, группы, онлайн)"><span class="opt-text">Да, неофициальный (курсы, группы, онлайн)</span></label>
+            <label class="opt"><input type="radio" name="teaching" value="Нет"><span class="opt-text">Нет</span></label>
+          </div>
+          <input type="text" id="teaching-years" placeholder="Если да — сколько лет?" style="margin-top:10px">
+        </div>
+
+        <div class="q">
+          <label class="q-label">1.6 Опишите вашу ключевую методологию в 3–5 предложениях
+            <span class="q-hint">Если не можете объяснить просто — методология ещё не оформлена</span>
+          </label>
+          <textarea id="methodology" placeholder="Расскажите о своём подходе и авторском методе работы"></textarea>
+        </div>
+      </div>
+
+      <div class="step-nav">
+        <button type="button" class="btn-next" onclick="nextStep(1)">Далее →</button>
+      </div>
+    </div>
+
+    <!-- ══════════ ШАГ 2 ══════════ -->
+    <div class="step" id="step-2">
+      <div class="form-block">
+        <div class="block-title">Блок 2 — Ваш продукт</div>
+
+        <div class="q">
+          <label class="q-label">2.1 Есть ли у вас уже курс или обучающая программа? <span class="req">*</span></label>
+          <div class="options-list" id="product-group">
+            <label class="opt"><input type="radio" name="has_product" value="Да, записанный курс (видео, уроки)"><span class="opt-text">Да, записанный курс (видео, уроки)</span></label>
+            <label class="opt"><input type="radio" name="has_product" value="Да, живой формат (группы, потоки)"><span class="opt-text">Да, живой формат (группы, потоки)</span></label>
+            <label class="opt"><input type="radio" name="has_product" value="Есть структура, но не оформлено в курс"><span class="opt-text">Есть структура, но ещё не оформлено в курс</span></label>
+            <label class="opt"><input type="radio" name="has_product" value="Нет, хочу создать с нуля">
+              <span class="opt-text">Нет, хочу создать с нуля<div class="opt-warn">⚠ Партнёрство Уровня 2 невозможно до создания продукта. Обсудим Уровень 1 или отложенный старт.</div></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="q">
+          <label class="q-label">2.2 Если курс/программа есть — опишите её</label>
+          <div class="prog-table">
+            <label>Название</label>
+            <input type="text" id="program-name" placeholder="«Психология отношений»">
+            <label>Тема / для кого</label>
+            <input type="text" id="program-topic" placeholder="Для кого предназначена">
+            <label>Длина</label>
+            <input type="text" id="program-length" placeholder="6 недель / 8 модулей">
+            <label>Акад. часов</label>
+            <input type="number" id="hours" placeholder="240" min="0">
+            <label>Формат</label>
+            <input type="text" id="program-format" placeholder="Записи / живые эфиры / очно">
+            <label>Цена за чел.</label>
+            <input type="text" id="price" placeholder="30 000 ₽">
+            <label>Потоков проведено</label>
+            <input type="number" id="streams-count" placeholder="3" min="0">
+            <label>Студентов всего</label>
+            <input type="number" id="students-total" placeholder="45" min="0">
+          </div>
+        </div>
+
+        <div class="q">
+          <label class="q-label">2.3 Какой результат получает студент по окончании?
+            <span class="q-hint">Конкретный и измеримый — не «станет лучше», а «научится X / избавится от Y»</span>
+          </label>
+          <textarea id="student-result" placeholder="После прохождения курса студент..."></textarea>
+        </div>
+
+        <div class="q">
+          <label class="q-label">2.4 Есть ли отзывы или кейсы студентов/клиентов?</label>
+          <div class="options-list">
+            <label class="opt"><input type="radio" name="has_reviews" value="Да, есть публичные"><span class="opt-text">Да, есть публичные</span></label>
+            <label class="opt"><input type="radio" name="has_reviews" value="Да, есть, но не публикую"><span class="opt-text">Да, есть, но не публикую</span></label>
+            <label class="opt"><input type="radio" name="has_reviews" value="В процессе сбора"><span class="opt-text">В процессе сбора</span></label>
+            <label class="opt"><input type="radio" name="has_reviews" value="Нет"><span class="opt-text">Нет</span></label>
+          </div>
+          <input type="text" id="reviews-link" placeholder="Ссылка на публичные отзывы (если есть)" style="margin-top:10px">
+        </div>
+
+        <div class="q">
+          <label class="q-label">2.5 Если несколько программ — перечислите все</label>
+          <textarea id="other-programs" placeholder="Название, часов, цена — по одной в строке"></textarea>
+        </div>
+      </div>
+
+      <div class="step-nav">
+        <button type="button" class="btn-prev" onclick="prevStep(2)">← Назад</button>
+        <button type="button" class="btn-next" onclick="nextStep(2)">Далее →</button>
+      </div>
+    </div>
+
+    <!-- ══════════ ШАГ 3 ══════════ -->
+    <div class="step" id="step-3">
+      <div class="form-block">
+        <div class="block-title">Блок 3 — Аудитория и поток клиентов</div>
+
+        <div class="q">
+          <label class="q-label">3.1 Откуда к вам приходят клиенты/студенты сейчас?
+            <span class="q-hint">Можно выбрать несколько</span>
+          </label>
+          <div class="options-cols">
+            <label class="opt"><input type="checkbox" name="traffic[]" value="Рекомендации / сарафан"><span class="opt-text">Рекомендации / сарафан</span></label>
+            <label class="opt"><input type="checkbox" name="traffic[]" value="Instagram / VK"><span class="opt-text">Instagram / VK</span></label>
+            <label class="opt"><input type="checkbox" name="traffic[]" value="Telegram-канал"><span class="opt-text">Telegram-канал</span></label>
+            <label class="opt"><input type="checkbox" name="traffic[]" value="YouTube"><span class="opt-text">YouTube</span></label>
+            <label class="opt"><input type="checkbox" name="traffic[]" value="Выступления / нетворкинги"><span class="opt-text">Выступления / нетворкинги</span></label>
+            <label class="opt"><input type="checkbox" name="traffic[]" value="Платная реклама"><span class="opt-text">Платная реклама</span></label>
+            <label class="opt"><input type="checkbox" name="traffic[]" value="Профи.ру и подобные"><span class="opt-text">Профи.ру и подобные</span></label>
+            <label class="opt"><input type="checkbox" name="traffic[]" value="Другое"><span class="opt-text">Другое</span></label>
+          </div>
+        </div>
+
+        <div class="q">
+          <label class="q-label">3.2 Размер вашей аудитории</label>
+          <div class="aud-table">
+            <label>Telegram</label>
+            <input type="number" id="aud-tg" placeholder="0" min="0">
+            <label>Instagram</label>
+            <input type="number" id="aud-ig" placeholder="0" min="0">
+            <label>VK</label>
+            <input type="number" id="aud-vk" placeholder="0" min="0">
+            <label>Email-база</label>
+            <input type="number" id="aud-email" placeholder="0" min="0">
+            <label>Другое</label>
+            <input type="number" id="aud-other" placeholder="0" min="0">
+          </div>
+          <div class="note-box">
+            <strong>Минимум для уверенного первого потока</strong> — 300+ целевых подписчиков суммарно. Академия обеспечивает дополнительный трафик из сообщества.
+          </div>
+        </div>
+
+        <div class="q">
+          <label class="q-label">3.3 Сколько новых клиентов/студентов в среднем в месяц?</label>
+          <div class="options-list">
+            <label class="opt"><input type="radio" name="new_clients" value="1–3"><span class="opt-text">1–3</span></label>
+            <label class="opt"><input type="radio" name="new_clients" value="4–10"><span class="opt-text">4–10</span></label>
+            <label class="opt"><input type="radio" name="new_clients" value="11–20"><span class="opt-text">11–20</span></label>
+            <label class="opt"><input type="radio" name="new_clients" value="Более 20"><span class="opt-text">Более 20</span></label>
+          </div>
+        </div>
+
+        <div class="q">
+          <label class="q-label">3.4 Активная клиентская база (люди, которые уже платили вам)?</label>
+          <div class="options-list">
+            <label class="opt"><input type="radio" name="client_base" value="Да, более 50 человек"><span class="opt-text">Да, более 50 человек</span></label>
+            <label class="opt"><input type="radio" name="client_base" value="Да, 20–50 человек"><span class="opt-text">Да, 20–50 человек</span></label>
+            <label class="opt"><input type="radio" name="client_base" value="Да, до 20 человек"><span class="opt-text">Да, до 20 человек</span></label>
+            <label class="opt"><input type="radio" name="client_base" value="Нет / только начинаю"><span class="opt-text">Нет / только начинаю</span></label>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-nav">
+        <button type="button" class="btn-prev" onclick="prevStep(3)">← Назад</button>
+        <button type="button" class="btn-next" onclick="nextStep(3)">Далее →</button>
+      </div>
+    </div>
+
+    <!-- ══════════ ШАГ 4 ══════════ -->
+    <div class="step" id="step-4">
+      <div class="form-block">
+        <div class="block-title">Блок 4 — Финансы и готовность</div>
+
+        <div class="q">
+          <label class="q-label">4.1 Ваш средний доход от экспертной деятельности в месяц
+            <span class="q-hint">Ориентировочно — для подбора формата партнёрства</span>
+          </label>
+          <div class="options-list">
+            <label class="opt"><input type="radio" name="income" value="До 50 000 ₽"><span class="opt-text">До 50 000 ₽</span></label>
+            <label class="opt"><input type="radio" name="income" value="50 000 – 150 000 ₽"><span class="opt-text">50 000 – 150 000 ₽</span></label>
+            <label class="opt"><input type="radio" name="income" value="150 000 – 300 000 ₽"><span class="opt-text">150 000 – 300 000 ₽</span></label>
+            <label class="opt"><input type="radio" name="income" value="300 000 – 500 000 ₽"><span class="opt-text">300 000 – 500 000 ₽</span></label>
+            <label class="opt"><input type="radio" name="income" value="Более 500 000 ₽"><span class="opt-text">Более 500 000 ₽</span></label>
+          </div>
+        </div>
+
+        <div class="q">
+          <label class="q-label">4.2 Какой документ хотите выдавать студентам?</label>
+          <div class="options-list">
+            <label class="opt"><input type="radio" name="diploma_type" value="Диплом о профессиональной переподготовке">
+              <span class="opt-text">Диплом о профессиональной переподготовке<div class="opt-warn">240+ акад. часов, нужно высшее/СПО у студентов</div></span>
+            </label>
+            <label class="opt"><input type="radio" name="diploma_type" value="Удостоверение о повышении квалификации">
+              <span class="opt-text">Удостоверение о повышении квалификации<div class="opt-warn">От 16 часов</div></span>
+            </label>
+            <label class="opt"><input type="radio" name="diploma_type" value="Сертификат (без гос. образца)"><span class="opt-text">Сертификат (без гос. образца, любая аудитория)</span></label>
+            <label class="opt"><input type="radio" name="diploma_type" value="Пока не определился(-ась)"><span class="opt-text">Пока не определился(-ась)</span></label>
+          </div>
+        </div>
+
+        <div class="q">
+          <label class="q-label">4.3 Готовы ли инвестировать в оформление программы?
+            <span class="q-hint">Актуально для Варианта 1 — оформление методологии под ДПО-стандарты</span>
+          </label>
+          <div class="options-list">
+            <label class="opt"><input type="radio" name="invest_ready" value="Да, готов(-а)"><span class="opt-text">Да, готов(-а)</span></label>
+            <label class="opt"><input type="radio" name="invest_ready" value="Рассматриваю, если обоснуете ROI"><span class="opt-text">Рассматриваю, если обоснуете ROI</span></label>
+            <label class="opt"><input type="radio" name="invest_ready" value="Нет, хочу только разделение прибыли"><span class="opt-text">Нет, хочу только модель разделения прибыли</span></label>
+          </div>
+          <input type="text" id="invest-budget" placeholder="Если да — примерный бюджет" style="margin-top:10px">
+        </div>
+
+        <div class="q">
+          <label class="q-label">4.4 Сколько времени в неделю готовы уделять Академии?</label>
+          <div class="options-list">
+            <label class="opt"><input type="radio" name="time_per_week" value="1–3 часа"><span class="opt-text">1–3 часа — только вести курсы</span></label>
+            <label class="opt"><input type="radio" name="time_per_week" value="4–8 часов"><span class="opt-text">4–8 часов — курсы + участие в активностях</span></label>
+            <label class="opt"><input type="radio" name="time_per_week" value="Более 8 часов"><span class="opt-text">Более 8 часов — готов(-а) быть активным лицом Академии</span></label>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-nav">
+        <button type="button" class="btn-prev" onclick="prevStep(4)">← Назад</button>
+        <button type="button" class="btn-next" onclick="nextStep(4)">Далее →</button>
+      </div>
+    </div>
+
+    <!-- ══════════ ШАГ 5 ══════════ -->
+    <div class="step" id="step-5">
+      <div class="form-block">
+        <div class="block-title">Блок 5 — Ожидания от партнёрства</div>
+
+        <div class="q">
+          <label class="q-label">5.1 Что для вас главное в партнёрстве?
+            <span class="q-hint">Расставьте приоритеты от 1 (самое важное) до 5</span>
+          </label>
+          <div class="priority-list">
+            <div class="priority-item">
+              <select id="p-diploma"><option value="">—</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+              <span class="pi-text">Юридическая основа / диплом государственного образца</span>
+            </div>
+            <div class="priority-item">
+              <select id="p-audience"><option value="">—</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+              <span class="pi-text">Готовая аудитория / поток студентов без маркетинга</span>
+            </div>
+            <div class="priority-item">
+              <select id="p-status"><option value="">—</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+              <span class="pi-text">Статус «преподаватель аккредитованной академии»</span>
+            </div>
+            <div class="priority-item">
+              <select id="p-community"><option value="">—</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+              <span class="pi-text">Сообщество коллег / профессиональная среда</span>
+            </div>
+            <div class="priority-item">
+              <select id="p-income"><option value="">—</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+              <span class="pi-text">Масштабирование дохода</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="q">
+          <label class="q-label">5.2 Что вас остановило бы от партнёрства?
+            <span class="q-hint">Открытый вопрос — важно понять возражения заранее</span>
+          </label>
+          <textarea id="stop-factors" placeholder="Опишите, что могло бы вас остановить"></textarea>
+        </div>
+
+        <div class="q">
+          <label class="q-label">5.3 Рассматриваете ли параллельную работу с другими организациями?</label>
+          <div class="options-list">
+            <label class="opt"><input type="radio" name="exclusivity" value="Нет, хочу эксклюзивное партнёрство в своей нише"><span class="opt-text">Нет, хочу эксклюзивное партнёрство в своей нише</span></label>
+            <label class="opt"><input type="radio" name="exclusivity" value="Да, работаю с другими площадками"><span class="opt-text">Да, работаю с другими площадками</span></label>
+            <label class="opt"><input type="radio" name="exclusivity" value="Открыт(-а) к обсуждению условий"><span class="opt-text">Открыт(-а) к обсуждению условий</span></label>
+          </div>
+        </div>
+
+        <div class="q">
+          <label class="q-label">5.4 Откуда вы узнали об Академии?</label>
+          <input type="text" id="source" placeholder="Нетворкинг, рекомендация, соцсети...">
+        </div>
+      </div>
+
+      <div class="form-block" style="background:linear-gradient(135deg,var(--navy) 0%,#0f2550 100%);border:none;text-align:center">
+        <p style="color:rgba(255,255,255,.7);font-size:14px;margin-bottom:24px;line-height:1.7">
+          Нажимая кнопку, вы соглашаетесь с <a href="privacy.html" style="color:var(--crystal)">политикой конфиденциальности</a>.<br>
+          Мы свяжемся с вами в Telegram в течение 1–2 рабочих дней.
+        </p>
+        <button type="button" class="btn-submit-final" id="submit-btn" onclick="submitForm()">Отправить анкету →</button>
+        <div id="submit-error" style="display:none;margin-top:14px">Ошибка отправки. Напишите: <a href="https://t.me/Aleksei_Zotov" style="color:var(--crystal)">@Aleksei_Zotov</a></div>
+      </div>
+
+      <div class="step-nav">
+        <button type="button" class="btn-prev" onclick="prevStep(5)">← Назад</button>
+      </div>
+    </div>
+
+  </form>
+</div>
+
+<script>
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz0_luUFLWwvcy_0XhtB30gKWLyHi6UHJWVvKTmlGNQCfhbNeUG4t8ka7_K13zUZB61Ww/exec';
+
+const STEP_NAMES = ['О вас', 'Ваш продукт', 'Аудитория', 'Финансы', 'Ожидания'];
+let currentStep = 1;
+
+function showStep(n) {
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  const el = document.getElementById('step-' + n);
+  if (el) el.classList.add('active');
+  document.getElementById('step-label').textContent = 'Шаг ' + n + ' из 5';
+  document.getElementById('step-name').textContent = STEP_NAMES[n - 1];
+  document.getElementById('progress-fill').style.width = (n / 5 * 100) + '%';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  currentStep = n;
+}
+
+function nextStep(from) {
+  if (from === 1 && !validateStep1()) return;
+  if (from === 2 && !validateStep2()) return;
+  showStep(from + 1);
+}
+
+function prevStep(from) {
+  showStep(from - 1);
+}
+
+function backFromReject() {
+  document.getElementById('reject-msg').style.display = 'none';
+  document.getElementById('progress-header').style.display = 'block';
+  document.getElementById('expert-form').style.display = 'block';
+  document.querySelectorAll('input[name="legal_status"]').forEach(r => r.checked = false);
+  document.querySelectorAll('#status-group .opt').forEach(o => o.classList.remove('selected'));
+  showStep(1);
+}
+
+// Правовой статус — проверка на физлицо
+document.querySelectorAll('input[name="legal_status"]').forEach(radio => {
+  radio.addEventListener('change', function() {
+    document.querySelectorAll('#status-group .opt').forEach(o => o.classList.remove('selected'));
+    this.closest('.opt').classList.add('selected');
+    if (this.value === 'Физическое лицо') {
+      document.getElementById('expert-form').style.display = 'none';
+      document.getElementById('progress-header').style.display = 'none';
+      document.getElementById('reject-msg').style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      document.getElementById('legal-status-hidden').value = this.value;
+    }
+  });
+});
+
+// Подсветка radio/checkbox
+document.addEventListener('change', function(e) {
+  if (e.target.type === 'radio') {
+    const group = e.target.closest('.options-list, .priority-list');
+    if (group) group.querySelectorAll('.opt').forEach(o => o.classList.remove('selected'));
+    e.target.closest('.opt')?.classList.add('selected');
+  }
+  if (e.target.type === 'checkbox') {
+    e.target.closest('.opt')?.classList.toggle('selected', e.target.checked);
+  }
+});
+
+// Валидация шага 1
+function validateStep1() {
+  let ok = true;
+  const name = document.getElementById('name');
+  const tg = document.getElementById('telegram');
+  if (!name.value.trim()) { name.classList.add('invalid'); ok = false; } else name.classList.remove('invalid');
+  if (!tg.value.trim())   { tg.classList.add('invalid');   ok = false; } else tg.classList.remove('invalid');
+  if (!document.querySelector('input[name="legal_status"]:checked')) {
+    document.getElementById('status-group').style.border = '2px solid var(--red)';
+    document.getElementById('status-group').style.borderRadius = '10px';
+    ok = false;
+  } else {
+    document.getElementById('status-group').style.border = '';
+  }
+  if (!document.querySelector('input[name="years_practice"]:checked')) {
+    document.getElementById('years-group').style.border = '2px solid var(--red)';
+    document.getElementById('years-group').style.borderRadius = '10px';
+    ok = false;
+  } else {
+    document.getElementById('years-group').style.border = '';
+  }
+  if (!ok) window.scrollTo({ top: 0, behavior: 'smooth' });
+  return ok;
+}
+
+// Валидация шага 2
+function validateStep2() {
+  if (!document.querySelector('input[name="has_product"]:checked')) {
+    document.getElementById('product-group').style.border = '2px solid var(--red)';
+    document.getElementById('product-group').style.borderRadius = '10px';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    return false;
+  }
+  document.getElementById('product-group').style.border = '';
+  return true;
+}
+
+// Отправка
+async function submitForm() {
+  const btn = document.getElementById('submit-btn');
+  const errBox = document.getElementById('submit-error');
+
+  btn.disabled = true;
+  btn.textContent = 'Отправляем…';
+  errBox.style.display = 'none';
+
+  const v  = id => document.getElementById(id)?.value?.trim() || '';
+  const r  = name => document.querySelector(`input[name="${name}"]:checked`)?.value || '';
+  const cb = name => [...document.querySelectorAll(`input[name="${name}"]:checked`)].map(i => i.value).join(', ');
+
+  const dirChecks = cb('direction[]');
+  const dirOther  = v('direction-other');
+  const direction = [dirChecks, dirOther].filter(Boolean).join(', ');
+
+  const audience = `TG:${v('aud-tg')||0} / IG:${v('aud-ig')||0} / VK:${v('aud-vk')||0} / Email:${v('aud-email')||0} / Другое:${v('aud-other')||0}`;
+
+  const priorities = [
+    `Диплом:${document.getElementById('p-diploma').value||'—'}`,
+    `Аудитория:${document.getElementById('p-audience').value||'—'}`,
+    `Статус:${document.getElementById('p-status').value||'—'}`,
+    `Сообщество:${document.getElementById('p-community').value||'—'}`,
+    `Доход:${document.getElementById('p-income').value||'—'}`,
+  ].join(', ');
+
+  const notes = [
+    `Правовой статус: ${v('legal-status-hidden')}`,
+    `Образование: ${v('education')}`,
+    `Пед.стаж: ${r('teaching')} ${v('teaching-years')}`.trim(),
+    `Методология: ${v('methodology')}`,
+    `Тема программы: ${v('program-topic')}`,
+    `Длина: ${v('program-length')} / Формат: ${v('program-format')}`,
+    `Потоков: ${v('streams-count')} / Студентов: ${v('students-total')}`,
+    `Результат студента: ${v('student-result')}`,
+    `Отзывы: ${r('has_reviews')} ${v('reviews-link')}`.trim(),
+    `Другие программы: ${v('other-programs')}`,
+    `Источники: ${cb('traffic[]')}`,
+    `Новых кл./мес: ${r('new_clients')}`,
+    `База: ${r('client_base')}`,
+    `Документ: ${r('diploma_type')}`,
+    `Инвестиции: ${r('invest_ready')} ${v('invest-budget')}`.trim(),
+    `Время/нед: ${r('time_per_week')}`,
+    `Приоритеты: ${priorities}`,
+    `Стоп-факторы: ${v('stop-factors')}`,
+    `Эксклюзив: ${r('exclusivity')}`,
+  ].filter(s => s && !s.endsWith(': ')).join('\n');
+
+  const data = {
+    name:          v('name'),
+    telegram:      v('telegram'),
+    phone:         v('phone'),
+    email:         v('email'),
+    city:          v('city'),
+    direction,
+    years_practice: r('years_practice'),
+    has_product:   r('has_product'),
+    program_name:  v('program-name'),
+    hours:         v('hours'),
+    price:         v('price'),
+    income:        r('income'),
+    audience,
+    notes,
+  };
+
+  try {
+    await fetch(SCRIPT_URL, {
+      method: 'POST', mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify(data),
+    });
+    setTimeout(() => {
+      document.getElementById('expert-form').style.display = 'none';
+      document.getElementById('progress-header').style.display = 'none';
+      document.getElementById('success-msg').style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 1500);
+  } catch {
+    btn.disabled = false;
+    btn.textContent = 'Отправить анкету →';
+    errBox.style.display = 'block';
+  }
+}
+</script>
+
+</body>
+</html>
