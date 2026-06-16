@@ -813,6 +813,11 @@ async function submitForm() {
     price:         v('price'),
     income:        r('income'),
     audience,
+    // Отдельные поля для autoScore на сервере
+    aud_telegram:  v('aud-tg')  || '0',
+    aud_instagram: v('aud-ig')  || '0',
+    aud_vk:        v('aud-vk')  || '0',
+    active_base:   r('client_base'),
     notes,
   };
 
