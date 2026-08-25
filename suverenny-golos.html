@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Суверенный голос | Академия Развития Личности</title>
+<meta name="description" content="Программа на 6 недель: состояние, голос и нейросети. Три эксперта Академии Развития Личности. Старт 7 сентября 2026.">
+<!-- пока страница не согласована: убрать строку ниже, чтобы её начали индексировать поисковики -->
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:      #1a3a6e;
+  --navy-deep: #0d2347;
+  --navy-ink:  #14284d;
+  --crystal:   #38c8f0;
+  --crystal-d: #1a9ec4;
+  --gold:      #d4860a;
+  --gold-soft: #f0b64a;
+  --bg:        #f8f6f2;
+  --bg-warm:   #f2ede5;
+  --white:     #ffffff;
+  --muted:     #6b6b8a;
+  --line:      rgba(26, 58, 110, 0.12);
+  --line-light:rgba(255, 255, 255, 0.14);
+  --radius:    22px;
+  --radius-lg: 32px;
+  --ease:      cubic-bezier(0.16, 1, 0.3, 1);
+  --shadow:    0 24px 60px -28px rgba(13, 35, 71, 0.35);
+  --shadow-sm: 0 12px 30px -18px rgba(13, 35, 71, 0.4);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  background: var(--bg);
+  color: var(--navy-ink);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+.wrap { width: 100%; max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+
+/* ─── TYPO ─────────────────────────────────────────── */
+h1, h2, h3, h4 { line-height: 1.08; letter-spacing: -0.02em; font-weight: 800; }
+h2 { font-size: clamp(28px, 4vw, 46px); }
+h3 { font-size: clamp(21px, 2.4vw, 28px); letter-spacing: -0.015em; }
+p  { max-width: 62ch; }
+
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--crystal-d);
+}
+.eyebrow::before {
+  content: ''; width: 26px; height: 1px; background: currentColor; opacity: .55;
+}
+.eyebrow.on-dark { color: var(--crystal); }
+
+.lead { font-size: clamp(16px, 1.6vw, 19px); color: var(--muted); }
+.on-dark .lead, .lead.on-dark { color: rgba(255,255,255,.72); }
+
+/* ─── BUTTONS ──────────────────────────────────────── */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  padding: 17px 30px; border-radius: 100px; border: 0; cursor: pointer;
+  font-family: inherit; font-size: 16px; font-weight: 700; letter-spacing: -0.01em;
+  text-decoration: none; position: relative; overflow: hidden;
+  transition: transform .35s var(--ease), box-shadow .35s var(--ease), background .3s var(--ease);
+}
+.btn-primary {
+  background: var(--gold); color: #2a1a02;
+  box-shadow: 0 14px 34px -14px rgba(212, 134, 10, .7);
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 20px 44px -14px rgba(212, 134, 10, .8); }
+.btn-primary:active { transform: scale(.985) translateY(0); }
+.btn-primary::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(100deg, transparent 30%, rgba(255,255,255,.42) 50%, transparent 70%);
+  transform: translateX(-120%);
+  animation: shimmer 5.5s var(--ease) infinite;
+}
+@keyframes shimmer { 0%, 62% { transform: translateX(-120%); } 88%, 100% { transform: translateX(120%); } }
+
+.btn-ghost {
+  background: transparent; color: var(--white);
+  border: 1px solid var(--line-light);
+}
+.btn-ghost:hover { background: rgba(255,255,255,.07); transform: translateY(-2px); }
+.btn-dark { background: var(--navy); color: var(--white); }
+.btn-dark:hover { background: var(--navy-deep); transform: translateY(-2px); }
+
+/* ─── HERO ─────────────────────────────────────────── */
+.hero {
+  position: relative;
+  background:
+    radial-gradient(120% 90% at 82% 8%, rgba(56, 200, 240, .16) 0%, transparent 55%),
+    linear-gradient(150deg, var(--navy) 0%, var(--navy-deep) 62%, #0a1c3a 100%);
+  color: var(--white);
+  padding: 34px 0 90px;
+  overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background-image: radial-gradient(rgba(255,255,255,.18) 1px, transparent 1px);
+  background-size: 4px 4px; opacity: .05;
+}
+.hero-top {
+  display: flex; align-items: center; justify-content: space-between; gap: 20px;
+  padding-bottom: 46px; position: relative; z-index: 2;
+}
+.hero-logo { height: 42px; width: auto; filter: brightness(0) invert(1); opacity: .92; }
+.hero-top-note { font-size: 13px; color: rgba(255,255,255,.6); letter-spacing: .02em; }
+
+.hero-grid {
+  position: relative; z-index: 2;
+  display: grid; grid-template-columns: 1.08fr 0.92fr; gap: 56px; align-items: center;
+}
+
+.hero h1 {
+  font-size: clamp(44px, 6.4vw, 82px);
+  letter-spacing: -0.035em;
+  margin: 22px 0 20px;
+}
+.hero h1 .accent {
+  display: block; color: var(--crystal);
+}
+.hero-sub { font-size: clamp(17px, 1.8vw, 20px); color: rgba(255,255,255,.78); max-width: 30ch; }
+
+.hero-meta { display: flex; flex-wrap: wrap; gap: 10px; margin: 30px 0 34px; }
+.chip {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 9px 16px; border-radius: 100px;
+  background: rgba(255,255,255,.06); border: 1px solid var(--line-light);
+  font-size: 13.5px; font-weight: 600; color: rgba(255,255,255,.86);
+  backdrop-filter: blur(6px);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.08);
+}
+.chip svg { width: 15px; height: 15px; stroke: var(--crystal); }
+
+.hero-cta { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+.hero-price-note { font-size: 13.5px; color: rgba(255,255,255,.55); margin-top: 16px; }
+.hero-price-note s { color: rgba(255,255,255,.4); }
+
+/* фото-каскад */
+.stack { position: relative; height: 560px; }
+.ph {
+  position: absolute; border-radius: var(--radius);
+  overflow: hidden; box-shadow: var(--shadow);
+  border: 1px solid rgba(255,255,255,.1);
+  will-change: transform;
+}
+.ph img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 18%; display: block; }
+.ph-name {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  padding: 26px 16px 13px;
+  background: linear-gradient(to top, rgba(10,22,44,.92) 12%, transparent 100%);
+  font-size: 12.5px; font-weight: 700; letter-spacing: .03em; color: #fff;
+}
+.ph-name span { display: block; font-size: 11px; font-weight: 500; color: rgba(255,255,255,.62); letter-spacing: .02em; margin-top: 2px; }
+
+.ph-1 { width: 50%; height: 54%; left: 0; top: 0; animation: float 9s ease-in-out infinite; }
+.ph-2 { width: 43%; height: 42%; right: 0; top: 8%; animation: float 11s ease-in-out infinite reverse; }
+.ph-3 { width: 52%; height: 42%; left: 12%; bottom: 0; animation: float 10s ease-in-out .8s infinite; }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-11px); } }
+
+.ph-placeholder {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+  background: linear-gradient(150deg, #23477f 0%, #16305c 100%);
+  height: 100%;
+}
+.ph-placeholder b { font-size: 34px; font-weight: 800; color: var(--crystal); letter-spacing: .02em; }
+.ph-placeholder i { font-style: normal; font-size: 11px; color: rgba(255,255,255,.45); letter-spacing: .06em; text-transform: uppercase; }
+
+/* ─── SECTIONS ─────────────────────────────────────── */
+section { padding: 96px 0; }
+.section-head { max-width: 720px; margin-bottom: 54px; }
+.section-head h2 { margin: 16px 0 18px; }
+
+/* проблема */
+.pain-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 64px; align-items: start; }
+.pain-list { display: flex; flex-direction: column; }
+.pain-item {
+  padding: 24px 0; border-top: 1px solid var(--line);
+  display: grid; grid-template-columns: 40px 1fr; gap: 18px; align-items: start;
+}
+.pain-item:last-child { border-bottom: 1px solid var(--line); }
+.pain-num { font-size: 13px; font-weight: 800; color: var(--gold); letter-spacing: .06em; padding-top: 3px; }
+.pain-item p { font-size: 16.5px; color: var(--navy-ink); max-width: 44ch; }
+
+.quote-block {
+  margin-top: 34px; padding: 28px 32px;
+  background: var(--white); border-radius: var(--radius);
+  border-left: 3px solid var(--crystal); box-shadow: var(--shadow-sm);
+}
+.quote-block p { font-size: 17px; font-weight: 600; letter-spacing: -0.01em; }
+
+/* модули зигзаг */
+.module { display: grid; grid-template-columns: 0.86fr 1.14fr; gap: 60px; align-items: center; margin-bottom: 104px; }
+.module:last-child { margin-bottom: 0; }
+.module.reverse .module-media { order: 2; }
+.module-media { position: relative; }
+.module-photo {
+  position: relative; border-radius: var(--radius-lg); overflow: hidden;
+  box-shadow: var(--shadow); aspect-ratio: 4 / 5;
+  transition: transform .6s var(--ease);
+}
+.module-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.module-media:hover .module-photo { transform: translateY(-6px); }
+.module-media::after {
+  content: ''; position: absolute; inset: 22px -22px -22px 22px;
+  border: 1px solid var(--crystal); border-radius: var(--radius-lg);
+  z-index: -1; opacity: .5;
+}
+.module.reverse .module-media::after { inset: 22px 22px -22px -22px; border-color: var(--gold); }
+
+.module-num {
+  font-size: 13px; font-weight: 800; letter-spacing: .16em; color: var(--gold);
+}
+.module h3 { margin: 14px 0 8px; }
+.module-weeks { font-size: 13.5px; font-weight: 600; color: var(--muted); margin-bottom: 22px; }
+.module ul { list-style: none; display: flex; flex-direction: column; gap: 13px; margin: 22px 0 26px; }
+.module li { display: grid; grid-template-columns: 22px 1fr; gap: 12px; font-size: 16px; }
+.module li svg { width: 17px; height: 17px; stroke: var(--crystal-d); margin-top: 4px; }
+.expert-tag {
+  display: inline-flex; align-items: center; gap: 13px;
+  padding: 11px 20px 11px 12px; border-radius: 100px;
+  background: var(--white); box-shadow: var(--shadow-sm);
+}
+.expert-tag img, .expert-tag .mini-ph {
+  width: 40px; height: 40px; border-radius: 50%; object-fit: cover; object-position: 50% 12%; flex-shrink: 0;
+}
+.mini-ph {
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(150deg, #23477f, #16305c);
+  color: var(--crystal); font-size: 13px; font-weight: 800;
+}
+.expert-tag b { display: block; font-size: 14.5px; font-weight: 700; }
+.expert-tag span { display: block; font-size: 12.5px; color: var(--muted); font-weight: 500; }
+
+/* программа */
+.program { background: var(--navy); color: var(--white); }
+.program .section-head h2 { color: var(--white); }
+.timeline { display: flex; flex-direction: column; position: relative; }
+.tl-row {
+  display: grid; grid-template-columns: 116px 56px 1fr auto; gap: 22px; align-items: center;
+  padding: 20px 4px; border-top: 1px solid var(--line-light);
+  transition: background .35s var(--ease), padding-left .35s var(--ease);
+}
+.tl-row:last-child { border-bottom: 1px solid var(--line-light); }
+.tl-row:hover { background: rgba(255,255,255,.035); padding-left: 14px; }
+.tl-row.final { background: rgba(56, 200, 240, .07); }
+.tl-date { font-size: 14px; font-weight: 700; color: var(--crystal); letter-spacing: -0.01em; }
+.tl-ava img, .tl-ava .mini-ph {
+  width: 44px; height: 44px; border-radius: 50%; object-fit: cover; object-position: 50% 12%;
+  border: 1px solid rgba(255,255,255,.18);
+}
+.tl-ava.trio { display: flex; }
+.tl-ava.trio img, .tl-ava.trio .mini-ph { width: 30px; height: 30px; margin-left: -9px; }
+.tl-ava.trio > *:first-child { margin-left: 0; }
+.tl-title { font-size: 16.5px; font-weight: 600; }
+.tl-who { font-size: 13px; color: rgba(255,255,255,.55); white-space: nowrap; }
+
+/* артефакты */
+.take-grid {
+  display: grid; grid-template-columns: repeat(6, 1fr); gap: 20px;
+}
+.take {
+  background: var(--white); border-radius: var(--radius); padding: 30px 28px;
+  box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+  transition: transform .45s var(--ease), box-shadow .45s var(--ease);
+}
+.take:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
+.take:nth-child(1) { grid-column: span 3; }
+.take:nth-child(2) { grid-column: span 3; }
+.take:nth-child(3) { grid-column: span 2; }
+.take:nth-child(4) { grid-column: span 2; }
+.take:nth-child(5) { grid-column: span 2; }
+.take-ico {
+  width: 44px; height: 44px; border-radius: 13px; margin-bottom: 18px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--bg-warm);
+}
+.take-ico svg { width: 21px; height: 21px; stroke: var(--navy); }
+.take h4 { font-size: 17px; margin-bottom: 8px; }
+.take p { font-size: 14.5px; color: var(--muted); }
+
+/* тарифы */
+.pricing { background: var(--bg-warm); }
+.price-grid { display: grid; grid-template-columns: 1.35fr 0.9fr; gap: 26px; align-items: stretch; }
+.price-main {
+  background: linear-gradient(155deg, var(--navy) 0%, var(--navy-deep) 100%);
+  color: var(--white); border-radius: var(--radius-lg); padding: 44px 44px 40px;
+  position: relative; overflow: hidden;
+}
+.price-main::before {
+  content: ''; position: absolute; width: 320px; height: 320px; right: -110px; top: -130px;
+  background: radial-gradient(circle, rgba(56,200,240,.22) 0%, transparent 68%);
+}
+.price-badge {
+  display: inline-block; padding: 7px 15px; border-radius: 100px;
+  background: var(--gold); color: #2a1a02; font-size: 12px; font-weight: 800;
+  letter-spacing: .06em; text-transform: uppercase; margin-bottom: 22px;
+}
+.price-value { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin: 8px 0 6px; }
+.price-value b { font-size: clamp(38px, 5vw, 58px); font-weight: 800; letter-spacing: -0.03em; }
+.price-value s { font-size: 20px; color: rgba(255,255,255,.42); }
+.price-anchor { font-size: 14px; color: rgba(255,255,255,.6); margin-bottom: 26px; }
+.price-list { list-style: none; display: flex; flex-direction: column; gap: 12px; margin: 26px 0 30px; }
+.price-list li { display: grid; grid-template-columns: 20px 1fr; gap: 12px; font-size: 15.5px; color: rgba(255,255,255,.9); }
+.price-list svg { width: 16px; height: 16px; stroke: var(--crystal); margin-top: 4px; }
+
+.timer { display: flex; gap: 10px; margin: 4px 0 26px; }
+.timer-cell {
+  background: rgba(255,255,255,.07); border: 1px solid var(--line-light);
+  border-radius: 14px; padding: 12px 4px; min-width: 66px; text-align: center;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.08);
+}
+.timer-cell b { display: block; font-size: 24px; font-weight: 800; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.timer-cell span { font-size: 10.5px; text-transform: uppercase; letter-spacing: .08em; color: rgba(255,255,255,.5); }
+
+.price-side { display: flex; flex-direction: column; gap: 26px; }
+.price-vip {
+  background: var(--white); border-radius: var(--radius-lg); padding: 34px 32px;
+  box-shadow: var(--shadow-sm); flex: 1;
+}
+.price-vip .tag { font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); }
+.price-vip .sum { font-size: 34px; font-weight: 800; letter-spacing: -0.03em; margin: 12px 0 4px; }
+.price-vip p { font-size: 14.5px; color: var(--muted); margin-bottom: 18px; }
+.price-vip ul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+.price-vip li { font-size: 14.5px; padding-left: 18px; position: relative; }
+.price-vip li::before {
+  content: ''; position: absolute; left: 0; top: 9px; width: 6px; height: 6px;
+  border-radius: 50%; background: var(--gold);
+}
+.price-note {
+  background: var(--white); border-radius: var(--radius); padding: 22px 26px;
+  font-size: 14px; color: var(--muted); box-shadow: var(--shadow-sm);
+}
+
+/* faq */
+.faq-list { max-width: 820px; }
+details {
+  border-bottom: 1px solid var(--line); padding: 4px 0;
+}
+details summary {
+  list-style: none; cursor: pointer; padding: 22px 40px 22px 0; position: relative;
+  font-size: 17px; font-weight: 700; letter-spacing: -0.01em;
+  transition: color .3s var(--ease);
+}
+details summary::-webkit-details-marker { display: none; }
+details summary:hover { color: var(--crystal-d); }
+details summary::after {
+  content: ''; position: absolute; right: 6px; top: 50%; width: 11px; height: 11px;
+  border-right: 2px solid var(--navy); border-bottom: 2px solid var(--navy);
+  transform: translateY(-70%) rotate(45deg); transition: transform .35s var(--ease);
+}
+details[open] summary::after { transform: translateY(-30%) rotate(-135deg); }
+details p { padding: 0 30px 24px 0; color: var(--muted); font-size: 15.5px; }
+
+/* финальный cta */
+.final {
+  background:
+    radial-gradient(100% 120% at 15% 10%, rgba(56,200,240,.18) 0%, transparent 58%),
+    linear-gradient(150deg, var(--navy-deep) 0%, #0a1c3a 100%);
+  color: var(--white); text-align: center;
+}
+.final h2 { color: var(--white); margin-bottom: 18px; }
+.final .lead { margin: 0 auto 32px; color: rgba(255,255,255,.72); }
+.final-faces { display: flex; justify-content: center; margin-bottom: 30px; }
+.final-faces img, .final-faces .mini-ph {
+  width: 62px; height: 62px; border-radius: 50%; object-fit: cover; object-position: 50% 12%;
+  border: 2px solid rgba(255,255,255,.16); margin-left: -16px;
+  transition: transform .4s var(--ease);
+}
+.final-faces > *:first-child { margin-left: 0; }
+.final-faces img:hover { transform: translateY(-6px) scale(1.04); }
+
+footer {
+  background: #0a1c3a; color: rgba(255,255,255,.6); padding: 44px 0 40px; font-size: 14px;
+}
+.footer-grid { display: flex; justify-content: space-between; gap: 30px; flex-wrap: wrap; align-items: center; }
+.footer-logo { height: 38px; filter: brightness(0) invert(1); opacity: .8; }
+footer a { color: var(--crystal); text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+.footer-legal { font-size: 12.5px; color: rgba(255,255,255,.32); margin-top: 20px; }
+
+/* ─── REVEAL ───────────────────────────────────────── */
+.rv { opacity: 0; transform: translateY(26px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
+.rv.in { opacity: 1; transform: none; }
+
+/* ─── MOBILE ───────────────────────────────────────── */
+@media (max-width: 980px) {
+  section { padding: 68px 0; }
+  .hero-grid, .pain-grid, .price-grid { grid-template-columns: 1fr; gap: 40px; }
+  .module { grid-template-columns: 1fr; gap: 34px; margin-bottom: 68px; }
+  .module.reverse .module-media { order: 0; }
+  .module-media::after { display: none; }
+  .module-photo { max-width: 420px; }
+  .stack { height: 420px; max-width: 460px; }
+  .take-grid { grid-template-columns: 1fr; }
+  .take:nth-child(n) { grid-column: span 1; }
+  .tl-row { grid-template-columns: 1fr auto; gap: 8px 14px; padding: 18px 4px; }
+  .tl-ava { display: none; }
+  .tl-date { grid-column: 1 / -1; }
+  .tl-who { font-size: 12px; }
+}
+@media (max-width: 560px) {
+  .wrap { padding: 0 18px; }
+  .hero { padding-bottom: 62px; }
+  .hero-top-note { display: none; }
+  .stack { height: 340px; }
+  .ph-name { font-size: 11px; padding: 20px 12px 10px; }
+  .price-main { padding: 32px 24px; }
+  .price-vip { padding: 28px 24px; }
+  .btn { width: 100%; }
+  .timer-cell { min-width: 0; flex: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::after, *::before { animation: none !important; transition: none !important; }
+  .rv { opacity: 1; transform: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ HERO ═══ -->
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-top">
+      <img src="assets/logo.png" alt="Академия Развития Личности" class="hero-logo">
+      <div class="hero-top-note">Онлайн · старт 7 сентября 2026</div>
+    </div>
+
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow on-dark">Программа трёх экспертов</div>
+        <h1>Суверенный<span class="accent">голос</span></h1>
+        <p class="hero-sub">Шесть недель на то, чтобы состояние, звучание и подача перестали работать друг против друга.</p>
+
+        <div class="hero-meta">
+          <span class="chip">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 11h18"/></svg>
+            6 недель
+          </span>
+          <span class="chip">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M17 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9.5" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg>
+            группа до 12 человек
+          </span>
+          <span class="chip">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            3 личные сессии
+          </span>
+        </div>
+
+        <div class="hero-cta">
+          <a href="#tarify" class="btn btn-primary">Записаться за 29 000 ₽</a>
+          <a href="#programma" class="btn btn-ghost">Смотреть программу</a>
+        </div>
+        <p class="hero-price-note">Цена для участников встречи 27 августа. Полная стоимость <s>37 000 ₽</s>.</p>
+      </div>
+
+      <!-- фото-каскад: три эксперта -->
+      <div class="stack">
+        <div class="ph ph-1">
+          <img src="assets/photo-yulia.jpg" alt="Юлия Цезарь">
+          <div class="ph-name">Юлия Цезарь<span>состояние</span></div>
+        </div>
+        <div class="ph ph-2">
+          <img src="assets/photo-anastasia.jpg" alt="Анастасия Игошина">
+          <div class="ph-name">Анастасия Игошина<span>голос</span></div>
+        </div>
+        <div class="ph ph-3">
+          <img src="assets/photo-aleksey.jpg" alt="Алексей Зотов">
+          <div class="ph-name">Алексей Зотов<span>нейросети</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ═══ ПРОБЛЕМА ═══ -->
+<section>
+  <div class="wrap pain-grid">
+    <div class="rv">
+      <div class="eyebrow">С чего всё начинается</div>
+      <h2 style="margin:16px 0 20px">Вас не слышат не потому, что вы мало говорите</h2>
+      <p class="lead">Можно знать своё дело в совершенстве и остаться в тени. Люди считывают не количество слов, а три вещи сразу: в каком состоянии вы говорите, как звучит голос и что остаётся от вас, когда встреча закончилась.</p>
+      <div class="quote-block">
+        <p>Убираете один слой, и остальные проседают. Расслабленное состояние без голоса не слышно. Поставленный голос без состояния звучит натянуто. Сильная подача без упаковки живёт ровно один эфир.</p>
+      </div>
+    </div>
+
+    <div class="pain-list rv">
+      <div class="pain-item">
+        <div class="pain-num">01</div>
+        <p>Готовитесь к эфиру три дня, а на записи голос садится, и текст звучит не вашим.</p>
+      </div>
+      <div class="pain-item">
+        <div class="pain-num">02</div>
+        <p>На переговорах соглашаетесь на удобное для других, а вечером злитесь на себя.</p>
+      </div>
+      <div class="pain-item">
+        <div class="pain-num">03</div>
+        <p>Контент выходит регулярно, но звучит как у всех, и его пролистывают.</p>
+      </div>
+      <div class="pain-item">
+        <div class="pain-num">04</div>
+        <p>Работаете на волевых усилиях и считаете, что суета приближает к результату.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ МОДУЛИ ═══ -->
+<section id="modules" style="padding-top:20px">
+  <div class="wrap">
+    <div class="section-head rv">
+      <div class="eyebrow">Как устроено</div>
+      <h2>Три слоя, которые работают только вместе</h2>
+      <p class="lead">Внутри, снаружи, вокруг. Каждый модуль ведёт свой эксперт: две групповые встречи по полтора часа плюс личная сессия.</p>
+    </div>
+
+    <!-- модуль 1 -->
+    <div class="module rv">
+      <div class="module-media">
+        <div class="module-photo"><img src="assets/photo-yulia.jpg" alt="Юлия Цезарь"></div>
+      </div>
+      <div>
+        <div class="module-num">МОДУЛЬ 01</div>
+        <h3>Состояние: выход из режима выживания</h3>
+        <div class="module-weeks">Недели 1 и 2 · встречи 7 и 14 сентября</div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M20 6 9 17l-5-5"/></svg>Диагностика: где именно вы живёте в режиме адаптации и выживания</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M20 6 9 17l-5-5"/></svg>Работа с корнями конформизма и родовыми страхами "не высовывайся"</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M20 6 9 17l-5-5"/></svg>Переключение с реакции амигдалы на мышление взрослого творца</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M20 6 9 17l-5-5"/></svg>Расслабление нервной системы как навык, через который открывается энергия</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M20 6 9 17l-5-5"/></svg>Чтение причинно-следственных связей на несколько шагов вперёд</li>
+        </ul>
+        <div class="expert-tag">
+          <img src="assets/photo-yulia.jpg" alt="">
+          <div><b>Юлия Цезарь</b><span>Мастер метасознания, президент Академии Развития Личности</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- модуль 2 -->
+    <div class="module reverse rv">
+      <div class="module-media">
+        <div class="module-photo"><img src="assets/photo-anastasia.jpg" alt="Анастасия Игошина"></div>
+      </div>
+      <div>
+        <div class="module-num">МОДУЛЬ 02</div>
+        <h3>Голос: звучание, за которым идут</h3>
+        <div class="module-weeks">Недели 3 и 4 · встречи 21 и 28 сентября</div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M20 6 9 17l-5-5"/></svg>Запись голоса "до" и разбор: что именно в звучании вас обесценивает</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M20 6 9 17l-5-5"/></svg>Дыхание, опора, тембр, темп и паузы</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M20 6 9 17l-5-5"/></svg>Речевые паттерны убедительности: как говорить, чтобы за вами шли</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M20 6 9 17l-5-5"/></svg>Голос будущего: какое звучание влияет на массы людей и почему</li>
+        </ul>
+        <div class="expert-tag">
+          <img src="assets/photo-anastasia.jpg" alt="">
+          <div><b>Анастасия Игошина</b><span>Речь, голос, публичные выступления</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- модуль 3 -->
+    <div class="module rv">
+      <div class="module-media">
+        <div class="module-photo"><img src="assets/photo-aleksey.jpg" alt="Алексей Зотов"></div>
+      </div>
+      <div>
+        <div class="module-num">МОДУЛЬ 03</div>
+        <h3>Нейросети: ваш голос в масштабе</h3>
+        <div class="module-weeks">Недели 5 и 6 · встречи 5 и 12 октября</div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M20 6 9 17l-5-5"/></svg>Личный AI-ассистент на ваших смыслах: говорит вашим языком, а не языком робота</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M20 6 9 17l-5-5"/></svg>Распаковка экспертности в тексты, оффер и контент-план</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M20 6 9 17l-5-5"/></svg>Клон голоса, озвучка материалов, видео-визитка</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M20 6 9 17l-5-5"/></svg>Рабочая связка на каждый день: контент, переписки, продающие тексты</li>
+        </ul>
+        <div class="expert-tag">
+          <img src="assets/photo-aleksey.jpg" alt="">
+          <div><b>Алексей Зотов</b><span>AI-автоматизация, наставник по нейросетям</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ПРОГРАММА ═══ -->
+<section class="program" id="programma">
+  <div class="wrap">
+    <div class="section-head rv">
+      <div class="eyebrow on-dark">Расписание потока</div>
+      <h2>Шесть недель и финал</h2>
+      <p class="lead on-dark">Одна групповая встреча в неделю. Личные сессии берёте внутри своего модуля в удобное время.</p>
+    </div>
+
+    <div class="timeline rv">
+      <div class="tl-row">
+        <div class="tl-date">7 сентября</div>
+        <div class="tl-ava"><img src="assets/photo-yulia.jpg" alt=""></div>
+        <div class="tl-title">Диагностика состояния и снятие программ выживания</div>
+        <div class="tl-who">Юлия Цезарь</div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-date">14 сентября</div>
+        <div class="tl-ava"><img src="assets/photo-yulia.jpg" alt=""></div>
+        <div class="tl-title">Тело, расслабление и доступ к энергии</div>
+        <div class="tl-who">Юлия Цезарь</div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-date">21 сентября</div>
+        <div class="tl-ava"><img src="assets/photo-anastasia.jpg" alt=""></div>
+        <div class="tl-title">Голос "до": разбор записей, дыхание и опора</div>
+        <div class="tl-who">Анастасия Игошина</div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-date">28 сентября</div>
+        <div class="tl-ava"><img src="assets/photo-anastasia.jpg" alt=""></div>
+        <div class="tl-title">Убедительность: темп, паузы, интонационные паттерны</div>
+        <div class="tl-who">Анастасия Игошина</div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-date">5 октября</div>
+        <div class="tl-ava"><img src="assets/photo-aleksey.jpg" alt=""></div>
+        <div class="tl-title">Сборка личного AI-ассистента и распаковка смыслов</div>
+        <div class="tl-who">Алексей Зотов</div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-date">12 октября</div>
+        <div class="tl-ava"><img src="assets/photo-aleksey.jpg" alt=""></div>
+        <div class="tl-title">Контент-план, клон голоса, видео-визитка</div>
+        <div class="tl-who">Алексей Зотов</div>
+      </div>
+      <div class="tl-row final">
+        <div class="tl-date">19 октября</div>
+        <div class="tl-ava trio">
+          <img src="assets/photo-yulia.jpg" alt="">
+          <img src="assets/photo-anastasia.jpg" alt="">
+          <img src="assets/photo-aleksey.jpg" alt="">
+        </div>
+        <div class="tl-title">Финал: выступление каждого участника и общий разбор</div>
+        <div class="tl-who">Все трое</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ЧТО УНОСИТЕ ═══ -->
+<section>
+  <div class="wrap">
+    <div class="section-head rv">
+      <div class="eyebrow">Результат в руках</div>
+      <h2>Что останется после программы</h2>
+      <p class="lead">Не ощущения, а материал, которым можно пользоваться на следующий день.</p>
+    </div>
+
+    <div class="take-grid rv">
+      <div class="take">
+        <div class="take-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="m23 7-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
+        <h4>Видео-самопрезентация</h4>
+        <p>Снятая и разобранная тремя экспертами. Готова к публикации в тот же вечер.</p>
+      </div>
+      <div class="take">
+        <div class="take-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M3 12h3l3-8 4 16 3-8h5"/></svg></div>
+        <h4>Аудио "до и после"</h4>
+        <p>Слышимая разница в звучании. Этот файл потом продаёт вас лучше любого описания.</p>
+      </div>
+      <div class="take">
+        <div class="take-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M9 9h6v6H9z"/><path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/></svg></div>
+        <h4>Личный AI-ассистент</h4>
+        <p>С промптами под вашу нишу и вашей манерой речи.</p>
+      </div>
+      <div class="take">
+        <div class="take-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 4h16v16H4z"/><path d="M8 9h8M8 13h8M8 17h4"/></svg></div>
+        <h4>Контент-план на месяц</h4>
+        <p>Написанный вашим голосом, а не усреднённым текстом из нейросети.</p>
+      </div>
+      <div class="take">
+        <div class="take-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5M12 15V3"/></svg></div>
+        <h4>Записи всех встреч</h4>
+        <p>Остаются у вас навсегда, вместе с материалами и упражнениями.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ТАРИФЫ ═══ -->
+<section class="pricing" id="tarify">
+  <div class="wrap">
+    <div class="section-head rv">
+      <div class="eyebrow">Участие</div>
+      <h2>Два варианта входа</h2>
+      <p class="lead">Три эксперта по отдельности стоят от 90 000 ₽. В программе они работают с вами последовательно и передают друг другу.</p>
+    </div>
+
+    <div class="price-grid rv">
+      <div class="price-main">
+        <div class="price-badge">Цена для участников встречи</div>
+        <div class="price-value"><b>29 000 ₽</b><s>37 000 ₽</s></div>
+        <p class="price-anchor">Действует 72 часа после встречи 27 августа.</p>
+
+        <div class="timer" id="timer">
+          <div class="timer-cell"><b data-t="d">00</b><span>дней</span></div>
+          <div class="timer-cell"><b data-t="h">00</b><span>часов</span></div>
+          <div class="timer-cell"><b data-t="m">00</b><span>минут</span></div>
+          <div class="timer-cell"><b data-t="s">00</b><span>секунд</span></div>
+        </div>
+
+        <ul class="price-list">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M20 6 9 17l-5-5"/></svg>6 групповых встреч по 1,5 часа</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M20 6 9 17l-5-5"/></svg>3 личные сессии: по одной с каждым экспертом</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M20 6 9 17l-5-5"/></svg>Финальное выступление и разбор всеми троими</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M20 6 9 17l-5-5"/></svg>Чат группы на всё время программы</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M20 6 9 17l-5-5"/></svg>Записи, материалы и упражнения остаются у вас</li>
+        </ul>
+
+        <a href="https://t.me/Julia_Tsezar" class="btn btn-primary" target="_blank" rel="noopener">Занять место в потоке</a>
+      </div>
+
+      <div class="price-side">
+        <div class="price-vip">
+          <div class="tag">VIP</div>
+          <div class="sum">65 000 ₽</div>
+          <p>Для тех, у кого впереди запуск, конференция или переговоры, и результат нужен к конкретной дате.</p>
+          <ul>
+            <li>Личных сессий вдвое больше</li>
+            <li>Прямой чат с экспертами между встречами</li>
+            <li>Сопровождение первого выступления или запуска</li>
+            <li>Разбор ваших материалов вне общей группы</li>
+          </ul>
+        </div>
+        <div class="price-note">
+          Мест в потоке 12. Оплата после короткого разговора: нам важно понимать, что программа вам подходит.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FAQ ═══ -->
+<section>
+  <div class="wrap">
+    <div class="section-head rv">
+      <div class="eyebrow">Вопросы</div>
+      <h2>Что обычно спрашивают</h2>
+    </div>
+    <div class="faq-list rv">
+      <details>
+        <summary>Я не выступаю публично. Мне это нужно?</summary>
+        <p>Голос работает на переговорах, в созвонах, в голосовых сообщениях и в разговоре с ребёнком. Сцена тут частный случай. Половина участников приходит не за выступлениями, а за тем, чтобы их перестали перебивать.</p>
+      </details>
+      <details>
+        <summary>Что будет, если пропущу встречу?</summary>
+        <p>Записи выкладываются в тот же день, вопросы можно задать в чат группы. Личную сессию переносим на удобное время внутри модуля.</p>
+      </details>
+      <details>
+        <summary>Нужен ли профессиональный микрофон?</summary>
+        <p>Нет. Работаем с тем, что есть: телефон, ноутбук, наушники с гарнитурой. Разница в звучании появляется от постановки дыхания и опоры, а не от техники.</p>
+      </details>
+      <details>
+        <summary>Я совсем не понимаю нейросети. Будет сложно?</summary>
+        <p>Третий модуль построен так, что вы собираете ассистента вместе с ведущим, шаг за шагом, на своих материалах. Никакого программирования, только текст и понятные инструменты.</p>
+      </details>
+      <details>
+        <summary>Сколько времени нужно закладывать в неделю?</summary>
+        <p>Полтора часа на встречу и примерно час на практику. Модуль с голосом требует коротких ежедневных упражнений по 10 минут, иначе результат не закрепится.</p>
+      </details>
+      <details>
+        <summary>Выдаёте ли документ об обучении?</summary>
+        <p>Программа идёт от Академии Развития Личности, у нас бессрочная лицензия ДПО. Формат документа обсуждаем индивидуально, если он вам нужен для работы.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ФИНАЛЬНЫЙ CTA ═══ -->
+<section class="final">
+  <div class="wrap">
+    <div class="rv">
+      <div class="final-faces">
+        <img src="assets/photo-yulia.jpg" alt="Юлия Цезарь">
+        <img src="assets/photo-anastasia.jpg" alt="Анастасия Игошина">
+        <img src="assets/photo-aleksey.jpg" alt="Алексей Зотов">
+      </div>
+      <h2>Первый поток набираем один раз</h2>
+      <p class="lead">Дальше программа пойдёт по полной цене и без личных сессий с каждым из троих. Если сомневаетесь, напишите: разберёмся, ваша это история или нет.</p>
+      <a href="https://t.me/Julia_Tsezar" class="btn btn-primary" target="_blank" rel="noopener">Написать и занять место</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <img src="assets/logo.png" alt="Академия Развития Личности" class="footer-logo">
+      <div>
+        Юлия Цезарь: <a href="https://t.me/Julia_Tsezar" target="_blank" rel="noopener">@Julia_Tsezar</a><br>
+        Алексей Зотов: <a href="https://t.me/Aleksei_Zotov" target="_blank" rel="noopener">@Aleksei_Zotov</a>
+      </div>
+      <div>
+        <a href="https://tsezaracademy.ru" target="_blank" rel="noopener">tsezaracademy.ru</a>
+      </div>
+    </div>
+    <div class="footer-legal">АНО ДПО "Академия Развития Личности" · лицензия на образовательную деятельность</div>
+  </div>
+</footer>
+
+<script>
+// дедлайн спеццены: 72 часа после встречи 27 августа
+const DEADLINE = new Date('2026-08-30T20:00:00+03:00').getTime();
+
+const cells = {
+  d: document.querySelector('[data-t="d"]'),
+  h: document.querySelector('[data-t="h"]'),
+  m: document.querySelector('[data-t="m"]'),
+  s: document.querySelector('[data-t="s"]')
+};
+
+function pad(n) { return String(n).padStart(2, '0'); }
+
+function tick() {
+  const left = DEADLINE - Date.now();
+  if (left <= 0) {
+    document.getElementById('timer').style.display = 'none';
+    clearInterval(timerId);
+    return;
+  }
+  const sec = Math.floor(left / 1000);
+  cells.d.textContent = pad(Math.floor(sec / 86400));
+  cells.h.textContent = pad(Math.floor(sec % 86400 / 3600));
+  cells.m.textContent = pad(Math.floor(sec % 3600 / 60));
+  cells.s.textContent = pad(sec % 60);
+}
+tick();
+const timerId = setInterval(tick, 1000);
+
+// появление блоков при скролле
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('in'), i * 90);
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+
+document.querySelectorAll('.rv').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
